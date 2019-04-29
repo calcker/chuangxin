@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'Home\homeController@index');
+Route::get('/', 'IndexController@indexPage');
+Route::get('/about', 'IndexController@aboutPage');
+
 
 Route::group(['prefix' => 'user'], function(){
     // 使用者驗證
