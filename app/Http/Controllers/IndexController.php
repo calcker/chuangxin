@@ -6,21 +6,21 @@ namespace App\Http\Controllers;
 class IndexController extends Controller
 {
     //
-    public function indexPage()
+    public function index()
     {
 
     	return view('index/index');
 
     }
 
-    public function aboutPage()
+    public function about()
     {
 
     	return view('index/about');
 
     }
 
-    public function helpPage()
+    public function help()
     {
 
     	return view('index/help');

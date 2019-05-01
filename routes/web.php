@@ -11,16 +11,23 @@
 |
 */
 
-Route::get('/', 'IndexController@indexPage');
-Route::get('/about', 'IndexController@aboutPage');
+Route::get('/', 'IndexController@index');
+Auth::routes();
+/*
+Route::get('/login', 'IndexController@login')->name('login');
+Route::get('/register', 'IndexController@register')->name('register');
+*/
+Route::get('/about', 'IndexController@about')->name('about');
+Route::get('/help', 'IndexController@help')->name('help');
 
 
+/*
 Route::group(['prefix' => 'user'], function(){
     // 使用者驗證
     Route::group(['prefix' => 'auth'], function(){
-        Route::get('/sign-up', 'UserAuthController@signUpPage');
+        Route::get('/sign-up', 'UserAuthController@signUpPage')->name('sign-up');
         Route::post('/sign-up', 'UserAuthController@signUpProcess');
-        Route::get('/sign-in', 'UserAuthController@signInPage');
+        Route::get('/sign-in', 'UserAuthController@signInPage')->name('sign-in');
         Route::post('/sign-in', 'UserAuthController@signInProcess');
         Route::get('/sign-out', 'UserAuthController@signOut');
         // Facebook 登入
@@ -33,4 +40,4 @@ Route::group(['prefix' => 'user'], function(){
         Route::get('/github-sign-in-callback', 'UserAuthController@githubSignInCallbackProcess');
     });
 });
-
+*/
