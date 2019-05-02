@@ -12,9 +12,14 @@
 */
 
 Route::get('/', 'IndexController@index');
+
 Auth::routes();
+
+
+
 /*
 Route::get('/login', 'IndexController@login')->name('login');
+
 Route::get('/register', 'IndexController@register')->name('register');
 */
 Route::get('/about', 'IndexController@about')->name('about');
