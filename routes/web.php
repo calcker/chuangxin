@@ -13,7 +13,7 @@
 
 Route::get('/', 'IndexController@index');
 
-Auth::routes();
+//Auth::routes();
 
 
 
@@ -24,6 +24,17 @@ Route::get('/register', 'IndexController@register')->name('register');
 */
 Route::get('/about', 'IndexController@about')->name('about');
 Route::get('/help', 'IndexController@help')->name('help');
+
+
+Route::get('/login', 'LoginController@showPage');
+
+Route::group(['prefix' => 'register'], function(){
+	Route::get('/person', 'Auth\PersonRegisterController@showPage');
+	Route::post('/person', 'Auth\PersonRegisterController@process');
+	Route::get('/company', 'Auth\CompanyRegisterController@showPage');
+	Route::get('/org', 'Auth\OrgRegisterController@showPage');
+});
+
 
 
 /*
