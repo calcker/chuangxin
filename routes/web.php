@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'IndexController@index');
+Route::get('/', 'HomeController@index');
 
 //Auth::routes();
 
@@ -22,8 +22,8 @@ Route::get('/login', 'IndexController@login')->name('login');
 
 Route::get('/register', 'IndexController@register')->name('register');
 */
-Route::get('/about', 'IndexController@about')->name('about');
-Route::get('/help', 'IndexController@help')->name('help');
+Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/help', 'HomeController@help')->name('help');
 
 
 Route::get('/login', 'LoginController@showPage');

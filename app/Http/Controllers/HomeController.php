@@ -3,27 +3,27 @@
 namespace App\Http\Controllers;
 
 
-class IndexController extends Controller
+class HomeController extends Controller
 {
     //
     public function index()
     {
 
-    	return view('index/index');
+    	return view('home/index');
 
     }
 
     public function about()
     {
 
-    	return view('index/about');
+    	return view('home/about');
 
     }
 
     public function help()
     {
 
-    	return view('index/help');
+    	return view('home/help');
 
     }
 
