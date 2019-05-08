@@ -3,7 +3,7 @@
 @section('title', trans('auth.login'))
 
 @section('content')
-<form class="form-signin">
+<form class="form-auth form-login">
   <h1 class="h3 mb-3 font-weight-normal">@yield('title')</h1>
   <label for="inputEmail" class="sr-only">@yield('email', trans('auth.email'))</label>
   <input type="email" id="inputEmail" class="form-control" placeholder="@yield('email', trans('auth.email'))" required autofocus>
