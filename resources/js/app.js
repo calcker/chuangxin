@@ -21,12 +21,13 @@ var app = new Vue({
       axios.post('/register/person', self.post).then(function(response) {
         // form submission successful, reset post data and set submitted to true
         self.post = {
-          title: '',
-          body: ''
+          personName: '',
+          email: '',
+          password: ''
         };
 
         // clear previous form errors
-        self.errors = '';
+        self.errors = [];
         self.submitted = true;
       }).catch(function (error) {
         // form submission failed, pass form errors to errors array

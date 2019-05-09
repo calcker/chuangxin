@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,10 +16,10 @@ class PersonRegisterController extends Controller
         return view('auth.register.person');
     }
 
-    public function process()
+    public function process(Request $request)
     {
-        
-        die('aaa');
+
+        //die(var_dump($request->all()));
 
         $this->validator($request->all())->validate();
 
@@ -41,7 +42,7 @@ class PersonRegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'personName' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
