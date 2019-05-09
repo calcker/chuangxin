@@ -18,6 +18,8 @@ class PersonRegisterController extends Controller
     public function process()
     {
         
+        die('aaa');
+
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));

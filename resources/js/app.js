@@ -22,7 +22,7 @@ var app = new Vue({
         // form submission successful, reset post data and set submitted to true
         self.post = {
           title: '',
-          body: '',
+          body: ''
         };
 
         // clear previous form errors
