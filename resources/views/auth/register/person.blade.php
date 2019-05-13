@@ -1,19 +1,18 @@
 @extends('layouts.auth')
 
-@section('title', trans('auth.person_register'))
-@section('person_name', trans('auth.person_name'))
+@section('title', trans('auth.person.register'))
+@section('name', trans('auth.person.name'))
 @section('email', trans('auth.email'))
 @section('password', trans('auth.password'))
 @section('register', trans('auth.register'))
-@section('company_register', trans('auth.company_register'))
-@section('org_register', trans('auth.org_register'))
-@section('gov_register', trans('auth.gov_register'))
+@section('company_register', trans('auth.company.register'))
+@section('org_register', trans('auth.org.register'))
 
 @section('content')
 <form class="form-auth form-reg-person" @submit.prevent="createPost" method="POST">
   <h1 class="h3 mb-3 font-weight-normal">@yield('title')</h1>
-  <label for="personName" class="sr-only">@yield('person_name')</label>
-  <input type="text" name="personName" class="form-control" v-model="post.personName" placeholder="@yield('person_name')" value="{{ old('personName') }}" required>
+  <label for="name" class="sr-only">@yield('person_name')</label>
+  <input type="text" name="name" class="form-control" v-model="post.name" placeholder="@yield('name')" value="{{ old('name') }}" required>
   <label for="email" class="sr-only">@yield('email')</label>
   <input type="email" name="email" class="form-control" v-model="post.email" placeholder="@yield('email')" value="{{ old('email') }}" required>
   <label for="password" class="sr-only">@yield('password')</label>

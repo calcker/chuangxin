@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,11 +18,15 @@ class PersonRegisterController extends Controller
     }
 
     public function process(Request $request)
-    {
+    {   
+
+        //$input = request()->all();
+
+        //var_dump($input);
+
+        //exit;
 
         $this->validator($request->all())->validate();
-
-        die('bbb');
 
         event(new Registered($user = $this->create($request->all())));
 
@@ -42,9 +47,9 @@ class PersonRegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'personName' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:user_email_registers'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'password' => ['required', 'string', 'min:6'],
         ]);
     }
 
@@ -57,7 +62,7 @@ class PersonRegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['personName'],
+            'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

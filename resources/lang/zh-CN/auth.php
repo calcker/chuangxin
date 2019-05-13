@@ -9,8 +9,16 @@ return [
     'email'            => '邮箱',
     'password'         => '密码',
     'remember'         => '记住我',
-    'person_name'      => '您的姓名',
-    'person_register'  => '个人注册',
-    'company_register' => '企业注册',
-    'org_register'     => '非盈利组织注册',
+    'person'           => [
+        'name'         => '您的姓名',
+        'register'     => '个人注册',
+    ],
+    'company'          => [
+        'name'         => '企业名称',
+        'register'     => '企业注册',
+    ],
+    'org'              => [
+        'name'         => '组织名称',
+        'register'     => '非盈利组织注册'
+    ],
 ];

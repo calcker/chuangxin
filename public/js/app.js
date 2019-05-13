@@ -49071,7 +49071,7 @@ var app = new Vue({
   el: '#app',
   data: {
     post: {
-      personName: '',
+      name: '',
       email: '',
       password: ''
     },
@@ -49084,7 +49084,7 @@ var app = new Vue({
       axios.post('/register/person', self.post).then(function (response) {
         // form submission successful, reset post data and set submitted to true
         self.post = {
-          personName: '',
+          name: '',
           email: '',
           password: ''
         }; // clear previous form errors
