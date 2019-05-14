@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
@@ -20,6 +20,7 @@ class PersonRegisterController extends Controller
     public function process(Request $request)
     {   
 
+        /*
         //$input = request()->all();
 
         //var_dump($input);
@@ -34,7 +35,7 @@ class PersonRegisterController extends Controller
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
-
+        */
 
     }
 
@@ -57,7 +58,7 @@ class PersonRegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data)
     {
