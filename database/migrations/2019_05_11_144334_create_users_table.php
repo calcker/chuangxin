@@ -17,9 +17,9 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->enum('type', ['person', 'company', 'org', 'member']);
-            $table->enum('loginable_tool', ['sms', 'weixin', 'weibo', 'qq', 'email']);
-            $table->tinyInteger('pending');
-            $table->tinyInteger('vip');
+            $table->enum('login_type', ['mobile', 'weixin', 'weibo', 'qq', 'email']);
+            $table->tinyInteger('pending')->default(0);
+            $table->tinyInteger('vip')->default(0);
             $table->string('domain')->unique();
             $table->timestamp('created_at');
             $table->timestamp('name_updated_at')->nullable();
