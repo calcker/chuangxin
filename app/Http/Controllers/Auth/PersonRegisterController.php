@@ -38,6 +38,8 @@ class PersonRegisterController extends Controller
             'token'      => str_random(64),
         ]);
 
+        event(new Registered($user));
+
         //event(new Registered($user = $this->create($request->all())));
 
         
