@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->enum('type', ['person', 'company', 'org', 'member']);
+            $table->enum('identity', ['person', 'company', 'org', 'member']);
             $table->enum('login_type', ['mobile', 'weixin', 'weibo', 'qq', 'email']);
             $table->tinyInteger('pending')->default(0);
             $table->tinyInteger('vip')->default(0);

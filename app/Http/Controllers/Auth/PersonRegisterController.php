@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User\User;
-use App\Models\User\Email;
+use App\Models\Auth\User;
+use App\Models\Auth\Email;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,7 @@ class PersonRegisterController extends Controller
 
         $user = User::create([
             'name'       => $data['name'],
-            'type'       => 'person',
+            'identity'   => 'person',
             'login_type' => 'email',
             'domain'     => str_random(64),
         ]);
@@ -34,7 +35,7 @@ class PersonRegisterController extends Controller
         $email = Email::create([
             'user_id'    => $user->id,
             'email'      => $data['email'],
-            'password'   => bcrypt($data['password']),
+            'password'   => Hash::make($data['password']),
             'token'      => str_random(64),
         ]);
 
@@ -78,19 +79,5 @@ class PersonRegisterController extends Controller
             'password' => ['required', 'string', 'min:6'],
         ]);
     }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
+    
 }

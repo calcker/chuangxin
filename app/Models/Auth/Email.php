@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Models\User;
+namespace App\Models\Auth;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Email extends Model
 {
-    
-	const UPDATED_AT = null;
     
 	protected $fillable = [
 		'user_id', 'email', 'password', 'token',
@@ -20,9 +18,9 @@ class Email extends Model
     /**
 	 * 获取Email对应用户
      */
-    public function user()
+    public function getUserModel()
     {
-    	return $this->morphOne('App\Models\User\User', 'loginable');
+    	return $this->morphOne('App\Models\User\User', 'getLoginModel');
     }
 
 }

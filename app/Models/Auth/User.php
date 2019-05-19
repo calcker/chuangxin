@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Models\User;
+namespace App\Models\Auth;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {   
+
+    use Notifiable;
 
     const UPDATED_AT = null;
 
@@ -15,7 +19,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'type', 'login_type', 'domain',
+        'name', 'identity', 'login_type', 'domain',
     ];
 
     /**
@@ -32,14 +36,14 @@ class User extends Model
      *
      * @var array
      */
-    //protected $casts = [
-    //    'email_verified_at' => 'datetime',
-    //];
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 
     /**
      * 获取此用户注册模型
      */
-    public function loginable()
+    public function getLoginModel()
     {
         return $this->morphTo();
     }
