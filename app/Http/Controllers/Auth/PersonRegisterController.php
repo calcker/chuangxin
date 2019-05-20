@@ -4,22 +4,23 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\Auth\User;
 use App\Models\Auth\Email;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class PersonRegisterController extends Controller
+class PersonRegisterController extends RegisterController
 {
 
-    public function showPage()
+    public function showRegistrationForm()
     {
         return view('auth.register.person');
     }
+    
 
-    public function process(Request $request)
+    public function register(Request $request)
     {   
         $data = $request->all();
 

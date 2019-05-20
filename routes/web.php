@@ -29,10 +29,10 @@ Route::get('/help', 'HomeController@help')->name('help');
 Route::get('/login', 'LoginController@showPage');
 
 Route::group(['prefix' => 'register'], function(){
-	Route::get('/person', 'Auth\PersonRegisterController@showPage');
-	Route::post('/person', 'Auth\PersonRegisterController@process');
-	Route::get('/company', 'Auth\CompanyRegisterController@showPage');
-	Route::get('/org', 'Auth\OrgRegisterController@showPage');
+	Route::get('/person', 'Auth\PersonRegisterController@showRegistrationForm');
+	Route::post('/person', 'Auth\PersonRegisterController@register');
+	Route::get('/company', 'Auth\CompanyRegisterController@showRegistrationForm');
+	Route::get('/org', 'Auth\OrgRegisterController@register');
 });
 
 
