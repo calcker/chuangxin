@@ -27,9 +27,7 @@ class SendEmailVerificationNotification implements ShouldQueue
      * @return void
      */
     public function handle(PersonRegistered $event)
-    {
-        die(var_dump($event->user->email_verified_at));
-        
+    {   
         if ($event->user instanceof MustVerifyEmail && ! $event->user->hasVerifiedEmail()) {
 
             $event->user->sendEmailVerificationNotification();

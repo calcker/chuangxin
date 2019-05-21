@@ -13,6 +13,8 @@ class User extends Authenticatable
 
     const UPDATED_AT = null;
 
+    protected $email;
+
     /**
      * The attributes that are mass assignable.
      *
