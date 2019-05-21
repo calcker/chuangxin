@@ -6,8 +6,8 @@ use App\Models\Auth\User;
 use App\Models\Auth\Email;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Controller;
+use App\Events\PersonRegistered;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -40,7 +40,7 @@ class PersonRegisterController extends RegisterController
             'token'      => str_random(64),
         ]);
 
-        event(new Registered($user));
+        event(new PersonRegistered($user));
 
         //event(new Registered($user = $this->create($request->all())));
 
