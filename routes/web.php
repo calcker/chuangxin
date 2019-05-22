@@ -33,6 +33,7 @@ Route::group(['prefix' => 'register'], function(){
 	Route::post('/person', 'Auth\PersonRegisterController@register');
 	Route::get('/company', 'Auth\CompanyRegisterController@showRegistrationForm');
 	Route::get('/org', 'Auth\OrgRegisterController@register');
+    Route::get('/verify/{token}', 'Auth\PersonRegisterController@active')->name('verify');
 });
 
 

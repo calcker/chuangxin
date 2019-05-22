@@ -8,11 +8,11 @@ class Email extends Model
 {
     
 	protected $fillable = [
-		'user_id', 'email', 'password', 'token',
+		'user_id', 'email', 'password', 'active_token',
 	];
 
 	protected $hidden = [
-		'password', 'token',
+		'password', 'active_token',
 	];
 
     /**

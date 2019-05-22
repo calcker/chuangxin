@@ -66,6 +66,14 @@ class PersonRegisterController extends RegisterController
 
     }
 
+
+    public function active(){
+
+        
+
+        
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *

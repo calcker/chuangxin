@@ -47,6 +47,13 @@ class User extends Authenticatable
         return ! is_null($this->email_verified_at);
     }
 
+    public function sendEmailVerificationNotification()
+    {
+
+        
+        
+    }
+
     /**
      * 获取此用户注册模型
      */
