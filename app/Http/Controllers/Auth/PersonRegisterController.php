@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class PersonRegisterController extends RegisterController
+class PersonEmailRegisterController extends RegisterController
 {
 
     public function showRegistrationForm()
@@ -40,7 +40,7 @@ class PersonRegisterController extends RegisterController
             'token'      => str_random(64),
         ]);
 
-        event(new PersonRegistered($user));
+        event(new PersonEmailRegistered($user, $email));
 
         //event(new Registered($user = $this->create($request->all())));
 

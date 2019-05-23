@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth;
 
+use App\Mail\EmailRegistered;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -49,8 +50,13 @@ class User extends Authenticatable
 
     public function sendEmailVerificationNotification()
     {
-
         
+
+        $mail = (new EmailRegistered($order))
+                ->onQueue('emails');
+
+        Mail::to($this->email)
+            ->queue($mail);
         
     }
 
