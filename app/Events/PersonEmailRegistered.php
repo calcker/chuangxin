@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Models\Auth\User;
+use App\Models\Auth\Email;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -23,7 +25,7 @@ class PersonEmailRegistered
      *
      * @return void
      */
-    public function __construct($user, $email)
+    public function __construct(User $user, Email $email)
     {
         $this->user = $user;
 

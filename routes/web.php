@@ -29,8 +29,8 @@ Route::get('/help', 'HomeController@help')->name('help');
 Route::get('/login', 'LoginController@showPage');
 
 Route::group(['prefix' => 'register'], function(){
-	Route::get('/person', 'Auth\PersonRegisterController@showRegistrationForm');
-	Route::post('/person', 'Auth\PersonRegisterController@register');
+	Route::get('/person', 'Auth\PersonEmailRegisterController@showRegistrationForm');
+	Route::post('/person', 'Auth\PersonEmailRegisterController@register');
 	Route::get('/company', 'Auth\CompanyRegisterController@showRegistrationForm');
 	Route::get('/org', 'Auth\OrgRegisterController@register');
     Route::get('/verify/{token}', 'Auth\PersonRegisterController@active')->name('email_verify');

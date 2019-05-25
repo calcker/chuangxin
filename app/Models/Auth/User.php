@@ -51,7 +51,6 @@ class User extends Authenticatable
     public function sendEmailVerificationNotification()
     {
         
-
         $mail = (new EmailRegistered($order))
                 ->onQueue('emails');
 

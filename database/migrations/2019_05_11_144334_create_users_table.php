@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->enum('login_type', ['mobile', 'weixin', 'weibo', 'qq', 'email']);
             $table->tinyInteger('pending')->default(0);
             $table->tinyInteger('vip')->default(0);
+            $table->tinyInteger('actived')->default(0);
             $table->string('domain')->unique();
             $table->timestamp('created_at');
             $table->timestamp('name_updated_at')->nullable();
@@ -33,7 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('active_token')->unique();
-            $table->timestamps();
+            $table->timestamp('actived_at')->nullable();
         });
     }
 

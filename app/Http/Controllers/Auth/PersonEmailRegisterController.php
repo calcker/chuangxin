@@ -6,7 +6,7 @@ use App\Models\Auth\User;
 use App\Models\Auth\Email;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Controller;
-use App\Events\PersonRegistered;
+use App\Events\PersonEmailRegistered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -34,10 +34,10 @@ class PersonEmailRegisterController extends RegisterController
         ]);
 
         $email = Email::create([
-            'user_id'    => $user->id,
-            'email'      => $data['email'],
-            'password'   => Hash::make($data['password']),
-            'token'      => str_random(64),
+            'user_id'       => $user->id,
+            'email'         => $data['email'],
+            'password'      => Hash::make($data['password']),
+            'active_token'  => str_random(64),
         ]);
 
         event(new PersonEmailRegistered($user, $email));
