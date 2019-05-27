@@ -17,7 +17,6 @@ class SendEmailVerificationNotification implements ShouldQueue
     public function __construct()
     {
         //
-
     }
 
     /**
@@ -27,10 +26,15 @@ class SendEmailVerificationNotification implements ShouldQueue
      * @return void
      */
     public function handle(PersonEmailRegistered $event)
-    {   
+    {
+
+        die(var_dump($event->user->hasVerifiedEmail()));
+
         if ($event->user instanceof MustVerifyEmail && ! $event->user->hasVerifiedEmail()) {
 
+            die('fafd');
             $event->user->sendEmailVerificationNotification();
+        
         }
     }
 }

@@ -16,9 +16,9 @@ class PersonEmailRegistered
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private $user;
+    public $user;
 
-    private $email;
+    public $email;
 
     /**
      * Create a new event instance.

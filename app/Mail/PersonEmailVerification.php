@@ -38,6 +38,7 @@ class PersonEmailVerification extends Mailable
      */
     public function build()
     {
+
         return $this->markdown('emails.verify')
                     ->with([
                         'username'     => $this->user->username,

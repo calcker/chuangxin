@@ -2,19 +2,17 @@
 
 namespace App\Models\Auth;
 
-use App\Mail\EmailRegistered;
+use App\Mail\PersonEmailVerification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable extends MustVerifyEmail
 {   
 
     use Notifiable;
 
     const UPDATED_AT = null;
-
-    protected $email;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'identity', 'login_type', 'domain',
+        'name', 'identity', 'email', 'login_type', 'domain',  'email_verified_token',
     ];
 
     /**
@@ -43,28 +41,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    
     public function hasVerifiedEmail()
     {
-        return ! is_null($this->email_verified_at);
+        return true;
     }
+    
 
     public function sendEmailVerificationNotification()
     {
-        
-        $mail = (new EmailRegistered($order))
+
+        $mail = (new PersonEmailVerification($order))
                 ->onQueue('emails');
 
         Mail::to($this->email)
             ->queue($mail);
         
-    }
-
-    /**
-     * 获取此用户注册模型
-     */
-    public function getLoginModel()
-    {
-        return $this->morphTo();
     }
 
 }
