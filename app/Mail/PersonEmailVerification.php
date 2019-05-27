@@ -2,8 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\Auth\User;
-use App\Models\Auth\Email;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -13,21 +11,21 @@ class PersonEmailVerification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $user;
+    private $name;
 
-    private $email;
+    private $token;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, Email $email)
+    public function __construct($name, $token)
     {
         //
-        $this->user = $user;
+        $this->name = $name;
         
-        $this->email = $email;
+        $this->token = $token;
 
     }
 
@@ -41,8 +39,8 @@ class PersonEmailVerification extends Mailable
 
         return $this->markdown('emails.verify')
                     ->with([
-                        'username'     => $this->user->username,
-                        'active_token' => $this->email->active_token,
+                        'name'  => $this->name,
+                        'token' => $this->token,
                     ]);
     }
 }

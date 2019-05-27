@@ -2,15 +2,18 @@
 
 namespace App\Models\Auth;
 
-use App\Mail\PersonEmailVerification;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable extends MustVerifyEmail
+class User extends Model implements 
+    AuthenticatableContract,
+    AuthorizableContract
 {   
-
-    use Notifiable;
+    use Authenticatable, Authorizable, Notifiable;
 
     const UPDATED_AT = null;
 
@@ -20,7 +23,7 @@ class User extends Authenticatable extends MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'identity', 'email', 'login_type', 'domain',  'email_verified_token',
+        'key', 'name', 'identity', 'domain', 'reg_type', 'created_ip',
     ];
 
     /**
@@ -32,31 +35,15 @@ class User extends Authenticatable extends MustVerifyEmail
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
-    
-    public function hasVerifiedEmail()
+    public function emailAccount()
     {
-        return true;
+        return $this->hasOne(EmailAccount::class);
+    }
+
+    public function mobileAccount()
+    {
+        return $this->hasOne(MobileAccount::class);
     }
     
-
-    public function sendEmailVerificationNotification()
-    {
-
-        $mail = (new PersonEmailVerification($order))
-                ->onQueue('emails');
-
-        Mail::to($this->email)
-            ->queue($mail);
-        
-    }
 
 }

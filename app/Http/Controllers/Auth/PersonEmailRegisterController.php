@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Auth\User;
-use App\Models\Auth\Email;
+use App\Models\Auth\EmailAccount;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Controller;
 use App\Events\PersonEmailRegistered;
@@ -27,20 +27,22 @@ class PersonEmailRegisterController extends RegisterController
         $this->validator($data)->validate();
 
         $user = User::create([
+            'key'        => str_random(64),
             'name'       => $data['name'],
             'identity'   => 'person',
-            'login_type' => 'email',
             'domain'     => str_random(64),
+            'reg_type'   => 'email',
+            'created_ip' => $request->getClientIp(),
         ]);
 
-        $email = Email::create([
-            'user_id'       => $user->id,
-            'email'         => $data['email'],
-            'password'      => Hash::make($data['password']),
-            'active_token'  => str_random(64),
+        $emailAccount = EmailAccount::create([
+            'user_id'    => $user->id,
+            'email'      => $data['email'],
+            'password'   => Hash::make($data['password']),
+            'token'      => str_random(64),
         ]);
 
-        event(new PersonEmailRegistered($user, $email));
+        event(new PersonEmailRegistered($user, $emailAccount));
 
         //event(new Registered($user = $this->create($request->all())));
 
@@ -84,7 +86,7 @@ class PersonEmailRegisterController extends RegisterController
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:emails'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:email_accounts'],
             'password' => ['required', 'string', 'min:6'],
         ]);
     }

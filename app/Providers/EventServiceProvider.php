@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-
 use App\Events\PersonEmailRegistered;
 use App\Listeners\SendEmailVerificationNotification;
 use Illuminate\Support\Facades\Event;

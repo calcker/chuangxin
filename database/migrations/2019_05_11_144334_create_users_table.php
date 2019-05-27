@@ -15,35 +15,47 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->char('key', 64)->unique();
             $table->string('name');
             $table->enum('identity', ['person', 'company', 'org', 'member']);
-            $table->string('email')->unique();
-            $table->string('password');
             $table->tinyInteger('pending')->default(0);
             $table->tinyInteger('vip')->default(0);
-            $table->tinyInteger('actived')->default(0);
-            $table->char('mobile', 11)->nullable();
             $table->string('domain')->unique();
+            $table->enum('reg_type', ['email', 'mobile', 'weixin', 'weibo', 'qq']);
             $table->timestamp('created_at');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('email_verified_token')->unique();
-            $table->timestamp('mobile_verified_at')->nullable();
-            $table->string('mobile_verified_token')->nullable();
+            $table->char('created_ip', 15);
             $table->timestamp('name_updated_at')->nullable();
             $table->timestamp('domain_updated_at')->nullable();
             $table->rememberToken();
-            //$table->enum('login_type', ['mobile', 'weixin', 'weibo', 'qq', 'email']);
+            $table->tinyInteger('email_binding')->default(0);
+            $table->tinyInteger('mobile_binding')->default(0);
+            $table->tinyInteger('weixin_binding')->default(0);
+            $table->tinyInteger('weibo_binding')->default(0);
+            $table->tinyInteger('qq_binding')->default(0);
+            $table->timestamp('last_logined_at')->nullable();
+            $table->char('last_logined_ip', 15)->nullable();
         });
 
-        /*
-        Schema::create('emails', function (Blueprint $table) {
+        Schema::create('email_accounts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned()->unique();
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('token')->unique();
+            $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('active_token')->unique();
-            $table->timestamp('actived_at')->nullable();
         });
-        */
+
+        Schema::create('mobile_accounts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->char('mobile', 11)->unique();
+            $table->string('password');
+            $table->string('token')->nullable();
+            $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+
     }
 
     /**
@@ -54,7 +66,8 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('emails');
+        Schema::dropIfExists('email_accounts');
+        Schema::dropIfExists('mobile_accounts');
 
     }
 }
