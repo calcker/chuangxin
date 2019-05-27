@@ -1,10 +1,10 @@
 @component('mail::message')
 
-# 欢迎注册使用 Laravel
+# 欢迎注册使用「创新之城」
 
 点击下面按钮进行激活。
 
-@component('mail::button', ['url' => 'http://www.laravel.com'])
+@component('mail::button', ['url' =>{{ config('app.url')  }}   ])
 
 激活
 

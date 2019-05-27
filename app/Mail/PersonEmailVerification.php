@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class PersonEmailVerification extends Mailable
+class PersonEmailVerification extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -24,9 +24,9 @@ class PersonEmailVerification extends Mailable
     {
         //
         $this->name = $name;
-        
-        $this->token = $token;
 
+        $this->token = $token;
+    
     }
 
     /**
@@ -36,7 +36,6 @@ class PersonEmailVerification extends Mailable
      */
     public function build()
     {
-
         return $this->markdown('emails.verify')
                     ->with([
                         'name'  => $this->name,
