@@ -4,7 +4,7 @@
 
 点击下面按钮进行激活。
 
-@component('mail::button', ['url' =>{{ config('app.url')  }}   ])
+@component('mail::button', ['url' =>{{ config('app.url') . '/register/email/verify/' . $token  }}  ])
 
 激活
 
