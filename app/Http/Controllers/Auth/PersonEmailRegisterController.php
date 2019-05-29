@@ -69,8 +69,9 @@ class PersonEmailRegisterController extends RegisterController
     }
 
 
-    public function active(){
-
+    public function active()
+    {
+        
         
 
         

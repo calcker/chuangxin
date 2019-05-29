@@ -1,10 +1,12 @@
 @component('mail::message')
 
-# 欢迎注册使用「创新之城」
+亲爱的 {{ $name }}
 
-点击下面按钮进行激活。
+# 欢迎注册「创新之城」
 
-@component('mail::button', ['url' =>{{ config('app.url') . '/register/email/verify/' . $token  }}  ])
+点击下面按钮完成账号激活。
+
+@component('mail::button', ['url' => $url ])
 
 激活
 
