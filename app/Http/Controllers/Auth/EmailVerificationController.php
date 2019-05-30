@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\Auth\EmailAccount;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Support\Facades\Validator;
 
 class EmailVerificationController extends Controller
@@ -21,18 +21,7 @@ class EmailVerificationController extends Controller
     |
     */
 
-    //use VerifiesEmails;
-
-    public function verify(Request $request)
-    {
-        
-        $token = $request->route('token');
-
-        $this->validator(['token' => $token])->validate();
-
-        $account = EmailAccount::where('token', $token)->first();
-
-    }
+    use RedirectsUsers;
 
     /**
      * Where to redirect users after verification.
@@ -42,12 +31,29 @@ class EmailVerificationController extends Controller
     protected $redirectTo = '/home';
 
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'token' => ['required', 'alpha_num', 'size:64'],
-        ]);
+    protected function isToken($token, $length = 64){
+        
+        return preg_match('/^[0-9a-zA-Z]{' . $length . '}$/', $str) ? true : false;
+        
     }
+
+    
+    public function verify(Request $request)
+    {
+        
+        $token = $request->route('token');
+
+        if(! $this->isToken($token) ) {
+
+            return redirect($this->redirectPath());
+        }
+
+        $account = EmailAccount::where('token', $token)->first();
+
+        $user->
+
+    }
+
 
     /**
      * Create a new controller instance.
