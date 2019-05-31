@@ -44,6 +44,8 @@ class PersonEmailRegisterController extends RegisterController
 
         event(new PersonEmailRegistered($user, $emailAccount));
 
+        
+
         //event(new Registered($user = $this->create($request->all())));
 
         
@@ -68,13 +70,25 @@ class PersonEmailRegisterController extends RegisterController
 
     }
 
-
-    public function active()
+    public function pending(Request $request)
     {
-        
-        
 
-        
+        $user = $request->user();
+
+        die(var_dump($user));
+
+        if(! $user) {
+            return redirect($this->redirectPath());
+        }
+
+        if($user->hasBindingEmail()){
+            return redirect($this->redirectPath());
+        }
+
+        $url = 1;
+
+        return view('auth.register.pending');
+
     }
 
     /**

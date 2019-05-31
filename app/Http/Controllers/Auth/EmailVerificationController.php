@@ -29,28 +29,33 @@ class EmailVerificationController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-
-
-    protected function isToken($token, $length = 64){
-        
-        return preg_match('/^[0-9a-zA-Z]{' . $length . '}$/', $str) ? true : false;
-        
-    }
-
     
     public function verify(Request $request)
     {
         
         $token = $request->route('token');
 
-        if(! $this->isToken($token) ) {
-
+        if(! $this->isToken($token)) {
             return redirect($this->redirectPath());
         }
 
         $account = EmailAccount::where('token', $token)->first();
 
-        $user->
+        die(var_dump($account));
+
+        if(! $account) {
+            return redirect($this->redirectPath());
+        }
+
+        if($account->hasVerifiedEmail()) {
+            return redirect($this->redirectPath());
+        }
+
+        if($account->markEmailAsVerified()) {
+            event(new Verified($account->user()));
+        }
+
+
 
     }
 
@@ -65,5 +70,11 @@ class EmailVerificationController extends Controller
         //$this->middleware('auth');
         //$this->middleware('signed')->only('verify');
         //$this->middleware('throttle:6,1')->only('verify', 'resend');
+    }
+
+    protected function isToken($token, $length = 64){
+        
+        return preg_match('/^[0-9a-zA-Z]{' . $length . '}$/', $str) ? true : false;
+        
     }
 }

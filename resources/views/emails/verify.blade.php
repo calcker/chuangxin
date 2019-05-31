@@ -12,7 +12,7 @@
 
 @endcomponent
 
-Thanks,<br>
+感谢您的加入,<br>
 
 {{ config('app.name') }}
 

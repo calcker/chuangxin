@@ -10,7 +10,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 
-class PersonEmailRegistered
+class PersonEmailVerified
 {
     use Dispatchable, SerializesModels;
 

@@ -2,12 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\PersonEmailRegistered;
+use App\Events\PersonEmailVerified;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendEmailVerificationNotification implements ShouldQueue
+class MarkEmailAsVerified
 {
     /**
      * Create the event listener.
@@ -25,15 +24,12 @@ class SendEmailVerificationNotification implements ShouldQueue
      * @param  PersonRegistered  $event
      * @return void
      */
-    public function handle(PersonEmailRegistered $event)
+    public function handle(PersonEmailVerified $event)
     {
 
         $account = $event->emailAccount;
 
-        if ($event->emailAccount instanceof MustVerifyEmail && ! $event->emailAccount->hasVerifiedEmail()){
+        $event->emailAccount->markEmailAsVerified();
 
-            $event->emailAccount->sendEmailVerificationNotification();
-        
-        }
     }
 }
