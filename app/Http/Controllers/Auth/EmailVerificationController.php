@@ -55,8 +55,6 @@ class EmailVerificationController extends Controller
             event(new Verified($account->user()));
         }
 
-
-
     }
 
 

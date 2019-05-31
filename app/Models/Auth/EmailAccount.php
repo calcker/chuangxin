@@ -23,16 +23,13 @@ class EmailAccount extends Account implements MustVerifyEmail
 
     public function markEmailAsVerified()
     {
-        
         $this->updated_at = Carbon::now();
         $this->user->email_binding = 1;
         $this->save();
-
     }
 
     public function sendEmailVerificationNotification()
     {
-
         $mail = (new PersonEmailVerification($this->user->name, $this->token))
                 ->onQueue('emails');
 

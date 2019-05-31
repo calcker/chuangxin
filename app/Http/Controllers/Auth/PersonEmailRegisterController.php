@@ -100,9 +100,9 @@ class PersonEmailRegisterController extends RegisterController
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:email_accounts'],
-            'password' => ['required', 'string', 'min:6'],
+            'name' => ['required', 'string', 'min:2', 'max:100'],
+            'email' => ['required', 'string', 'email', 'min:6', 'max:255', 'unique:email_accounts'],
+            'password' => ['required', 'string', 'min:6', 'max:255'],
         ]);
     }
     

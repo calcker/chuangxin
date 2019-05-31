@@ -4,7 +4,7 @@
 
 # 欢迎注册「创新之城」
 
-点击下面按钮完成账号激活。
+请点击下面按钮完成账号激活。
 
 @component('mail::button', ['url' => $url ])
 
@@ -12,8 +12,10 @@
 
 @endcomponent
 
-感谢您的加入,<br>
+<hr>
 
-{{ config('app.name') }}
+如果此邮件不能正常显示, 可将以下内容直接复制到浏览器地址栏内
+
+{{ $url }}
 
 @endcomponent

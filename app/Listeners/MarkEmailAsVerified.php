@@ -26,10 +26,6 @@ class MarkEmailAsVerified
      */
     public function handle(PersonEmailVerified $event)
     {
-
-        $account = $event->emailAccount;
-
         $event->emailAccount->markEmailAsVerified();
-
     }
 }

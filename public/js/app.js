@@ -49085,20 +49085,25 @@ var app = new Vue({
         // form submission successful, reset post data and set submitted to true
         self.post = {
           name: '',
-          email: {},
+          email: '',
           password: ''
         }; // clear previous form errors
 
         self.errors = '';
         self.submitted = true;
+        self.gotoURL('/register/pending');
       })["catch"](function (error) {
         // form submission failed, pass form errors to errors array
-        console.log(error.response.data.errors);
-        self.errors = self.printErrors(error.response.data.errors);
+        self.showErrors(error.response.data.errors);
       });
     },
-    printErrors: function printErrors(errors) {
-      return errors.email[0];
+    showErrors: function showErrors(errors) {
+      for (var i in errors) {
+        this.errors += errors[i] + '/n';
+      }
+    },
+    gotoURL: function gotoURL(url) {
+      window.location.href = url; //this.$router.push({path: url});
     }
   }
 });
