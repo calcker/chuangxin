@@ -10,9 +10,9 @@
     <p>@{{ errors }}</p>
   </div>
   <label for="username" class="sr-only">@yield('email', trans('auth.email'))</label>
-  <input type="text" id="username" class="form-control" placeholder="@yield('email', trans('auth.email'))" required autofocus>
+  <input type="text" id="username" class="form-control" v-model="post.username"placeholder="@yield('email', trans('auth.email'))" required autofocus>
   <label for="password" class="sr-only">@yield('email', trans('auth.password'))</label>
-  <input type="password" id="password" class="form-control" placeholder="@yield('password', trans('auth.password'))" required>
+  <input type="password" id="password" class="form-control" v-model="post.password" placeholder="@yield('password', trans('auth.password'))" required>
   <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me"> @yield('remember', trans('auth.remember'))
@@ -21,4 +21,8 @@
   <button class="btn btn-lg btn-primary btn-block" type="submit">@yield('title')</button>
   <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 </form>
+@stop
+
+@section('js')
+  {{ mix('js/appLogin.js') }}
 @stop
