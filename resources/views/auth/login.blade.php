@@ -3,12 +3,16 @@
 @section('title', trans('auth.login'))
 
 @section('content')
-<form class="form-auth form-login">
+<form id="app-login" class="form-auth form-login" @submit.prevent="createPost" method="POST">
   <h1 class="h3 mb-3 font-weight-normal">@yield('title')</h1>
-  <label for="inputEmail" class="sr-only">@yield('email', trans('auth.email'))</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="@yield('email', trans('auth.email'))" required autofocus>
-  <label for="inputPassword" class="sr-only">@yield('email', trans('auth.password'))</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="@yield('password', trans('auth.password'))" required>
+  <div v-if="errors" class="alert alert-danger" role="alert">
+    <h5 class="alert-heading">出错了!</h5>
+    <p>@{{ errors }}</p>
+  </div>
+  <label for="username" class="sr-only">@yield('email', trans('auth.email'))</label>
+  <input type="text" id="username" class="form-control" placeholder="@yield('email', trans('auth.email'))" required autofocus>
+  <label for="password" class="sr-only">@yield('email', trans('auth.password'))</label>
+  <input type="password" id="password" class="form-control" placeholder="@yield('password', trans('auth.password'))" required>
   <div class="checkbox mb-3">
     <label>
       <input type="checkbox" value="remember-me"> @yield('remember', trans('auth.remember'))

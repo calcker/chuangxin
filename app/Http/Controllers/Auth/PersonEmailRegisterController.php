@@ -10,6 +10,7 @@ use App\Events\PersonEmailRegistered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class PersonEmailRegisterController extends RegisterController
 {
@@ -73,7 +74,9 @@ class PersonEmailRegisterController extends RegisterController
     public function pending(Request $request)
     {
 
-        $user = $request->user();
+        $user = Auth::user();
+
+        //$user = $request->user();
 
         die(var_dump($user));
 
@@ -81,7 +84,7 @@ class PersonEmailRegisterController extends RegisterController
             return redirect($this->redirectPath());
         }
 
-        if($user->hasBindingEmail()){
+        if($user->hasBindingEmail()) {
             return redirect($this->redirectPath());
         }
 

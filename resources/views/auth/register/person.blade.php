@@ -9,10 +9,11 @@
 @section('org_register', trans('auth.org.register'))
 
 @section('content')
-<form class="form-auth form-reg-person" @submit.prevent="createPost" method="POST">
+<form id="app-person-reg" class="form-auth form-reg-person" @submit.prevent="createPost" method="POST">
   <h1 class="h3 mb-3 font-weight-normal">@yield('title')</h1>
   <div v-if="errors" class="alert alert-danger" role="alert">
-    @{{ errors }}
+    <h5 class="alert-heading">出错了!</h5>
+    <p>@{{ errors }}</p>
   </div>
   <label for="name" class="sr-only">@yield('person_name')</label>
   <input type="text" name="name" class="form-control" v-model="post.name" placeholder="@yield('name')" value="{{ old('name') }}" required>

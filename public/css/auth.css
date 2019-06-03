@@ -10727,3 +10727,8 @@ body {
   border-top-right-radius: 0;
 }
 
+.form-auth .alert {
+  text-align: left;
+  white-space: pre-wrap;
+}
+

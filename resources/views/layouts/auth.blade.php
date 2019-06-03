@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ mix('css/auth.css') }}">
   </head>
   <body class="text-center">
-    <div id="app" class="container">
+    <div class="container">
       @yield('content')
     </div>
     <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>

@@ -26,14 +26,19 @@ Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/help', 'HomeController@help')->name('help');
 
 
-Route::get('/login', 'LoginController@showPage');
+Route::get('/login', 'Auth\LoginController@showLoginForm');
+
+Route::group(['prefix' => 'login'], function(){
+    Route::post('/email', 'Auth\EmailLoginController@login');
+    Route::post('/mobile', 'Auth\MobileLoginController@login');
+});
 
 Route::group(['prefix' => 'register'], function(){
 	Route::get('/person', 'Auth\PersonEmailRegisterController@showRegistrationForm');
 	Route::post('/person', 'Auth\PersonEmailRegisterController@register');
 	Route::get('/company', 'Auth\CompanyRegisterController@showRegistrationForm');
 	Route::get('/org', 'Auth\OrgRegisterController@register');
-    Route::post('/pending', 'Auth\PersonEmailRegisterController@pending');
+    Route::get('/pending', 'Auth\PersonEmailRegisterController@pending');
     Route::get('/verify/{token}', 'Auth\EmailVerificationController@verify')->name('verify');
 });
 
