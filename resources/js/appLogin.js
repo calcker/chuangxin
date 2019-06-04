@@ -40,7 +40,7 @@ var appLogin = new Vue({
         // clear previous form errors
         self.errors = '';
         self.submitted = true;
-        self.gotoURL('/home');
+        //self.gotoURL('/home');
 
       }).catch(function (error) {
         // form submission failed, pass form errors to errors array

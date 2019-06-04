@@ -31427,8 +31427,6 @@ var appLogin = new Vue({
         url = '/login/mobile';
       }
 
-      console.log(url);
-
       if (!url) {
         this.errors = '▪ 请输入正确格式email或手机号';
         return false;
@@ -31442,8 +31440,7 @@ var appLogin = new Vue({
         }; // clear previous form errors
 
         self.errors = '';
-        self.submitted = true;
-        self.gotoURL('/home');
+        self.submitted = true; //self.gotoURL('/home');
       })["catch"](function (error) {
         // form submission failed, pass form errors to errors array
         self.showErrors(error.response.data.errors);

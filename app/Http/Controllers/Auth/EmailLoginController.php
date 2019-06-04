@@ -7,14 +7,13 @@ use App\Http\Controllers\Auth\LoginController;
 
 class EmailLoginController extends LoginController
 {
-    //
-    /*
-	public function login(Request $request)
-	{
 
-	}
-	*/
-
-	
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+    }	
 
 }
