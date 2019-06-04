@@ -26,8 +26,6 @@ var appLogin = new Vue({
         url = '/login/mobile';
       }
 
-      console.log(url);
-
       if(!url){
         this.errors = '▪ 请输入正确格式email或手机号';
         return false;
