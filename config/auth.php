@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'email_accounts' => [
+            'driver' => 'session',
+            'provider' => 'email_accounts',
+        ],
     ],
 
     /*
@@ -68,7 +73,11 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\Auth\User::class,
+        ],
+        'email_accounts' => [
+            'driver' => 'eloquent',
+            'model'  => App\Models\Auth\EmailAccount::class,
         ],
 
         // 'users' => [

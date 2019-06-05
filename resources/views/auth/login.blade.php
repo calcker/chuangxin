@@ -6,7 +6,6 @@
 <form id="app-login" class="form-auth form-login" @submit.prevent="createPost" method="POST">
   <h1 class="h3 mb-3 font-weight-normal">@yield('title')</h1>
   <div v-if="errors" class="alert alert-danger" role="alert">
-    <h5 class="alert-heading">出错了!</h5>
     <p>@{{ errors }}</p>
   </div>
   <label for="username" class="sr-only">@yield('email', trans('auth.email'))</label>
