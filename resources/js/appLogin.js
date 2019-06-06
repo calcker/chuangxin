@@ -3,6 +3,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+Vue.component('alert-box', require('./components/AlertBox.vue').default);
+
 var appLogin = new Vue({
   el: '#app-login',
   data: {
