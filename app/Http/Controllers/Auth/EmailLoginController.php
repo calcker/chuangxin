@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class EmailLoginController extends LoginController
 {
@@ -43,5 +44,7 @@ class EmailLoginController extends LoginController
     {
     	return $request->input('password');
     }
+
+
 
 }

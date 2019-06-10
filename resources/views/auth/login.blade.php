@@ -5,7 +5,7 @@
 @section('content')
 <form id="app-login" class="form-auth form-login" @submit.prevent="createPost" method="POST">
   <h1 class="h3 mb-3 font-weight-normal">@yield('title')</h1>
-  <alert-box v-bind="errors"></alert-box>
+  <alert-box v-if="errors" :errors="errors"></alert-box>
   <label for="username" class="sr-only">@yield('email', trans('auth.email'))</label>
   <input type="text" id="username" class="form-control" v-model="post.username"placeholder="@yield('email', trans('auth.email'))" required autofocus>
   <label for="password" class="sr-only">@yield('email', trans('auth.password'))</label>

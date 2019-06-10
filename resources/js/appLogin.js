@@ -46,7 +46,10 @@ var appLogin = new Vue({
 
       }).catch(function (error) {
         // form submission failed, pass form errors to errors array
-        self.showErrors(error.response.data.errors);
+        self.errors = error.response.data.errors;
+        console.log(self.errors);
+
+        //self.showErrors(error.response.data.errors);
       });
     },
     showErrors: function(errors){
