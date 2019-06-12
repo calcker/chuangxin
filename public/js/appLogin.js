@@ -19413,7 +19413,7 @@ var render = function() {
         "ul",
         _vm._l(_vm.errors, function(value, key, index) {
           return _c("li", [
-            _vm._v("\n            " + _vm._s(value) + "\n        ")
+            _vm._v("\n            " + _vm._s(value[0]) + "\n        ")
           ])
         }),
         0
