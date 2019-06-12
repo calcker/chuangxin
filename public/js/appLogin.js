@@ -1771,8 +1771,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['errors']
 });
@@ -19412,9 +19410,7 @@ var render = function() {
       _c(
         "ul",
         _vm._l(_vm.errors, function(value, key, index) {
-          return _c("li", [
-            _vm._v("\n            " + _vm._s(value[0]) + "\n        ")
-          ])
+          return _c("li", [_vm._v(_vm._s(value[0]))])
         }),
         0
       )
@@ -31573,7 +31569,8 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); //window.Router = require('vue-router');
+
 Vue.component('alert-box', __webpack_require__(/*! ./components/AlertBox.vue */ "./resources/js/components/AlertBox.vue")["default"]);
 var appLogin = new Vue({
   el: '#app-login',
@@ -31599,7 +31596,9 @@ var appLogin = new Vue({
       }
 
       if (!url) {
-        this.errors = '▪ 请输入正确格式email或手机号';
+        this.errors = {
+          email: ["请输入正确格式email或手机号"]
+        };
         return false;
       }
 
@@ -31611,19 +31610,12 @@ var appLogin = new Vue({
         }; // clear previous form errors
 
         self.errors = '';
-        self.submitted = true; //self.gotoURL('/home');
+        self.submitted = true;
+        self.$router.push('/home'); //self.gotoURL('/home');
       })["catch"](function (error) {
         // form submission failed, pass form errors to errors array
         self.errors = error.response.data.errors;
-        console.log(self.errors); //self.showErrors(error.response.data.errors);
       });
-    },
-    showErrors: function showErrors(errors) {
-      this.errors = '';
-
-      for (var i in errors) {
-        this.errors += '▪ ' + errors[i] + '\n';
-      }
     },
     gotoURL: function gotoURL(url) {
       window.location.href = url;

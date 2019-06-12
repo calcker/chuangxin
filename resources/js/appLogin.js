@@ -2,6 +2,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+//window.Router = require('vue-router');
 
 Vue.component('alert-box', require('./components/AlertBox.vue').default);
 
@@ -29,7 +30,7 @@ var appLogin = new Vue({
       }
 
       if(!url){
-        this.errors = '▪ 请输入正确格式email或手机号';
+        this.errors = {email: ["请输入正确格式email或手机号"]};
         return false;
       }
 
@@ -42,21 +43,12 @@ var appLogin = new Vue({
         // clear previous form errors
         self.errors = '';
         self.submitted = true;
+        self.$router.push('/home');
         //self.gotoURL('/home');
-
       }).catch(function (error) {
         // form submission failed, pass form errors to errors array
         self.errors = error.response.data.errors;
-        console.log(self.errors);
-
-        //self.showErrors(error.response.data.errors);
       });
-    },
-    showErrors: function(errors){
-      this.errors = '';
-      for(var i in errors){
-        this.errors += '▪ ' + errors[i] + '\n';
-      }
     },
     gotoURL: function(url){
       window.location.href = url;
