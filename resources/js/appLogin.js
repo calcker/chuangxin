@@ -46,7 +46,7 @@ var appLogin = new Vue({
         self.$router.push('/home');
         //self.gotoURL('/home');
       }).catch(function (error) {
-        // form submission failed, pass form errors to errors array
+        // form submission fail`  `````````a-zA-Z0-9_qqqqqqqqqed, pass form errors to errors array
         self.errors = error.response.data.errors;
       });
     },
