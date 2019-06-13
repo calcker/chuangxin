@@ -15,3 +15,12 @@ mix.js('resources/js/appLogin.js', 'public/js').version()
    .js('resources/js/appPersonReg.js', 'public/js').version()
    .sass('resources/sass/app.scss', 'public/css').version()
    .sass('resources/sass/auth.scss', 'public/css').version();
+
+
+mix.webpackConfig({
+    resolve:{
+        alias: {
+        'vue-router$': 'vue-router/dist/vue-router.common.js'
+        }
+    }
+});

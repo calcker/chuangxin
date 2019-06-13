@@ -1,8 +1,7 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
-//window.Router = require('vue-router');
+import Vue from 'vue';
 
 Vue.component('alert-box', require('./components/AlertBox.vue').default);
 
@@ -35,23 +34,17 @@ var appLogin = new Vue({
       }
 
       axios.post(url, self.post).then(function(response) {
-        // form submission successful, reset post data and set submitted to true
         self.post = {
           username: '',
           password: ''
         };
-        // clear previous form errors
         self.errors = '';
         self.submitted = true;
-        self.$router.push('/home');
-        //self.gotoURL('/home');
-      }).catch(function (error) {
-        // form submission fail`  `````````a-zA-Z0-9_qqqqqqqqqed, pass form errors to errors array
+        window.location.href = '/home';
+      }).catch(function(error){
         self.errors = error.response.data.errors;
       });
-    },
-    gotoURL: function(url){
-      window.location.href = url;
     }
   }
 });
+
