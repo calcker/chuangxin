@@ -3,6 +3,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+Vue.component('alert-box', require('./components/AlertBox.vue').default);
+
 var appPersonReg = new Vue({
   el: '#app-person-reg',
   data: {
@@ -27,21 +29,11 @@ var appPersonReg = new Vue({
         // clear previous form errors
         self.errors = '';
         self.submitted = true;
-        self.gotoURL('/register/pending');
-
+        window.location.href = '/register/pending';
       }).catch(function (error) {
         // form submission failed, pass form errors to errors array
-        self.showErrors(error.response.data.errors);
+        self.errors = error.response.data.errors;
       });
-    },
-    showErrors: function(errors){
-      this.errors = '';
-    	for(var i in errors){
-        this.errors += '▪ ' + errors[i] + '\n';
-      }
-    },
-    gotoURL: function(url){
-      window.location.href = url;
     }
   }
 });

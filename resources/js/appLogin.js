@@ -1,7 +1,7 @@
 
 require('./bootstrap');
 
-import Vue from 'vue';
+window.Vue = require('vue');
 
 Vue.component('alert-box', require('./components/AlertBox.vue').default);
 

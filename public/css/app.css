@@ -10667,8 +10667,12 @@ body {
   font-weight: normal;
 }
 
-nav.navbar.navbar-expand-lg {
+.navbar {
   margin-bottom: 20px;
+}
+
+.navbar-brand {
+  background-image: url(/images/logo.png?d19f2a0eb3afd276cb66f1c30f71b632);
 }
 
 /* footer */

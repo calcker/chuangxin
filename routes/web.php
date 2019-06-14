@@ -25,8 +25,8 @@ Route::get('/register', 'IndexController@register')->name('register');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/help', 'HomeController@help')->name('help');
 
-
 Route::get('/login', 'Auth\LoginController@showLoginForm');
+Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::group(['prefix' => 'login'], function(){
     Route::post('/email', 'Auth\EmailLoginController@login');

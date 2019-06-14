@@ -11,9 +11,7 @@
 @section('content')
 <form id="app-person-reg" class="form-auth form-reg-person" @submit.prevent="createPost" method="POST">
   <h1 class="h3 mb-3 font-weight-normal">@yield('title')</h1>
-  <div v-if="errors" class="alert alert-danger" role="alert">
-    <p>@{{ errors }}</p>
-  </div>
+  <alert-box v-if="errors" :errors="errors"></alert-box>
   <label for="name" class="sr-only">@yield('person_name')</label>
   <input type="text" name="name" class="form-control" v-model="post.name" placeholder="@yield('name')" value="{{ old('name') }}" required>
   <label for="email" class="sr-only">@yield('email')</label>
