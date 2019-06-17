@@ -9,7 +9,10 @@
       <a href="#" class="list-group-item list-group-item-action"><strong>团队</strong></a>
       <a href="#" class="list-group-item list-group-item-action"><strong>话题</strong></a>
       <a href="#" class="list-group-item list-group-item-action"><strong>合作</strong></a>
+      <a href="#" class="list-group-item list-group-item-action"><strong>交易</strong></a>
       <a href="#" class="list-group-item list-group-item-action"><strong>城市</strong></a>
+      <a href="#" class="list-group-item list-group-item-action"><strong>企业</strong></a>
+      <a href="#" class="list-group-item list-group-item-action"><strong>院校</strong></a>
     </div>
   </div>
   <div class="col-md-7">

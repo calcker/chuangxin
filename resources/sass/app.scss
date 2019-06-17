@@ -29,11 +29,14 @@ body {
   margin-right:10px;
 }
 
-.side-nav .list-group-item{
+.side-nav .list-group-item {
   border: 0;
   border-radius: 3px;
   text-align: center;
+}
 
+.side-nav .list-group-item.active {
+  background-color: #b9cce0;
 }
 
 /* footer */

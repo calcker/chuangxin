@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>创新之城 - 与世界分享你的创新力</title>
+    <title>创新之城 - 我们一起改变世界</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   </head>
   <body>

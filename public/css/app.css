@@ -10691,6 +10691,10 @@ body {
   text-align: center;
 }
 
+.side-nav .list-group-item.active {
+  background-color: #b9cce0;
+}
+
 /* footer */
 
 footer {
