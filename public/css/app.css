@@ -10672,7 +10672,23 @@ body {
 }
 
 .navbar-brand {
-  background-image: url(/images/logo.png?d19f2a0eb3afd276cb66f1c30f71b632);
+  /*
+  background-image: url(../images/logo.png);
+  height:20px;
+  width:50px;
+  */
+}
+
+.navbar-brand img {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.side-nav .list-group-item {
+  border: 0;
+  border-radius: 3px;
+  text-align: center;
 }
 
 /* footer */
