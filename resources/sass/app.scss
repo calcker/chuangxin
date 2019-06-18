@@ -1,6 +1,11 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/v4-shims.scss";
 
 body {
 	
@@ -36,8 +41,9 @@ body {
 }
 
 .side-nav .list-group-item.active {
-  background-color: #b9cce0;
+  /*background-color: #b9cce0;*/
 }
+
 
 /* footer */
 

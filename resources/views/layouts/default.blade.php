@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>创新之城 - 我们一起改变世界</title>
+    <link href="/images/logo.png" rel="shortcut icon">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   </head>
   <body>

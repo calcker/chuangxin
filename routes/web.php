@@ -25,6 +25,9 @@ Route::get('/register', 'IndexController@register')->name('register');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/help', 'HomeController@help')->name('help');
 
+Route::get('/works', 'WorksController@index')->name('works');
+
+
 Route::get('/login', 'Auth\LoginController@showLoginForm');
 Route::get('/logout', 'Auth\LoginController@logout');
 
