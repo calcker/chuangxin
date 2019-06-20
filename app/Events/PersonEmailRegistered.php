@@ -25,7 +25,7 @@ class PersonEmailRegistered
      */
     public function __construct(User $user, EmailAccount $emailAccount)
     {
-        auth()->login($user);
+        //auth()->login($user);
 
         $this->user = $user;
 
