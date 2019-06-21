@@ -1,13 +1,9 @@
 <template>
-    <div class="alert alert-danger" role="alert">
-        <ul>
-            <li v-for="(value, key, index) in errors">{{ value[0] }}</li>
-        </ul>
-    </div>
+    <h2>sss</h2>
 </template>
 
 <script>
     export default {
-        props: ['errors']
+        props: ['email']
     }
 </script>

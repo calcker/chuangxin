@@ -8,11 +8,12 @@
       <a href="/works" class="list-group-item list-group-item-action"><strong>作品</strong></a>
       <a href="/team" class="list-group-item list-group-item-action"><strong>团队</strong></a>
       <a href="/topic" class="list-group-item list-group-item-action"><strong>话题</strong></a>
-      <a href="/cooperation" class="list-group-item list-group-item-action"><strong>合作</strong></a>
+      <a href="/market" class="list-group-item list-group-item-action"><strong>招聘</strong></a>
+      <a href="/project" class="list-group-item list-group-item-action"><strong>项目</strong></a>
       <a href="/market" class="list-group-item list-group-item-action"><strong>交易</strong></a>
-      <a href="/city" class="list-group-item list-group-item-action"><strong>城市</strong></a>
       <a href="/company" class="list-group-item list-group-item-action"><strong>企业</strong></a>
       <a href="/college" class="list-group-item list-group-item-action"><strong>院校</strong></a>
+      <a href="/city" class="list-group-item list-group-item-action"><strong>城市</strong></a>
     </div>
   </div>
   <div class="col-md-7">

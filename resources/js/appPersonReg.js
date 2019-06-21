@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import EmailVerify from './components/pages/EmailVerify'
 
 require('./bootstrap');
 
@@ -7,8 +8,8 @@ window.Vue = require('vue');
 
 Vue.use(VueRouter);
 
-Vue.component('alert-box', require('./components/AlertBox.vue').default);
-Vue.component('email-verify', require('./components/EmailVerify.vue').default);
+Vue.component('AlertBox', require('./components/AlertBox.vue').default);
+//Vue.component('EmailVerify', require('./components/EmailVerify.vue').default);
 
 const router = new VueRouter({
   routes: [
@@ -40,7 +41,7 @@ var appPersonReg = new Vue({
         // clear previous form errors
         self.errors = '';
         self.submitted = true;
-        router.push({path: 'verify'});
+        //router.push({path: 'verify'});
         //window.location.href = '/register/pending';
       }).catch(function (error) {
         // form submission failed, pass form errors to errors array
