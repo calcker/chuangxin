@@ -1,6 +1,6 @@
-import Vue from 'vue'
+//import Vue from 'vue'
 import VueRouter from 'vue-router'
-import EmailVerify from './components/pages/EmailVerify'
+//import EmailVerify from './components/pages/EmailVerify'
 
 require('./bootstrap');
 
@@ -8,17 +8,20 @@ window.Vue = require('vue');
 
 Vue.use(VueRouter);
 
-Vue.component('AlertBox', require('./components/AlertBox.vue').default);
+//Vue.component('AlertBox', require('./components/AlertBox.vue').default);
 //Vue.component('EmailVerify', require('./components/EmailVerify.vue').default);
 
 const router = new VueRouter({
   routes: [
-    {path: '/verify', component: EmailVerify}
+    {path: '/start', component: require('./components/auth/email/Start.vue')},
+    {path: '/wait', component: require('./components/auth/email/Wait.vue')},
+    {path: '*', redirect: '/start'}
   ]
 });
 
 var appPersonReg = new Vue({
   el: '#app-person-reg',
+  router: router/*,
   data: {
     post: {
       name: '',
@@ -49,4 +52,5 @@ var appPersonReg = new Vue({
       });
     }
   }
+  */
 });
