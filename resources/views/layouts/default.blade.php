@@ -6,11 +6,15 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   </head>
   <body>
-    @include('layouts._header')
-
-    <div class="container">
-      @yield('content')
-      @include('layouts._footer')
+    <div id="app">
+      @include('layouts._header')
+      <div class="container">
+        @yield('content')
+        @include('layouts._footer')
+      </div>
     </div>
+  <!--
+   <script type="text/javascript" src="@yield('js')"></script>
+  -->
   </body>
 </html>

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import router from './router/register'
+import router from './router/index'
 //import EmailVerify from './components/pages/EmailVerify'
 
 //require('./bootstrap');

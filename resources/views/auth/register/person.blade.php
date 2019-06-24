@@ -10,5 +10,5 @@
 @stop
 
 @section('js')
-  {{ mix('js/appPersonReg.js') }}
+  {{ mix('js/app.js') }}
 @stop

@@ -13,6 +13,10 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/vue', function(){
+    return view('layouts.vue');
+});
+
 //Auth::routes();
 
 

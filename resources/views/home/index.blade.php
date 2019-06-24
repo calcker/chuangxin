@@ -28,3 +28,7 @@
   </div>
 </div>
 @stop
+
+@section('js')
+  {{ mix('js/app.js') }}
+@stop
