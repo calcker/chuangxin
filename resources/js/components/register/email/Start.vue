@@ -19,6 +19,20 @@
 
 <script>
     export default {
+    	data: function() {
+    		return {
+	    		post: {
+	     			name: '',
+	     			email: '',
+	      			password: ''
+	    		},
+    			errors: '',
+    			submitted: false
+    		}
+  		},
+    	mounted: function() {
+            //console.log('Component mounted.');
+        },
         props: ['email']
     }
 </script>

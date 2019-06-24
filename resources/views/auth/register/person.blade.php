@@ -1,7 +1,12 @@
 @extends('layouts.auth')
 
+@section('title', '注册')
+
+
 @section('content')
-<router-view></router-view>
+<div id="app">
+  <router-view/>
+</div>
 @stop
 
 @section('js')

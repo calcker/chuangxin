@@ -22,6 +22,11 @@ Route::get('/login', 'IndexController@login')->name('login');
 
 Route::get('/register', 'IndexController@register')->name('register');
 */
+/*
+Route::get(['prefix' => 'user'], function(){
+    Route::get('/register', 'Auth\PersonEmailRegisterController@showRegistrationForm');
+});
+*/
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/help', 'HomeController@help')->name('help');
 
@@ -36,6 +41,8 @@ Route::group(['prefix' => 'login'], function(){
     Route::post('/mobile', 'Auth\MobileLoginController@login');
 });
 
+
+/*
 Route::group(['prefix' => 'register'], function(){
 	Route::get('/person', 'Auth\PersonEmailRegisterController@showRegistrationForm');
 	Route::post('/person', 'Auth\PersonEmailRegisterController@register');
@@ -44,7 +51,7 @@ Route::group(['prefix' => 'register'], function(){
     Route::get('/pending', 'Auth\PersonEmailRegisterController@pending');
     Route::get('/verify/{token}', 'Auth\EmailVerificationController@verify')->name('verify');
 });
-
+*/
 
 
 /*
