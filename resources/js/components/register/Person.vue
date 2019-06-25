@@ -10,10 +10,14 @@
 	  	<input type="password" name="password" class="form-control" v-model="post.password" placeholder="密码" value="" required>
 	  	<button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
 	  	<div class="row mt-2">
+	  		<div class="col"><router-link to="/register/company">企业注册</router-link></div>
+			<div class="col"><router-link to="/register/org">非盈利组织注册</router-link></div>
+			<!--
 	    	<div class="col"><a href="/register/company" class="btn btn-sm btn-link">企业注册</a></div>
 	    	<div class="col"><a href="/register/org" class="btn btn-sm btn-link">非盈利组织注册</a></div>
+	  		-->
 	  	</div>
-	 	 <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+	 	<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 	</form>
 </template>
 

@@ -160,6 +160,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -924,43 +928,36 @@ var render = function() {
         [_vm._v("注册")]
       ),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "row mt-2" }, [
+        _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c("router-link", { attrs: { to: "/register/company" } }, [
+              _vm._v("企业注册")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c("router-link", { attrs: { to: "/register/org" } }, [
+              _vm._v("非盈利组织注册")
+            ])
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
       _c("p", { staticClass: "mt-5 mb-3 text-muted" }, [_vm._v("© 2017-2018")])
     ],
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-2" }, [
-      _c("div", { staticClass: "col" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-link",
-            attrs: { href: "/register/company" }
-          },
-          [_vm._v("企业注册")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-sm btn-link",
-            attrs: { href: "/register/org" }
-          },
-          [_vm._v("非盈利组织注册")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -15958,7 +15955,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1___default.a({
   }]
 });
 router.beforeEach(function (to, from, next) {
-  window.document.title = '创新之城' + to.name;
+  window.document.title = '创新之城 - ' + to.name;
   next();
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
