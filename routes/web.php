@@ -13,9 +13,23 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/vue', function(){
-    return view('layouts.vue');
+Route::get('/route', function(){
+    return view('layouts.vue-router');
 });
+
+Route::post('/register', 'Auth\EmailRegisterController@register');
+
+
+/*
+Route::group(['prefix' => 'register'], function(){
+    //Route::get('/person', 'Auth\PersonEmailRegisterController@showRegistrationForm');
+    Route::post('/person', 'Auth\PersonEmailRegisterController@register');
+    //Route::get('/company', 'Auth\CompanyRegisterController@showRegistrationForm');
+    //Route::get('/org', 'Auth\OrgRegisterController@register');
+    //Route::get('/pending', 'Auth\PersonEmailRegisterController@pending');
+    //Route::get('/verify/{token}', 'Auth\EmailVerificationController@verify')->name('verify');
+});
+*/
 
 //Auth::routes();
 

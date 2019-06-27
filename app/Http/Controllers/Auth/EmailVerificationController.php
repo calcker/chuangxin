@@ -28,7 +28,7 @@ class EmailVerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/route#/profile';
     
     public function verify(Request $request)
     {
@@ -39,9 +39,26 @@ class EmailVerificationController extends Controller
             return redirect($this->redirectPath());
         }
 
-        $account = EmailAccount::where('token', $token)->first();
+        $register = EmailRegister::where('token', $token)->first();
 
-        die(var_dump($account));
+        die(var_dump($register));
+
+        $user = User::create([
+            'key'        => str_random(64),
+            'name'       => $data['name'],
+            'identity'   => 'person',
+            'domain'     => str_random(64),
+            'reg_type'   => 'email',
+            'created_ip' => $request->getClientIp(),
+        ]);
+
+        $emailAccount = EmailAccount::create([
+            'user_id'    => $user->id,
+            'email'      => $data['email'],
+            'password'   => Hash::make($data['password']),
+            'token'      => str_random(64),
+        ])
+
 
         if(! $account) {
             return redirect($this->redirectPath());

@@ -18,6 +18,12 @@ const router =  new VueRouter({
 			name: '个人注册',
 			components: require('../components/register/Person')
 		},
+
+		{
+			path: '/register/email/registered',
+			name: '注册成功',
+			components: require('../components/register/email/Registered')
+		},
 		
 		/*
 		{
@@ -25,7 +31,8 @@ const router =  new VueRouter({
 			name: 'Wait',
 			components:  Wait
 		}*/
-		{	path: '*', 
+		{	
+			path: '*', 
 			redirect: '/login'
 		}
 

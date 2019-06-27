@@ -37,6 +37,7 @@ class PersonEmailVerification extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->markdown('emails.verify')
+                    ->subject('邮箱验证')
                     ->with([
                         'name' => $this->name,
                         'url'  => config('app.url'). '/register/verify/' . $this->token,

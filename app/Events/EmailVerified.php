@@ -10,24 +10,21 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 
-class PersonEmailVerified
+class EmailVerified
 {
     use Dispatchable, SerializesModels;
 
-    public $user;
-
-    public $emailAccount;
+    public $register;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user, EmailAccount $emailAccount)
+    public function __construct(EmailRegister $register)
     {
-        $this->user = $user;
-
-        $this->emailAccount = $emailAccount;
+        $this->register = $register;
+        
     }
 
 }

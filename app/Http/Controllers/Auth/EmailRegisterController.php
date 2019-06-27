@@ -3,30 +3,37 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\Auth\User;
-use App\Models\Auth\EmailAccount;
+use App\Models\Auth\EmailRegister;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Controller;
-use App\Events\PersonEmailRegistered;
+use App\Events\EmailRegistered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
-class PersonEmailRegisterController extends RegisterController
+class EmailRegisterController extends RegisterController
 {
-
-    public function showRegistrationForm()
-    {
-        return view('auth.register.person');
-    }
     
-
     public function register(Request $request)
     {   
         $data = $request->all();
 
         $this->validator($data)->validate();
 
+        $register = EmailRegister::create([
+            'email'      => $data['email'],
+            'password'   => Hash::make($data['password']),
+            'name'       => $data['name'],
+            'identity'   => $data['identity'],
+            'token'      => str_random(64),
+            'reg_at'     => Carbon::now(),
+            'reg_ip'     => $request->getClientIp(),
+        ]);
+
+        event(new EmailRegistered($register));
+        
+        /*
         $user = User::create([
             'key'        => str_random(64),
             'name'       => $data['name'],
@@ -44,7 +51,7 @@ class PersonEmailRegisterController extends RegisterController
         ]);
 
         event(new PersonEmailRegistered($user, $emailAccount));
-
+        */
         
 
         //event(new Registered($user = $this->create($request->all())));

@@ -9,34 +9,54 @@
 	  	<label for="password" class="sr-only">密码</label>
 	  	<input type="password" name="password" class="form-control" v-model="post.password" placeholder="密码" value="" required>
 	  	<button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+	  	<router-link to="/login" class="btn btn-secondary btn-block">已有账号</router-link>
 	  	<div class="row mt-2">
-	  		<div class="col"><router-link to="/register/company">企业注册</router-link></div>
-			<div class="col"><router-link to="/register/org">非盈利组织注册</router-link></div>
-			<!--
-	    	<div class="col"><a href="/register/company" class="btn btn-sm btn-link">企业注册</a></div>
-	    	<div class="col"><a href="/register/org" class="btn btn-sm btn-link">非盈利组织注册</a></div>
-	  		-->
+	  		<div class="col"><router-link to="/register/company" class="btn btn-link">企业注册</router-link></div>
+			<div class="col"><router-link to="/register/org" class="btn btn-link">非盈利组织</router-link></div>
 	  	</div>
 	 	<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 	</form>
 </template>
 
 <script>
-    export default {
-    	data: function() {
-    		return {
+	import AlertBox from '../AlertBox'
+	window.axios = require('axios');
+	window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+	export default {
+		data: function() {
+			return {
 	    		post: {
 	     			name: '',
 	     			email: '',
-	      			password: ''
+	      			password: '',
+	      			identity: 'person'
 	    		},
-    			errors: '',
-    			submitted: false
+				errors: '',
+				submitted: false
+			}
+		},
+		methods: {
+			createPost: function(){
+		      var self = this;
+		      axios.post('/register', self.post).then(function(response) {
+		        // form submission successful, reset post data and set submitted to true
+		        self.post = {
+		          name: '',
+		          email: '',
+		          password: ''
+		        };
+		        // clear previous form errors
+		        self.errors = '';
+		        self.submitted = true;
+		        sessionStorage.setItem('emailRegister', self.post);
+		        router.push({path: '/register/email-registered'});
+		        //window.location.href = '/register/pending';
+		      }).catch(function (error) {
+		        // form submission failed, pass form errors to errors array
+		        self.errors = error.response.data.errors;
+		      });
     		}
-  		},
-    	mounted: function() {
-            //console.log('Component mounted.');
-        },
-        props: ['email']
-    }
+		},
+		components: {AlertBox}
+	}
 </script>

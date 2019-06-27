@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 
-class EmailAccount extends Account implements MustVerifyEmail
+class EmailAccount extends Account
 {
     
 	protected $fillable = ['user_id', 'email', 'password', 'token',];
