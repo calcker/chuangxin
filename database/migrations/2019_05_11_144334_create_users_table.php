@@ -48,7 +48,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('email_registers', function (Blueprint $table) {
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
             $table->string('name');
             $table->enum('identity', ['person', 'company', 'org', 'member']);

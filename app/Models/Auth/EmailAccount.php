@@ -37,6 +37,4 @@ class EmailAccount extends Account
             ->queue($mail);
     }
 
-
-
 }
