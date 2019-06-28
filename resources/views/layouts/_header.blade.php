@@ -9,7 +9,7 @@
       	<li class="nav-item"><a class="nav-link" href="/logout"><strong>退出</strong></a></li>
       @else
       	<li class="nav-item"><a class="nav-link active" href="/route#/login"><strong>登录</strong></a></li>
-        <li class="nav-item"><a class="nav-link" href="/route#/register/person"><strong>注册</strong></a></li>
+        <li class="nav-item"><a class="nav-link" href="/route#/register/email/person"><strong>注册</strong></a></li>
   	  @endif
    	</ul>
   </div>

@@ -53,7 +53,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->enum('identity', ['person', 'company', 'org', 'member']);
             $table->string('token')->unique();
-            $table->tinyInteger('verified')->default(0);
             $table->timestamp('reg_at');
             $table->char('reg_ip', 15);
         });

@@ -14,15 +14,15 @@ const router =  new VueRouter({
 		},
 
 		{
-			path: '/register/person',
+			path: '/register/email/person',
 			name: '个人注册',
-			components: require('../components/register/Person')
+			components: require('../components/register/email/Person')
 		},
 
 		{
-			path: '/register/email/registered',
+			path: '/register/email/success',
 			name: '注册成功',
-			components: require('../components/register/email/Registered')
+			components: require('../components/register/email/Success')
 		},
 		
 		/*
@@ -44,5 +44,5 @@ router.beforeEach((to, from, next) => {
 	next();
 });
 
-export default router;
+export default router;0.
 

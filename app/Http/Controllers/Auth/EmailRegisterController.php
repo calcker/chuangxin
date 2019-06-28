@@ -6,6 +6,7 @@ use App\Models\Auth\User;
 use App\Models\Auth\EmailRegister;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Events\EmailRegistered;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -109,11 +110,29 @@ class EmailRegisterController extends RegisterController
      */
     protected function validator(array $data)
     {
+        
+        $messages = [
+            'name.required' => '请填写姓名',
+            'name.min' => '姓名不能少于2个字符',
+            'name.max' => '姓名不能超过255个字符',
+            'email.required' => '请填写email',
+            'email.email' => 'email格式不正确',
+            'email.min' => 'email不能少于5个字符',
+            'email.max' => 'email不能超过255个字符',
+            'email.unique' => '此email已注册',
+            'password.required' => '请填写密码',
+            'password.min' => '密码不能少于6个字符',
+            'password.max' => '密码不能超过255个字符',
+            'identity.required' => '缺少账户类型',
+            'identity.in'  => '账号类型不在范围内',
+        ];
+
         return Validator::make($data, [
-            'name' => ['required', 'string', 'min:2', 'max:100'],
-            'email' => ['required', 'string', 'email', 'min:6', 'max:255', 'unique:email_accounts'],
+            'name' => ['required', 'string', 'min:2', 'max:255'],
+            'email' => ['required', 'string', 'email', 'min:5', 'max:255', 'unique:email_accounts'],
             'password' => ['required', 'string', 'min:6', 'max:255'],
-        ]);
+            'identity' => ['required', Rule::in(['person', 'company', 'org'])],
+        ], $messages);
     }
     
 }

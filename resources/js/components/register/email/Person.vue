@@ -11,15 +11,15 @@
 	  	<button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
 	  	<router-link to="/login" class="btn btn-secondary btn-block">已有账号</router-link>
 	  	<div class="row mt-2">
-	  		<div class="col"><router-link to="/register/company" class="btn btn-link">企业注册</router-link></div>
-			<div class="col"><router-link to="/register/org" class="btn btn-link">非盈利组织</router-link></div>
+	  		<div class="col"><router-link to="/register/email/company" class="btn btn-link">企业注册</router-link></div>
+			<div class="col"><router-link to="/register/email/org" class="btn btn-link">非盈利组织</router-link></div>
 	  	</div>
 	 	<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 	</form>
 </template>
 
 <script>
-	import AlertBox from '../AlertBox'
+	import AlertBox from '../../AlertBox'
 	window.axios = require('axios');
 	window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 	export default {
@@ -39,20 +39,24 @@
 			createPost: function(){
 		      var self = this;
 		      axios.post('/register', self.post).then(function(response) {
-		        // form submission successful, reset post data and set submitted to true
+		        localStorage.setItem('emailRegister', {
+		        	name: self.post.name,
+		        	email: self.post.email
+		        });
 		        self.post = {
 		          name: '',
 		          email: '',
-		          password: ''
+		          password: '',
+		          identity: 'person'
 		        };
 		        // clear previous form errors
 		        self.errors = '';
 		        self.submitted = true;
-		        sessionStorage.setItem('emailRegister', self.post);
-		        router.push({path: '/register/email-registered'});
+		        self.$router.push({path: '/register/email/success'});
 		        //window.location.href = '/register/pending';
 		      }).catch(function (error) {
 		        // form submission failed, pass form errors to errors array
+		        console.log(error);
 		        self.errors = error.response.data.errors;
 		      });
     		}

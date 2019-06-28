@@ -15,7 +15,7 @@
 	  			</div>
 	  		</div>
 	  		<div class="col text-right">
-	  			<router-link to="/register/person" class="btn btn-link">还没有账号?</router-link></div>
+	  			<router-link to="/register/email/person" class="btn btn-link">还没有账号?</router-link></div>
 	  		</div>
 	  	</div>
 	  	<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>

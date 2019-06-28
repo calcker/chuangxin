@@ -17,10 +17,11 @@
     		}
   		},
     	created: function() {
-    		var emailRegister = sessionStorage.getItem('emailRegister');
+    		var emailRegister = localStorage.getItem('emailRegister');
     		if(!emailRegister) this.$router.push({path: '/register/person'});
     		this.name = emailRegister.name;
     		this.email = emailRegister.email;
+            console.log(emailRegister.name);
         },
         computed: {
         	gotoEmail: function() {
