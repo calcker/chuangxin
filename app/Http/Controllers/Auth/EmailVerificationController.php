@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Auth\EmailAccount;
+use App\Models\Auth\EmailRegister;
+use App\Events\EmailVerified;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class EmailVerificationController extends Controller
 {
@@ -28,52 +30,26 @@ class EmailVerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/route#/profile';
+    protected $redirectTo = '/';
     
     public function verify(Request $request)
     {
         
         $token = $request->route('token');
 
-        if(! $this->isToken($token)) {
-            return redirect($this->redirectPath());
-        }
-
+        if($this->validator(['token' => $token])->fails()) return redirect($this->redirectPath());
+        
         $register = EmailRegister::where('token', $token)->first();
 
-        die(var_dump($register));
+        if(!$register) return redirect($this->redirectPath());
 
-        $user = User::create([
-            'key'        => str_random(64),
-            'name'       => $data['name'],
-            'identity'   => 'person',
-            'domain'     => str_random(64),
-            'reg_type'   => 'email',
-            'created_ip' => $request->getClientIp(),
-        ]);
+        if($register->hasVerifiedEmail()) return redirect($this->redirectPath());
+        
+        event(new EmailVerified($request, $register));
 
-        $emailAccount = EmailAccount::create([
-            'user_id'    => $user->id,
-            'email'      => $data['email'],
-            'password'   => Hash::make($data['password']),
-            'token'      => str_random(64),
-        ])
-
-
-        if(! $account) {
-            return redirect($this->redirectPath());
-        }
-
-        if($account->hasVerifiedEmail()) {
-            return redirect($this->redirectPath());
-        }
-
-        if($account->markEmailAsVerified()) {
-            event(new Verified($account->user()));
-        }
+        //return redirect('/router#/register/email/verified');
 
     }
-
 
     /**
      * Create a new controller instance.
@@ -87,9 +63,16 @@ class EmailVerificationController extends Controller
         //$this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
-    protected function isToken($token, $length = 64){
-        
-        return preg_match('/^[0-9a-zA-Z]{' . $length . '}$/', $str) ? true : false;
+    protected function validator(array $data){
+
+        $messages = [
+            'required' => 'token错误',
+            'size' => 'token错误',
+        ];
+
+        return Validator::make($data, [
+            'token' => ['required', 'string', 'size:64'],
+        ], $messages);
         
     }
 }

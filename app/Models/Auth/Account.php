@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 abstract class Account extends Model
 {
     
-	const UPDATED_AT = null;
+	public $timestamps = false;
 
     //
 	public function user()

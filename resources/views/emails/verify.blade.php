@@ -2,13 +2,13 @@
 
 亲爱的 {{ $name }}
 
-# 欢迎注册「创新之城」
+# 欢迎加入「创新之城」
 
 请点击下面按钮完成账号激活。
 
 @component('mail::button', ['url' => $url ])
 
-激活
+激活账号
 
 @endcomponent
 

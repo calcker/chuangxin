@@ -2,18 +2,17 @@
 
 namespace App\Events;
 
-use App\Models\Auth\User;
-use App\Models\Auth\EmailAccount;
-use Illuminate\Broadcasting\Channel;
+use App\Models\Auth\EmailRegister;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Http\Request;
 
 class EmailVerified
 {
     use Dispatchable, SerializesModels;
 
+    public $request;
+    
     public $register;
 
     /**
@@ -21,10 +20,11 @@ class EmailVerified
      *
      * @return void
      */
-    public function __construct(EmailRegister $register)
-    {
-        $this->register = $register;
+    public function __construct(Request $request, EmailRegister $register)
+    {     
+        $this->request = $request;
         
+        $this->register = $register;   
     }
 
 }

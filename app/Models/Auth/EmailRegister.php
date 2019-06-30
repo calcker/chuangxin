@@ -3,10 +3,13 @@
 namespace App\Models\Auth;
 
 use Carbon\Carbon;
+use App\Models\Auth\User;
+use App\Models\Auth\EmailAccount;
 use App\Models\Auth\Register;
-use App\Mail\PersonEmailVerification;
+use App\Mail\EmailVerification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Http\Request;
 
 class EmailRegister extends Register implements MustVerifyEmail
 {
@@ -24,19 +27,37 @@ class EmailRegister extends Register implements MustVerifyEmail
     {
         $this->verified = 1;
         $this->save();
-
-        //$this->updated_at = Carbon::now();
-        //$this->user->email_binding = 1;
-        //$this->save();
-
     }
 
     public function sendEmailVerificationNotification()
     {
-        $mail = (new PersonEmailVerification($this->name, $this->token))
+        $mail = (new EmailVerification($this->name, $this->token))
                 ->onQueue('emails');
 
         Mail::to($this->email)->queue($mail);
+
+    }
+
+    public function createAccount(Request $request)
+    {
+
+        $user = User::create([
+            'key'        => str_random(64),
+            'name'       => $this->name,
+            'identity'   => $this->identity,
+            'domain'     => str_random(64),
+            'reg_type'   => 'email',
+            'created_ip' => $request->getClientIp(),
+            'email_binding' => 1,
+        ]);
+
+        $emailAccount = EmailAccount::create([
+            'user_id'     => $user->id,
+            'email'       => $this->email,
+            'password'    => $this->password,
+            'verified_at' => Carbon::now(),
+            'verified_ip' => $request->getClientIp(),
+        ]);
 
     }
     

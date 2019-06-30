@@ -48,6 +48,7 @@ class CreateUsersTable extends Migration
         });
 
         Schema::create('email_registers', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('email');
             $table->string('password');
             $table->string('name');
@@ -55,6 +56,7 @@ class CreateUsersTable extends Migration
             $table->string('token')->unique();
             $table->timestamp('reg_at');
             $table->char('reg_ip', 15);
+            $table->tinyInteger('verified')->default(0);
         });
 
         /*

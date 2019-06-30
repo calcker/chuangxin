@@ -13,7 +13,7 @@
         <strong>创新之城</strong>
       </a>
     </nav>
-    <div id="app" class="text-center container">
+    <div id="app" class="container">
       <router-view></router-view>
     </div>
     <script type="text/javascript" src="{{ mix('js/app.js') }}"></script>

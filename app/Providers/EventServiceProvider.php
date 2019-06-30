@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use App\Events\PersonEmailRegistered;
+use App\Events\EmailRegistered;
+use App\Events\EmailVerified;
 use App\Listeners\SendEmailVerificationNotification;
+use App\Listeners\MarkEmailAsVerified;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -15,10 +17,10 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        PersonEmailRegistered::class => [
+        EmailRegistered::class => [
             SendEmailVerificationNotification::class,
-        ],
-        PersonEmailVerified::class => [
+        ], 
+        EmailVerified::class => [
             MarkEmailAsVerified::class,
         ],
     ];

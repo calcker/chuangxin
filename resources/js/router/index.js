@@ -24,7 +24,13 @@ const router =  new VueRouter({
 			name: '注册成功',
 			components: require('../components/register/email/Success')
 		},
-		
+
+		{
+			path: '/register/email/verify/:token',
+			name: '邮箱验证',
+			components: require('../components/register/email/Verify')
+		},
+
 		/*
 		{
 			path: '/wait',

@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class PersonEmailVerification extends Mailable implements ShouldQueue
+class EmailVerification extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -22,11 +22,8 @@ class PersonEmailVerification extends Mailable implements ShouldQueue
      */
     public function __construct($name, $token)
     {
-        //
         $this->name = $name;
-
         $this->token = $token;
-    
     }
 
     /**
@@ -40,7 +37,7 @@ class PersonEmailVerification extends Mailable implements ShouldQueue
                     ->subject('邮箱验证')
                     ->with([
                         'name' => $this->name,
-                        'url'  => config('app.url'). '/register/verify/' . $this->token,
+                        'url'  => config('app.url') . config('app.vue_router') . '/register/email/verify/' . $this->token,
                     ]);
     }
 }

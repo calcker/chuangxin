@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth;
 
+use App\Models\Auth\EmailAccount;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -23,7 +24,7 @@ class User extends Model implements
      * @var array
      */
     protected $fillable = [
-        'key', 'name', 'identity', 'domain', 'reg_type', 'created_ip',
+        'key', 'name', 'identity', 'domain', 'reg_type', 'created_ip', 'email_binding',
     ];
 
     /**
@@ -42,7 +43,7 @@ class User extends Model implements
 
     public function mobileAccount()
     {
-        return $this->hasOne(MobileAccount::class);
+        //return $this->hasOne(MobileAccount::class);
     }
     
 

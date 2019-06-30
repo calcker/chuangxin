@@ -54,6 +54,11 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+
+    //vue-router路径
+    'vue_router' => '/router#',
+
+
     'asset_url' => env('ASSET_URL', null),
 
     /*

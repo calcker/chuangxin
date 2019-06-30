@@ -1,12 +1,24 @@
 <template>
-	<div>	
-		<h4>亲爱的, {{ name }}</h4>
-		<h2>恭喜您，注册成功!</h2>
-		<!--
-		<a class="btn btn-link" href="{{ gotoEmail }}"><strong>进入我的邮箱</strong></a>
-		-->
-	</div>
+    <div class="email-register-success alert alert-success" role="alert">
+        <h4 class="alert-heading">恭喜您, 注册成功</h4>
+        <hr>
+        <p>亲爱的, <strong>{{ name }}</strong></p>
+        <p>感谢您的加入</p>
+        <p>请尽快登录<a :href="'http://' + gotoEmail" class="alert-link"> 您的邮箱</a> ( {{ email }} ), 完成邮箱验证</p>
+        <hr>
+        <a class="btn btn-primary btn-block" :href="'http://' + gotoEmail">
+            登录我的邮箱 {{ gotoEmail }}
+        </a>
+    </div>
 </template>
+
+<style type="text/css">
+    .email-register-success {
+        max-width: 400px;
+        padding: 40px;
+        margin: 0 auto;
+    }
+</style>
 
 <script>
     export default {
@@ -17,15 +29,15 @@
     		}
   		},
     	created: function() {
-    		var emailRegister = localStorage.getItem('emailRegister');
-    		if(!emailRegister) this.$router.push({path: '/register/person'});
-    		this.name = emailRegister.name;
-    		this.email = emailRegister.email;
-            console.log(emailRegister.name);
+    		var name = sessionStorage.getItem('name'),
+                email = sessionStorage.getItem('email');
+    		if(!email || !name) this.$router.push({path: '/register/email/person'});
+    		this.name = name;
+    		this.email = email;
         },
         computed: {
         	gotoEmail: function() {
-        		$t = this.email.split('@')[1];
+        		var $t = this.email.split('@')[1];
                 $t = $t.toLowerCase();
                 if ($t == '163.com') {
                     return 'mail.163.com';

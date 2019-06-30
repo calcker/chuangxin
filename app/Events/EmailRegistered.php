@@ -20,7 +20,6 @@ class EmailRegistered
      */
     public function __construct(EmailRegister $register)
     {
-
         $this->register = $register;
 
     }

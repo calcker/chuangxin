@@ -2,8 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\PersonEmailVerified;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Events\EmailVerified;
 use Illuminate\Queue\InteractsWithQueue;
 
 class MarkEmailAsVerified
@@ -21,11 +20,19 @@ class MarkEmailAsVerified
     /**
      * Handle the event.
      *
-     * @param  PersonRegistered  $event
+     * @param  EmailVerified $event
      * @return void
      */
-    public function handle(PersonEmailVerified $event)
+    public function handle(EmailVerified $event)
     {
-        $event->register->markEmailAsVerified();
+
+        $request = $event->request;
+
+        $register = $event->register;
+
+        $register->markEmailAsVerified();
+
+        $register->createAccount($request);
+
     }
 }

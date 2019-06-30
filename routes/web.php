@@ -13,11 +13,15 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/route', function(){
+Route::get('/router', function(){
     return view('layouts.vue-router');
 });
 
-Route::post('/register', 'Auth\EmailRegisterController@register');
+Route::post('/register/email', 'Auth\EmailRegisterController@register');
+
+Route::post('/register/email/verify', 'Auth\EmailVerificationController@verify');
+
+
 
 
 /*
