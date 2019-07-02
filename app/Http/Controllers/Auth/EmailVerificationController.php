@@ -26,23 +26,26 @@ class EmailVerificationController extends Controller
         
         $token = $request->route('token');
 
-        if($this->validator(['token' => $token])->fails()) {
-
-            return response()->json(['status' => false, 'message' => 'token错误']);
+        if($this->validator(['token' => $token])->fails())
+        {
+            return response()->json(['status' => false]);
         }
-
-        
-        //if($this->validator(['token' => $token])->fails()) return response('Error!', 500);
 
         $register = EmailRegister::where('token', $token)->first();
 
-        if(!$register) return response('Error!', 500);
+        if(!is_object($register))
+        {
+            return response()->json(['status' => false]);
+        }
 
-        if($register->hasVerifiedEmail()) return response('Error!', 500);
+        if($register->hasVerifiedEmail())
+        {
+            return response()->json(['status' => false]);
+        }
         
         event(new EmailVerified($request, $register));
 
-        return response('Success!', 200);
+        return response()->json(['status' => true]);
 
     }
 

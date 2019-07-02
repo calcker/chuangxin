@@ -13,7 +13,7 @@
 				<div class="col text-left">
 		  	   		<div class="checkbox mt-2">
 		    			<label>
-		      				<input type="checkbox" value="remember-me"> 我同意注册协议和隐私政策
+		      				<input type="checkbox" value="remember-me"> 我同意并遵守网站相关协议和隐私政策
 		    			</label>
 		  			</div>
 		  		</div>

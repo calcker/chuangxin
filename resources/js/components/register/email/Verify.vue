@@ -1,18 +1,20 @@
 <template>
-    <div v-if="success" class="email-verify-success alert alert-success" role="alert">
+    <div v-if="success == 'success'" class="email-verify-success alert alert-success" role="alert">
         <h4 class="alert-heading">恭喜您, 验证成功</h4>
         <hr>
         <p>我们一起, 改变世界!</p>
         <hr>
         <router-link to="/login" class="btn btn-primary btn-block">立即登录您的账号</router-link>
     </div>
-    <div v-else>
-        <alert-box v-if="errors" :errors="errors"></alert-box>
+    <div v-else-if="success == 'failure'" class="email-verify-failure alert alert-danger" role="alert">
+        <h4 class="alert-heading">抱歉, 验证失败</h4>
+        <hr>
+        <p>{{ error }}</p>
     </div>
 </template>
 
 <style type="text/css">
-    .email-verify-success {
+    .email-verify-success, .email-verify-failure {
         max-width: 400px;
         padding: 40px;
         margin: 0 auto;
@@ -28,21 +30,23 @@
     export default {
     	data: function() {
     		return {
-                errors: '',
-                success: false
+                error: '',
+                success: '',
     		}
   		},
         mounted: function() {
-            var token = this.$route.params.token;
+            var self = this,
+                token = this.$route.params.token;
             axios.get('/register/email/verify/' + token).then(function(response) {
-                console.log(response.data.status);
-                //if(response.statues)
-                //self.success = true;
+                if(response.data.status){
+                    self.success = 'success';
+                }else{
+                    self.success = 'failure';
+                    self.error = 'token错误';
+                }
             }).catch(function (error) {
-
-                console.log(error); 
-                console.log('token错误');
-                self.errors = '未知错误';
+                self.error = '未知错误';
+                console.log(error.toString());
             });
         },
         components: {AlertBox}

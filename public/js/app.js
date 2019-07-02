@@ -2057,6 +2057,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
@@ -2065,20 +2067,23 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      errors: '',
-      success: false
+      error: '',
+      success: ''
     };
   },
   mounted: function mounted() {
-    var token = this.$route.params.token;
+    var self = this,
+        token = this.$route.params.token;
     axios.get('/register/email/verify/' + token).then(function (response) {
-      console.log(response.toString());
-      console.log(response.data.status); //if(response.statues)
-      //self.success = true;
+      if (response.data.status) {
+        self.success = 'success';
+      } else {
+        self.success = 'failure';
+        self.error = 'token错误';
+      }
     })["catch"](function (error) {
-      console.log(error);
-      console.log('token错误');
-      self.errors = '未知错误';
+      self.error = '未知错误';
+      console.log(error.toString());
     });
   },
   components: {
@@ -2119,7 +2124,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.email-verify-success {\n    max-width: 400px;\n    padding: 40px;\n    margin: 0 auto;\n}\n", ""]);
+exports.push([module.i, "\n.email-verify-success, .email-verify-failure {\n    max-width: 400px;\n    padding: 40px;\n    margin: 0 auto;\n}\n", ""]);
 
 // exports
 
@@ -3681,7 +3686,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "checkbox mt-2" }, [
           _c("label", [
             _c("input", { attrs: { type: "checkbox", value: "remember-me" } }),
-            _vm._v(" 我同意注册协议和隐私政策\n\t    \t\t\t")
+            _vm._v(" 我同意并遵守网站相关协议和隐私政策\n\t    \t\t\t")
           ])
         ])
       ])
@@ -3772,7 +3777,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.success
+  return _vm.success == "success"
     ? _c(
         "div",
         {
@@ -3801,15 +3806,24 @@ var render = function() {
         ],
         1
       )
-    : _c(
+    : _vm.success == "failure"
+    ? _c(
         "div",
+        {
+          staticClass: "email-verify-failure alert alert-danger",
+          attrs: { role: "alert" }
+        },
         [
-          _vm.errors
-            ? _c("alert-box", { attrs: { errors: _vm.errors } })
-            : _vm._e()
-        ],
-        1
+          _c("h4", { staticClass: "alert-heading" }, [
+            _vm._v("抱歉, 验证失败")
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c("p", [_vm._v(_vm._s(_vm.error))])
+        ]
       )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -14,6 +14,12 @@ const router =  new VueRouter({
 		},
 
 		{
+			path: '/my',
+			name: '我的空间',
+			components: require('../components/My')
+		}
+
+		{
 			path: '/register/email/person',
 			name: '个人注册',
 			components: require('../components/register/email/Person')
@@ -31,6 +37,11 @@ const router =  new VueRouter({
 			components: require('../components/register/email/Verify')
 		},
 
+		{
+			path: '/settings/profile/Person',
+			name: '设置-个人资料',
+			components: require('../components/settings/profile/Person')
+		}
 		/*
 		{
 			path: '/wait',
