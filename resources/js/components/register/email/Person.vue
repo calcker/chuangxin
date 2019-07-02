@@ -9,6 +9,15 @@
 		  	<input type="email" name="email" class="form-control" v-model="post.email" placeholder="邮箱" value="" required>
 		  	<label for="password" class="sr-only">密码</label>
 		  	<input type="password" name="password" class="form-control" v-model="post.password" placeholder="密码" value="" required>
+		  	<div class="row mb-2">
+				<div class="col text-left">
+		  	   		<div class="checkbox mt-2">
+		    			<label>
+		      				<input type="checkbox" value="remember-me"> 我同意注册协议和隐私政策
+		    			</label>
+		  			</div>
+		  		</div>
+		  	</div>
 		  	<button class="btn btn-lg btn-primary btn-block" type="submit" :disabled="submitted">注册</button>
 		  	<router-link to="/login" class="btn btn-secondary btn-block">已有账号</router-link>
 		  	<div class="row mt-2">

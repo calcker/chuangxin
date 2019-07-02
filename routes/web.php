@@ -19,7 +19,7 @@ Route::get('/router', function(){
 
 Route::post('/register/email', 'Auth\EmailRegisterController@register');
 
-Route::post('/register/email/verify', 'Auth\EmailVerificationController@verify');
+Route::get('/register/email/verify/{token}', 'Auth\EmailVerificationController@verify');
 
 
 

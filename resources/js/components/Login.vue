@@ -41,7 +41,3 @@
 		components: {AlertBox}
     }
 </script>
-
-<style>
-
-</style>

@@ -1865,6 +1865,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -2049,34 +2058,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+var token = document.head.querySelector('meta[name="csrf-token"]');
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      post: {//token: this.$route.qurey.token
-      },
       errors: '',
       success: false
     };
   },
   mounted: function mounted() {
-    console.log(this.$route.params.token);
-  },
-  created: function created() {
-    var self = this;
-    /*
-    console.log(this.$route.qurey.token);
-    axios.post('/register/email/verify', this.post).then(function(response) {
-    self.success = true;
-         //sessionStorage.setItem('email', self.post.email);
-    //sessionStorage.setItem('name', self.post.name);
-    //self.afterSubmit();
-    //self.$router.push({path: '/register/email/success'});
-    }).catch(function (error) {
-    self.errors = error.response.data.errors;
+    var token = this.$route.params.token;
+    axios.get('/register/email/verify/' + token).then(function (response) {
+      console.log(response.toString());
+      console.log(response.data.status); //if(response.statues)
+      //self.success = true;
+    })["catch"](function (error) {
+      console.log(error);
+      console.log('token错误');
+      self.errors = '未知错误';
     });
-    */
   },
   components: {
     AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -2116,7 +2119,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.email-verify {\n    max-width: 400px;\n    padding: 40px;\n    margin: 0 auto;\n}\n", ""]);
+exports.push([module.i, "\n.email-verify-success {\n    max-width: 400px;\n    padding: 40px;\n    margin: 0 auto;\n}\n", ""]);
 
 // exports
 
@@ -3606,6 +3609,8 @@ var render = function() {
           }
         }),
         _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
         _c(
           "button",
           {
@@ -3666,7 +3671,23 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mb-2" }, [
+      _c("div", { staticClass: "col text-left" }, [
+        _c("div", { staticClass: "checkbox mt-2" }, [
+          _c("label", [
+            _c("input", { attrs: { type: "checkbox", value: "remember-me" } }),
+            _vm._v(" 我同意注册协议和隐私政策\n\t    \t\t\t")
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -3755,7 +3776,7 @@ var render = function() {
     ? _c(
         "div",
         {
-          staticClass: "email-verify alert alert-success",
+          staticClass: "email-verify-success alert alert-success",
           attrs: { role: "alert" }
         },
         [
@@ -3765,7 +3786,7 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _c("p", [_vm._v("期待与您一起, 改变世界!")]),
+          _c("p", [_vm._v("我们一起, 改变世界!")]),
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),

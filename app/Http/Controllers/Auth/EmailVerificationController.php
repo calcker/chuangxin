@@ -6,9 +6,7 @@ use App\Models\Auth\EmailRegister;
 use App\Events\EmailVerified;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
 
 class EmailVerificationController extends Controller
 {
@@ -23,31 +21,28 @@ class EmailVerificationController extends Controller
     |
     */
 
-    use RedirectsUsers;
-
-    /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-    
     public function verify(Request $request)
     {
         
         $token = $request->route('token');
 
-        if($this->validator(['token' => $token])->fails()) return redirect($this->redirectPath());
+        if($this->validator(['token' => $token])->fails()) {
+
+            return response()->json(['status' => false, 'message' => 'token错误']);
+        }
+
         
+        //if($this->validator(['token' => $token])->fails()) return response('Error!', 500);
+
         $register = EmailRegister::where('token', $token)->first();
 
-        if(!$register) return redirect($this->redirectPath());
+        if(!$register) return response('Error!', 500);
 
-        if($register->hasVerifiedEmail()) return redirect($this->redirectPath());
+        if($register->hasVerifiedEmail()) return response('Error!', 500);
         
         event(new EmailVerified($request, $register));
 
-        //return redirect('/router#/register/email/verified');
+        return response('Success!', 200);
 
     }
 
@@ -64,12 +59,12 @@ class EmailVerificationController extends Controller
     }
 
     protected function validator(array $data){
-
+        
         $messages = [
             'required' => 'token错误',
             'size' => 'token错误',
         ];
-
+        
         return Validator::make($data, [
             'token' => ['required', 'string', 'size:64'],
         ], $messages);
