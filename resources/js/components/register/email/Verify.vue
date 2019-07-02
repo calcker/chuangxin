@@ -22,7 +22,6 @@
 </style>
 
 <script>
-    import AlertBox from '../../AlertBox'
     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     var token = document.head.querySelector('meta[name="csrf-token"]');
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
@@ -48,7 +47,6 @@
                 self.error = '未知错误';
                 console.log(error.toString());
             });
-        },
-        components: {AlertBox}
+        }
     }
 </script>

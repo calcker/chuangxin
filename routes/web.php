@@ -49,6 +49,7 @@ Route::get(['prefix' => 'user'], function(){
     Route::get('/register', 'Auth\PersonEmailRegisterController@showRegistrationForm');
 });
 */
+/*
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/help', 'HomeController@help')->name('help');
 
@@ -63,7 +64,7 @@ Route::group(['prefix' => 'login'], function(){
     Route::post('/mobile', 'Auth\MobileLoginController@login');
 });
 
-
+*/
 /*
 Route::group(['prefix' => 'register'], function(){
 	Route::get('/person', 'Auth\PersonEmailRegisterController@showRegistrationForm');

@@ -16,10 +16,11 @@
 		  			</div>
 		  		</div>
 		  		<div class="col text-right">
-		  			<router-link to="/register/email/person" class="btn btn-link">还没有账号?</router-link>
+		  			<router-link to="/password/reset" class="btn btn-link">忘记密码</router-link>
 		  		</div>
 		  	</div>
 		  	<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+		  	<router-link to="/register/email/person" class="btn btn-secondary btn-block">注册</router-link>
 		 	<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 		</form>
 	</div>
@@ -27,6 +28,10 @@
 
 <script>
 	import AlertBox from './AlertBox'
+	window.axios = require('axios');
+	window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    var token = document.head.querySelector('meta[name="csrf-token"]');
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
     export default {
     	data: function() {
     		return {
@@ -38,6 +43,30 @@
     			submitted: false
     		}
   		},
+  		methods: {
+			createPost: function(){
+		      	var self = this;
+		      	this.beforeSubmit();
+		      	axios.post('/login', self.post).then(function(response) {
+		        	sessionStorage.setItem('email', self.post.email);
+		      		sessionStorage.setItem('name', self.post.name);
+		      		self.afterSubmit();
+		        	self.$router.push({path: '/home'});
+		    	}).catch(function (error) {
+		       		self.errors = error.response.data.errors;
+		      	});
+    		},
+    		beforeSubmit: function(){
+		       	this.errors = '';
+		        this.submitted = true;
+    		},
+    		afterSubmit: function(){
+    			this.post.email = '';
+    			this.post.name = '';
+    			this.post.password = '';
+    			this.submitted = false;
+    		}
+		},
 		components: {AlertBox}
     }
 </script>
