@@ -1816,6 +1816,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+var token = document.head.querySelector('meta[name="csrf-token"]');
+window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1827,56 +1831,30 @@ __webpack_require__.r(__webpack_exports__);
       submitted: false
     };
   },
-  components: {
-    AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_0__["default"]
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/password/Reset.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/password/Reset.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AlertBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AlertBox */ "./resources/js/components/AlertBox.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-var token = document.head.querySelector('meta[name="csrf-token"]');
-window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      post: {
-        email: ''
-      },
-      errors: '',
-      submitted: false
-    };
-  },
   methods: {
     createPost: function createPost() {
       var self = this;
       this.beforeSubmit();
+      axios.post('/login', self.post).then(function (response) {
+        sessionStorage.setItem('email', self.post.email);
+        sessionStorage.setItem('name', self.post.name);
+        self.afterSubmit();
+        self.$router.push({
+          path: '/home'
+        });
+      })["catch"](function (error) {
+        self.errors = error.response.data.errors;
+      });
+    },
+    beforeSubmit: function beforeSubmit() {
+      this.errors = '';
+      this.submitted = true;
+    },
+    afterSubmit: function afterSubmit() {
+      this.post.email = '';
+      this.post.name = '';
+      this.post.password = '';
+      this.submitted = false;
     }
   },
   components: {
@@ -3534,108 +3512,6 @@ var staticRenderFns = [
     ])
   }
 ]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/password/Reset.vue?vue&type=template&id=77e63374&":
-/*!*****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/password/Reset.vue?vue&type=template&id=77e63374& ***!
-  \*****************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "text-center" }, [
-    _c(
-      "form",
-      {
-        staticClass: "form-auth form-login",
-        attrs: { id: "app-forget-password", method: "POST" },
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.createPost($event)
-          }
-        }
-      },
-      [
-        _c("h1", { staticClass: "h3 mb-3 font-weight-normal" }, [
-          _vm._v("重设密码")
-        ]),
-        _vm._v(" "),
-        _vm.errors
-          ? _c("alert-box", { attrs: { errors: _vm.errors } })
-          : _vm._e(),
-        _vm._v(" "),
-        _c("label", { staticClass: "sr-only", attrs: { for: "username" } }, [
-          _vm._v("邮箱")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.post.email,
-              expression: "post.email"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "username",
-            placeholder: "请输入您的邮箱",
-            required: "",
-            autofocus: ""
-          },
-          domProps: { value: _vm.post.email },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.post, "email", $event.target.value)
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-lg btn-primary btn-block mt-5",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("下一步")]
-        ),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-secondary btn-block",
-            attrs: { href: "/", role: "button", "aria-pressed": "true" }
-          },
-          [_vm._v("回首页")]
-        ),
-        _vm._v(" "),
-        _c("p", { staticClass: "mt-5 mb-3 text-muted" }, [
-          _vm._v("© 2017-2018")
-        ])
-      ],
-      1
-    )
-  ])
-}
-var staticRenderFns = []
 render._withStripped = true
 
 
@@ -18944,75 +18820,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/password/Reset.vue":
-/*!****************************************************!*\
-  !*** ./resources/js/components/password/Reset.vue ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Reset_vue_vue_type_template_id_77e63374___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Reset.vue?vue&type=template&id=77e63374& */ "./resources/js/components/password/Reset.vue?vue&type=template&id=77e63374&");
-/* harmony import */ var _Reset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Reset.vue?vue&type=script&lang=js& */ "./resources/js/components/password/Reset.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Reset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Reset_vue_vue_type_template_id_77e63374___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Reset_vue_vue_type_template_id_77e63374___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/password/Reset.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/password/Reset.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/components/password/Reset.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Reset.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/password/Reset.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/password/Reset.vue?vue&type=template&id=77e63374&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/password/Reset.vue?vue&type=template&id=77e63374& ***!
-  \***********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_template_id_77e63374___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Reset.vue?vue&type=template&id=77e63374& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/password/Reset.vue?vue&type=template&id=77e63374&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_template_id_77e63374___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Reset_vue_vue_type_template_id_77e63374___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/components/register/email/Person.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/register/email/Person.vue ***!
@@ -19280,18 +19087,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1___default.a({
     name: '登录',
     components: __webpack_require__(/*! ../components/Login */ "./resources/js/components/Login.vue")
   }, {
-    path: '/password/reset',
-    name: '重设密码',
-    components: __webpack_require__(/*! ../components/password/Reset */ "./resources/js/components/password/Reset.vue")
-  },
-  /*
-  {
-  	path: '/my',
-  	name: '我的空间',
-  	components: require('../components/My')
-  },
-  */
-  {
+    path: '/my',
+    name: '我的空间',
+    components: __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '../components/My'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))
+  }, {
     path: '/register/email/person',
     name: '个人注册',
     components: __webpack_require__(/*! ../components/register/email/Person */ "./resources/js/components/register/email/Person.vue")
@@ -19303,14 +19102,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1___default.a({
     path: '/register/email/verify/:token',
     name: '邮箱验证',
     components: __webpack_require__(/*! ../components/register/email/Verify */ "./resources/js/components/register/email/Verify.vue")
+  }, {
+    path: '/settings/profile/Person',
+    name: '设置-个人资料',
+    components: __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '../components/settings/profile/Person'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()))
   },
-  /*
-  {
-  	path: '/settings/profile/Person',
-  	name: '设置-个人资料',
-  	components: require('../components/settings/profile/Person')
-  },
-  /
   /*
   {
   	path: '/wait',
@@ -19338,7 +19134,7 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):\n\n@import '~bootstrap/less/bootstrap';\n       ^\n      Can't find stylesheet to import.\n  ╷\n3 │ @import '~bootstrap/less/bootstrap';\n  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ╵\n  stdin 3:9  root stylesheet\n      in /home/vagrant/Code/chuangxin/resources/sass/app.scss (line 3, column 9)\n    at runLoaders (/home/vagrant/Code/chuangxin/node_modules/webpack/lib/NormalModule.js:301:20)\n    at /home/vagrant/Code/chuangxin/node_modules/loader-runner/lib/LoaderRunner.js:367:11\n    at /home/vagrant/Code/chuangxin/node_modules/loader-runner/lib/LoaderRunner.js:233:18\n    at context.callback (/home/vagrant/Code/chuangxin/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at render (/home/vagrant/Code/chuangxin/node_modules/sass-loader/lib/loader.js:52:13)\n    at Function.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:24443:48)\n    at wP.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:15367:15)\n    at uU.vt (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8492:3)\n    at iO.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8422:25)\n    at iO.cv (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8409:6)\n    at py.cv (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8199:35)\n    at Object.m (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1383:19)\n    at /home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:5078:51\n    at xf.a (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1394:71)\n    at xf.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8214:23)\n    at vS.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8209:25)\n    at uU.vt (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8492:3)\n    at iO.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8422:25)\n    at iO.cv (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8409:6)\n    at Object.eval (eval at CM (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:648:15), <anonymous>:3:37)\n    at uU.vt (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8492:3)");
 
 /***/ }),
 
@@ -19349,7 +19145,7 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):\n\n@import '~bootstrap/less/bootstrap';\n       ^\n      Can't find stylesheet to import.\n  ╷\n3 │ @import '~bootstrap/less/bootstrap';\n  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ╵\n  stdin 3:9  root stylesheet\n      in /home/vagrant/Code/chuangxin/resources/sass/auth.scss (line 3, column 9)\n    at runLoaders (/home/vagrant/Code/chuangxin/node_modules/webpack/lib/NormalModule.js:301:20)\n    at /home/vagrant/Code/chuangxin/node_modules/loader-runner/lib/LoaderRunner.js:367:11\n    at /home/vagrant/Code/chuangxin/node_modules/loader-runner/lib/LoaderRunner.js:233:18\n    at context.callback (/home/vagrant/Code/chuangxin/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at render (/home/vagrant/Code/chuangxin/node_modules/sass-loader/lib/loader.js:52:13)\n    at Function.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:24443:48)\n    at wP.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:15367:15)\n    at uU.vt (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8492:3)\n    at iO.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8422:25)\n    at iO.cv (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8409:6)\n    at py.cv (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8199:35)\n    at Object.m (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1383:19)\n    at /home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:5078:51\n    at xf.a (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1394:71)\n    at xf.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8214:23)\n    at vS.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8209:25)\n    at uU.vt (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8492:3)\n    at iO.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8422:25)\n    at iO.cv (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8409:6)\n    at Object.eval (eval at CM (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:648:15), <anonymous>:3:37)\n    at uU.vt (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8492:3)");
 
 /***/ }),
 
@@ -19360,7 +19156,7 @@ router.beforeEach(function (to, from, next) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/lib/loader.js):\n\n@import '~bootstrap/scss/bootstrap';\n       ^\n      Can't find stylesheet to import.\n  ╷\n3 │ @import '~bootstrap/scss/bootstrap';\n  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ╵\n  stdin 3:9  root stylesheet\n      in /home/vagrant/Code/chuangxin/resources/sass/vue-router.scss (line 3, column 9)\n    at runLoaders (/home/vagrant/Code/chuangxin/node_modules/webpack/lib/NormalModule.js:301:20)\n    at /home/vagrant/Code/chuangxin/node_modules/loader-runner/lib/LoaderRunner.js:367:11\n    at /home/vagrant/Code/chuangxin/node_modules/loader-runner/lib/LoaderRunner.js:233:18\n    at context.callback (/home/vagrant/Code/chuangxin/node_modules/loader-runner/lib/LoaderRunner.js:111:13)\n    at render (/home/vagrant/Code/chuangxin/node_modules/sass-loader/lib/loader.js:52:13)\n    at Function.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:24443:48)\n    at wP.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:15367:15)\n    at uU.vt (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8492:3)\n    at iO.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8422:25)\n    at iO.cv (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8409:6)\n    at py.cv (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8199:35)\n    at Object.m (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1383:19)\n    at /home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:5078:51\n    at xf.a (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1394:71)\n    at xf.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8214:23)\n    at vS.$2 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8209:25)\n    at uU.vt (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8492:3)\n    at iO.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8422:25)\n    at iO.cv (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8409:6)\n    at Object.eval (eval at CM (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:648:15), <anonymous>:3:37)\n    at uU.vt (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9079:42)\n    at uU.vs (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:9081:32)\n    at iB.uF (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8429:46)\n    at us.$0 (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8571:7)\n    at Object.eH (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:1512:80)\n    at ad.ba (/home/vagrant/Code/chuangxin/node_modules/sass/sass.dart.js:8492:3)");
 
 /***/ }),
 
