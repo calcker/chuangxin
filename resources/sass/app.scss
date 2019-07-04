@@ -1,6 +1,6 @@
 
 // Bootstrap
-@import '~bootstrap/less/bootstrap';
+//@import '~bootstrap/less/bootstrap';
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
 @import "~@fortawesome/fontawesome-free/scss/regular.scss";
@@ -8,14 +8,14 @@
 @import "~@fortawesome/fontawesome-free/scss/v4-shims.scss";
 
 body {
-	
+
 	font-size: 14px;
 	font-weight: normal;
 
 }
 
 .navbar {
-	
+
 	margin-bottom: 20px;
 
 }
