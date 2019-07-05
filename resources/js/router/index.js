@@ -12,13 +12,13 @@ const router =  new VueRouter({
 			name: '登录',
 			components: require('../components/Login')
 		},
-/*
+
 		{
-			path: '/my',
-			name: '我的空间',
-			components: require('../components/My')
+			path: '/home',
+			name: '空间',
+			components: require('../components/home/Home')
 		},
-*/
+
 		{
 			path: '/register/email/person',
 			name: '个人注册',
@@ -36,6 +36,13 @@ const router =  new VueRouter({
 			name: '邮箱验证',
 			components: require('../components/register/email/Verify')
 		},
+
+		{
+			path: '/password/reset',
+			name: '重设密码',
+			components: require('../components/password/Reset')
+		},
+
 /*
 		{
 			path: '/settings/profile/Person',
