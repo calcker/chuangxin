@@ -19812,7 +19812,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1___default.a({
     components: __webpack_require__(/*! ../components/register/email/Verify */ "./resources/js/components/register/email/Verify.vue")
   }, {
     path: '/password/reset',
-    name: '个人注册',
+    name: '重设密码',
     components: __webpack_require__(/*! ../components/password/Reset */ "./resources/js/components/password/Reset.vue")
   },
   /*

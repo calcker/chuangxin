@@ -21,6 +21,9 @@ Route::post('/register/email', 'Auth\EmailRegisterController@register');
 
 Route::get('/register/email/verify/{token}', 'Auth\EmailVerificationController@verify');
 
+Route::group(['prefix' => 'login'], function(){
+    Route::post('/email', 'Auth\EmailLoginController@login');
+});
 
 
 
