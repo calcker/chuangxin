@@ -51,8 +51,9 @@
 		      	axios.post('/login/email', self.post).then(function(response) {
 		        	//sessionStorage.setItem('email', self.post.email);
 		      		//sessionStorage.setItem('name', self.post.name);
+		      		console.log(response);
 		      		self.afterSubmit();
-		        	self.$router.push({path: '/home'});
+		        	//self.$router.push({path: '/home'});
 		    	}).catch(function (error) {
 		       		self.errors = error.response.data.errors;
 		      	});

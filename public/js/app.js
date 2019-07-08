@@ -1839,10 +1839,8 @@ window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
       axios.post('/login/email', self.post).then(function (response) {
         //sessionStorage.setItem('email', self.post.email);
         //sessionStorage.setItem('name', self.post.name);
-        self.afterSubmit();
-        self.$router.push({
-          path: '/home'
-        });
+        console.log(response);
+        self.afterSubmit(); //self.$router.push({path: '/home'});
       })["catch"](function (error) {
         self.errors = error.response.data.errors;
       });
@@ -2086,6 +2084,7 @@ window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
         });
       })["catch"](function (error) {
         self.errors = error.response.data.errors;
+        self.afterSubmit();
       });
     },
     beforeSubmit: function beforeSubmit() {
@@ -20909,7 +20908,13 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var auth = {};
+var auth = {
+  state: {
+    currentUser: null,
+    isLogin: false,
+    token: ""
+  }
+};
 /* harmony default export */ __webpack_exports__["default"] = (auth);
 
 /***/ }),

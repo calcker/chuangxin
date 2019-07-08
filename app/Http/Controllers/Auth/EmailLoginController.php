@@ -14,10 +14,15 @@ class EmailLoginController extends LoginController
 {
 
     protected function validateLogin(Request $request)
-    {
+    {	
+
+    	die(var_dump($request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ])));
 
         $request->validate([
-            'username' => 'required|string|email',
+            'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
     }

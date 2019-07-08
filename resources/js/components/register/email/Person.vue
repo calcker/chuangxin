@@ -59,6 +59,7 @@
 		        	self.$router.push({path: '/register/email/success'});
 		    	}).catch(function (error) {
 		       		self.errors = error.response.data.errors;
+		      		self.afterSubmit();
 		      	});
     		},
     		beforeSubmit: function(){
