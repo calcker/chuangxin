@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-//import Start from '../components/register/email/Start'
-///import Wait from '../components/register/email/Wait'
 
 Vue.use(VueRouter)
 
@@ -15,8 +13,11 @@ const router =  new VueRouter({
 
 		{
 			path: '/home',
-			name: '空间',
-			components: require('../components/home/Home')
+			name: '我的空间',
+			components: require('../components/home/Home'),
+			meta: {
+				isLogin: true				
+			}
 		},
 
 		{
@@ -70,5 +71,5 @@ router.beforeEach((to, from, next) => {
 	next();
 });
 
-export default router;0.
+export default router;
 

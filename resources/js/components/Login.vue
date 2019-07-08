@@ -37,7 +37,8 @@
     		return {
 	    		post: {
 	     			email: '',
-	      			password: ''
+	      			password: '',
+	      			remember: ''
 	    		},
     			errors: '',
     			submitted: false
@@ -47,9 +48,9 @@
 			createPost: function(){
 		      	var self = this;
 		      	this.beforeSubmit();
-		      	axios.post('/login', self.post).then(function(response) {
-		        	sessionStorage.setItem('email', self.post.email);
-		      		sessionStorage.setItem('name', self.post.name);
+		      	axios.post('/login/email', self.post).then(function(response) {
+		        	//sessionStorage.setItem('email', self.post.email);
+		      		//sessionStorage.setItem('name', self.post.name);
 		      		self.afterSubmit();
 		        	self.$router.push({path: '/home'});
 		    	}).catch(function (error) {
@@ -62,7 +63,6 @@
     		},
     		afterSubmit: function(){
     			this.post.email = '';
-    			this.post.name = '';
     			this.post.password = '';
     			this.submitted = false;
     		}
