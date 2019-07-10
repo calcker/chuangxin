@@ -6,7 +6,7 @@
 		  	<label for="username" class="sr-only">邮箱</label>
 		  	<input type="text" id="username" class="form-control" v-model="post.email" placeholder="请输入您的邮箱" required autofocus>
 		  	<button class="btn btn-lg btn-primary btn-block mt-5" type="submit">下一步</button>
-		 	<a href="/" class="btn btn-secondary btn-block" role="button" aria-pressed="true">回首页</a>
+		  	<button class="btn btn-secondary btn-block" v-on:click="back">返回</button>
 		 	<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 		</form>
 	</div>
@@ -48,8 +48,10 @@
     		afterSubmit: function(){
     			this.post.email = '';
     			this.submitted = false;
-    		}
-
+    		},
+    		back: function() {
+                this.$router.go(-1);
+            }
   		},
 		components: {AlertBox}
     }

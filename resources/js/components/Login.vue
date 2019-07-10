@@ -11,7 +11,7 @@
 				<div class="col text-left">
 		  	   		<div class="checkbox mt-2">
 		    			<label>
-		      				<input type="checkbox" value="remember-me"> 记住密码
+		      				<input type="checkbox" name="remember" v-model="post.remember" value=""> 记住密码
 		    			</label>
 		  			</div>
 		  		</div>
@@ -28,10 +28,7 @@
 
 <script>
 	import AlertBox from './AlertBox'
-	window.axios = require('axios');
-	window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    var token = document.head.querySelector('meta[name="csrf-token"]');
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+
     export default {
     	data: function() {
     		return {
@@ -51,7 +48,7 @@
 		      	axios.post('/login/email', self.post).then(function(response) {
 		        	//sessionStorage.setItem('email', self.post.email);
 		      		//sessionStorage.setItem('name', self.post.name);
-		      		console.log(response);
+		      		//console.log(response);
 		      		self.afterSubmit();
 		        	//self.$router.push({path: '/home'});
 		    	}).catch(function (error) {

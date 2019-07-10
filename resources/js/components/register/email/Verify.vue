@@ -22,15 +22,17 @@
 </style>
 
 <script>
+    /*
     window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     var token = document.head.querySelector('meta[name="csrf-token"]');
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
     window.axios = require('axios');
+    */
     export default {
     	data: function() {
     		return {
                 error: '',
-                success: '',
+                success: ''
     		}
   		},
         mounted: function() {

@@ -13,7 +13,10 @@
 				<div class="col text-left">
 		  	   		<div class="checkbox mt-2">
 		    			<label>
-		      				<input type="checkbox" value="remember-me"> 我同意并遵守网站相关协议和隐私政策
+		      				<input type="checkbox" name="agree" v-model="post.agree" value=""> 我同意并遵守 
+		      					<router-link to="/policy">
+		      						《本网站用户相关协议和隐私政策》
+		      					</router-link>
 		    			</label>
 		  			</div>
 		  		</div>
@@ -31,10 +34,7 @@
 
 <script>
 	import AlertBox from '../../AlertBox'
-	window.axios = require('axios');
-	window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    var token = document.head.querySelector('meta[name="csrf-token"]');
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+
 	export default {
 		data: function() {
 			return {
@@ -42,6 +42,7 @@
 	     			name: '',
 	     			email: '',
 	      			password: '',
+	      			agree: '',
 	      			identity: 'person'
 	    		},
 				errors: '',
@@ -53,12 +54,16 @@
 		      	var self = this;
 		      	this.beforeSubmit();
 		      	axios.post('/register/email', self.post).then(function(response) {
-		        	sessionStorage.setItem('email', self.post.email);
-		      		sessionStorage.setItem('name', self.post.name);
-		      		self.afterSubmit();
-		        	self.$router.push({path: '/register/email/success'});
+		      		if(response.data.code == 201){
+		        		sessionStorage.setItem('email', response.data.data.email);
+		      			sessionStorage.setItem('name', response.data.data.name);
+		      			self.afterSubmit();
+		        		self.$router.push({path: '/register/email/success'});
+		      		}else{
+		      			self.errors = response.data.msg;
+		      		}
 		    	}).catch(function (error) {
-		       		self.errors = error.response.data.errors;
+		       		self.errors = error.response.data.msg;
 		      		self.afterSubmit();
 		      	});
     		},
@@ -67,9 +72,6 @@
 		        this.submitted = true;
     		},
     		afterSubmit: function(){
-    			this.post.email = '';
-    			this.post.name = '';
-    			this.post.password = '';
     			this.submitted = false;
     		}
 		},

@@ -38,19 +38,22 @@ class EmailRegister extends Register implements MustVerifyEmail
 
     }
 
-    public function createAccount(Request $request)
+    public function create(Request $request)
     {
 
         $user = User::create([
             'key'        => str_random(64),
             'name'       => $this->name,
             'identity'   => $this->identity,
+            'email'      => $this->email,
+            'password'   => $this->password,
             'domain'     => str_random(64),
             'reg_type'   => 'email',
             'created_ip' => $request->getClientIp(),
             'email_binding' => 1,
         ]);
 
+        /*
         $emailAccount = EmailAccount::create([
             'user_id'     => $user->id,
             'email'       => $this->email,
@@ -58,6 +61,7 @@ class EmailRegister extends Register implements MustVerifyEmail
             'verified_at' => Carbon::now(),
             'verified_ip' => $request->getClientIp(),
         ]);
+        */
 
     }
     

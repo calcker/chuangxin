@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Exceptions\HttpResponseException;
+
 
 class EmailLoginController extends LoginController
 {
@@ -16,15 +18,29 @@ class EmailLoginController extends LoginController
     protected function validateLogin(Request $request)
     {	
 
-    	die(var_dump($request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ])));
+        $data = $request->input();
 
-        $request->validate([
-            'email' => 'required|string|email',
+        $messages = [
+            'email.required' => '请输入email',
+            'email.email' => 'email格式不正确',
+            'password.required' => '请输入密码',
+        ];
+
+        $validator = Validator::make($data, [
+            'email'    => 'required|string|email',
             'password' => 'required|string',
-        ]);
+        ], $messages);
+
+        if($validator->fails()) {
+            
+            throw new HttpResponseException(response()->json([
+                'code' => 422,
+                'msg'  => $validator->errors(),
+                'data' => null
+            ], 422));
+
+        }
+
     }
 
     protected function attemptLogin(Request $request)
@@ -39,16 +55,6 @@ class EmailLoginController extends LoginController
 		Auth::login($emailAccount->user);
 
     	return true;
-    }
-
-    protected function getInputEmail(Request $request)
-    {
-        return $request->input('username');
-    }
-
-    protected function getInputPassword(Request $request)
-    {
-    	return $request->input('password');
     }
 
 

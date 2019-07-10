@@ -12,6 +12,12 @@ const router =  new VueRouter({
 		},
 
 		{
+			path: '/policy',
+			name: '协议及政策',
+			components: require('../components/Policy')
+		},
+
+		{
 			path: '/home',
 			name: '我的空间',
 			components: require('../components/home/Home'),

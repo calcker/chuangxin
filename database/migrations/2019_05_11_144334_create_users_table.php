@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->char('key', 64)->unique();
             $table->string('name');
             $table->enum('identity', ['person', 'company', 'org', 'member']);
+            $table->string('email')->unique()->nullable();
+            $table->string('password');
             $table->tinyInteger('pending')->default(0);
             $table->tinyInteger('vip')->default(0);
             $table->string('domain')->unique();
@@ -37,7 +39,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_logined_at')->nullable();
             $table->char('last_logined_ip', 15)->nullable();
         });
-
+        /*
         Schema::create('email_accounts', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('email')->unique();
@@ -46,6 +48,7 @@ class CreateUsersTable extends Migration
             $table->char('verified_ip', 15);
             $table->foreign('user_id')->references('id')->on('users');
         });
+        */
 
         Schema::create('email_registers', function (Blueprint $table) {
             $table->bigIncrements('id');
