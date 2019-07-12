@@ -1835,7 +1835,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/login/email', self.post).then(function (response) {
         //sessionStorage.setItem('email', self.post.email);
         //sessionStorage.setItem('name', self.post.name);
-        console.log(response);
+        //console.log(response);
         self.afterSubmit(); //self.$router.push({path: '/home'});
       })["catch"](function (error) {
         self.errors = error.response.data.errors;
@@ -20750,7 +20750,53 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("div", { staticClass: "row mb-2" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "col text-left" }, [
+            _c("div", { staticClass: "checkbox mt-2" }, [
+              _c("label", [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.remember,
+                      expression: "post.remember"
+                    }
+                  ],
+                  attrs: { type: "checkbox", name: "remember", value: "" },
+                  domProps: {
+                    checked: Array.isArray(_vm.post.remember)
+                      ? _vm._i(_vm.post.remember, "") > -1
+                      : _vm.post.remember
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.post.remember,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.post, "remember", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.post,
+                              "remember",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.post, "remember", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" 记住密码\n\t    \t\t\t")
+              ])
+            ])
+          ]),
           _vm._v(" "),
           _c(
             "div",
@@ -20795,21 +20841,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col text-left" }, [
-      _c("div", { staticClass: "checkbox mt-2" }, [
-        _c("label", [
-          _c("input", { attrs: { type: "checkbox", value: "remember-me" } }),
-          _vm._v(" 记住密码\n\t    \t\t\t")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
