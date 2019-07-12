@@ -19,20 +19,23 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->enum('identity', ['person', 'company', 'org', 'member']);
             $table->string('email')->unique()->nullable();
+            $table->char('mobile', 11);
+            
             $table->string('password');
             $table->tinyInteger('pending')->default(0);
             $table->tinyInteger('vip')->default(0);
             $table->string('domain')->unique();
             $table->enum('reg_type', ['email', 'mobile', 'weixin', 'weibo', 'qq']);
-            $table->timestamp('created_at');
+            $table->timestamps();
+            //$table->timestamp('created_at');
             $table->char('created_ip', 15);
             /*
             $table->timestamp('name_updated_at')->nullable();
             $table->timestamp('domain_updated_at')->nullable();
             */
             $table->rememberToken();
-            $table->tinyInteger('email_binding')->default(0);
-            $table->tinyInteger('mobile_binding')->default(0);
+            //$table->tinyInteger('email_binding')->default(0);
+            //$table->tinyInteger('mobile_binding')->default(0);
             $table->tinyInteger('weixin_binding')->default(0);
             $table->tinyInteger('weibo_binding')->default(0);
             $table->tinyInteger('qq_binding')->default(0);
