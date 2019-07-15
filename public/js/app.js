@@ -2275,6 +2275,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /*
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -2293,7 +2294,7 @@ window.axios = require('axios');
     var self = this,
         token = this.$route.params.token;
     axios.get('/register/email/verify/' + token).then(function (response) {
-      if (response.data.status) {
+      if (response.data.code = 201) {
         self.success = 'success';
       } else {
         self.success = 'failure';
@@ -2301,7 +2302,6 @@ window.axios = require('axios');
       }
     })["catch"](function (error) {
       self.error = '未知错误';
-      console.log(error.toString());
     });
   }
 });
@@ -21480,7 +21480,13 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm.error))])
+          _c("p", [_vm._v(_vm._s(_vm.error))]),
+          _vm._v(" "),
+          _c(
+            "a",
+            { staticClass: "btn btn-primary btn-block", attrs: { href: "/" } },
+            [_vm._v("返回首页")]
+          )
         ]
       )
     : _vm._e()

@@ -4,7 +4,6 @@ namespace App\Models\Auth;
 
 use Carbon\Carbon;
 use App\Models\Auth\User;
-use App\Models\Auth\EmailAccount;
 use App\Models\Auth\Register;
 use App\Mail\EmailVerification;
 use Illuminate\Support\Facades\Mail;
@@ -16,7 +15,7 @@ class EmailRegister extends Register implements MustVerifyEmail
     
 	protected $fillable = ['email', 'password', 'name', 'identity', 'token', 'reg_at', 'reg_ip'];
 
-	protected $hidden = ['email', 'password', 'token',];
+	protected $hidden = ['email', 'password', 'token'];
 
     public function hasVerifiedEmail()
     {
@@ -38,7 +37,7 @@ class EmailRegister extends Register implements MustVerifyEmail
 
     }
 
-    public function create(Request $request)
+    public function createAccount(Request $request)
     {
 
         $user = User::create([

@@ -153,7 +153,7 @@ class EmailRegisterController extends RegisterController
 
         return Validator::make($data, [
             'name' => ['required', 'string', 'min:2', 'max:255'],
-            'email' => ['required', 'string', 'email', 'min:5', 'max:255', 'unique:email_accounts'],
+            'email' => ['required', 'string', 'email', 'min:5', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'max:255'],
             'agree'    => ['required', Rule::in([true, 1, '1'])],
             'identity' => ['required', Rule::in(['person', 'company', 'org'])],

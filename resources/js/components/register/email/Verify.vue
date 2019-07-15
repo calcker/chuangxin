@@ -10,6 +10,7 @@
         <h4 class="alert-heading">抱歉, 验证失败</h4>
         <hr>
         <p>{{ error }}</p>
+        <a class="btn btn-primary btn-block" href="/">返回首页</a>
     </div>
 </template>
 
@@ -39,7 +40,7 @@
             var self = this,
                 token = this.$route.params.token;
             axios.get('/register/email/verify/' + token).then(function(response) {
-                if(response.data.status){
+                if(response.data.code = 201){
                     self.success = 'success';
                 }else{
                     self.success = 'failure';
@@ -47,7 +48,6 @@
                 }
             }).catch(function (error) {
                 self.error = '未知错误';
-                console.log(error.toString());
             });
         }
     }

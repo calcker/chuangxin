@@ -28,24 +28,46 @@ class EmailVerificationController extends Controller
 
         if($this->validator(['token' => $token])->fails())
         {
-            return response()->json(['status' => false]);
+            throw new HttpResponseException(response()->json([
+                'code' => 422,
+                'msg'  => $validator->errors(),
+                'data' => null
+            ], 422));
+
+            //return response()->json(['status' => false]);
         }
 
         $register = EmailRegister::where('token', $token)->first();
 
         if(!is_object($register))
         {
-            return response()->json(['status' => false]);
+            throw new HttpResponseException(response()->json([
+                'code' => 422,
+                'msg'  => [
+                    'token' => ['token错误'] 
+                ],
+                'data' => null
+            ], 422));
         }
 
         if($register->hasVerifiedEmail())
         {
-            return response()->json(['status' => false]);
+            throw new HttpResponseException(response()->json([
+                'code' => 422,
+                'msg'  => [
+                    'token' => ['token错误'] 
+                ],
+                'data' => null
+            ], 422));
         }
         
         event(new EmailVerified($request, $register));
 
-        return response()->json(['status' => true]);
+        return response()->json([
+            'code' => 201,
+            'msg'  => 'Success!',
+            'data' => null
+        ], 201);
 
     }
 

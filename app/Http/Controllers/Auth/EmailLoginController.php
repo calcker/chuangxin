@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\Auth\User;
-use App\Models\Auth\EmailAccount;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 
@@ -18,20 +15,7 @@ class EmailLoginController extends LoginController
     protected function validateLogin(Request $request)
     {	
 
-        $data = $request->input();
-
-        $messages = [
-            'email.required' => '请输入email',
-            'email.email' => 'email格式不正确',
-            'password.required' => '请输入密码',
-        ];
-
-        $validator = Validator::make($data, [
-            'email'    => 'required|string|email',
-            'password' => 'required|string',
-        ], $messages);
-
-        if($validator->fails()) {
+        if($this->validator($request->input())->fails()) {
             
             throw new HttpResponseException(response()->json([
                 'code' => 422,
@@ -43,6 +27,7 @@ class EmailLoginController extends LoginController
 
     }
 
+    /*
     protected function attemptLogin(Request $request)
     {
 
@@ -55,6 +40,22 @@ class EmailLoginController extends LoginController
 		Auth::login($emailAccount->user);
 
     	return true;
+    }
+    */
+
+    protected function validator(array $data)
+    {
+         $messages = [
+            'email.required' => '请输入email',
+            'email.email' => 'email格式不正确',
+            'password.required' => '请输入密码',
+        ];
+
+        return Validator::make($data, [
+            'email'    => 'required|string|email',
+            'password' => 'required|string',
+        ], $messages);
+
     }
 
 
