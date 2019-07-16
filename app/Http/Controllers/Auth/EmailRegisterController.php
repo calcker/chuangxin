@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Carbon\Carbon;
 
 class EmailRegisterController extends RegisterController
 {
@@ -34,14 +33,13 @@ class EmailRegisterController extends RegisterController
         }
 
         $register = EmailRegister::create([
-            'email'      => $data['email'],
-            'password'   => Hash::make($data['password']),
-            'name'       => $data['name'],
-            'agree'      => $data['agree'],
-            'identity'   => $data['identity'],
-            'token'      => str_random(64),
-            'reg_at'     => Carbon::now(),
-            'reg_ip'     => $request->getClientIp(),
+            'email'       => $data['email'],
+            'password'    => Hash::make($data['password']),
+            'name'        => $data['name'],
+            'agree'       => $data['agree'],
+            'identity'    => $data['identity'],
+            'token'       => str_random(64),
+            'created_ip'  => $request->getClientIp(),
         ]);
 
         event(new EmailRegistered($register));

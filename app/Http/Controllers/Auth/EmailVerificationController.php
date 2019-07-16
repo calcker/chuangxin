@@ -6,6 +6,7 @@ use App\Models\Auth\EmailRegister;
 use App\Events\EmailVerified;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Validator;
 
 class EmailVerificationController extends Controller

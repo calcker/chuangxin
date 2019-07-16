@@ -40,6 +40,7 @@
             var self = this,
                 token = this.$route.params.token;
             axios.get('/register/email/verify/' + token).then(function(response) {
+                console.log(response);
                 if(response.data.code = 201){
                     self.success = 'success';
                 }else{

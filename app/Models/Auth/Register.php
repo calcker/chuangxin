@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 abstract class Register extends Model
 {
-    
-	public $timestamps = false;
+
+	const UPDATED_AT = null;
 
 	abstract public function createAccount(Request $request);
 

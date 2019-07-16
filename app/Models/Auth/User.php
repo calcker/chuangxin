@@ -15,6 +15,9 @@ class User extends Model implements
     AuthorizableContract
 {   
     use Authenticatable, Authorizable, Notifiable;
+
+    const UPDATED_AT = null;
+
     /**
      * The attributes that are mass assignable.
      *

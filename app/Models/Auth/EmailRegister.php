@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class EmailRegister extends Register implements MustVerifyEmail
 {
     
-	protected $fillable = ['email', 'password', 'name', 'identity', 'token', 'reg_at', 'reg_ip'];
+	protected $fillable = ['email', 'password', 'name', 'identity', 'token', 'created_ip'];
 
 	protected $hidden = ['email', 'password', 'token'];
 
