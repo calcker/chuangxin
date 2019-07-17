@@ -10,7 +10,7 @@
         <h4 class="alert-heading">抱歉, 验证失败</h4>
         <hr>
         <p>{{ error }}</p>
-        <a class="btn btn-primary btn-block" href="/">返回首页</a>
+        <a class="btn btn-info btn-block" href="/">返回首页</a>
     </div>
 </template>
 
@@ -48,6 +48,8 @@
                     self.error = 'token错误';
                 }
             }).catch(function (error) {
+                console.log(error);
+                self.success = 'failure';
                 self.error = '未知错误';
             });
         }

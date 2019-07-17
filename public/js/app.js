@@ -2303,6 +2303,8 @@ window.axios = require('axios');
         self.error = 'token错误';
       }
     })["catch"](function (error) {
+      console.log(error);
+      self.success = 'failure';
       self.error = '未知错误';
     });
   }
@@ -21486,7 +21488,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "a",
-            { staticClass: "btn btn-primary btn-block", attrs: { href: "/" } },
+            { staticClass: "btn btn-danger btn-block", attrs: { href: "/" } },
             [_vm._v("返回首页")]
           )
         ]
