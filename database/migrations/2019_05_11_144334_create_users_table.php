@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->enum('reg_type', ['email', 'mobile', 'weixin', 'weibo', 'qq']);
             $table->timestamps();
             $table->char('created_ip', 15);
-            $table->rememberToken();;
+            $table->rememberToken();
             $table->tinyInteger('weixin_binding')->default(0);
             $table->tinyInteger('weibo_binding')->default(0);
             $table->tinyInteger('qq_binding')->default(0);
@@ -77,7 +77,6 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
-        Schema::dropIfExists('email_accounts');
         Schema::dropIfExists('email_registers');
 
     }
