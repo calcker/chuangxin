@@ -21488,7 +21488,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "a",
-            { staticClass: "btn btn-danger btn-block", attrs: { href: "/" } },
+            { staticClass: "btn btn-info btn-block", attrs: { href: "/" } },
             [_vm._v("返回首页")]
           )
         ]
