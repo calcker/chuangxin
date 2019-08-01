@@ -2,7 +2,7 @@
 
 namespace App\Models\Auth;
 
-use App\Models\Auth\EmailAccount;
+use App\Models\Auth\Person;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -24,7 +24,16 @@ class User extends Model implements
      * @var array
      */
     protected $fillable = [
-        'key', 'name', 'identity', 'domain', 'reg_type', 'created_ip', 'email_binding',
+        'key',
+        'name',
+        'identity',
+        'email',
+        'password',
+        'domain',
+        'reg_type',
+        'created_ip',
+        'remember_token',
+        'api_token',
     ];
 
     /**
@@ -33,18 +42,29 @@ class User extends Model implements
      * @var array
      */
     protected $hidden = [
-        'remember_token',
+        'password', 'remember_token',
     ];
 
-    public function emailAccount()
+    public function person()
     {
-        return $this->hasOne(EmailAccount::class);
+
+        return $this->hasOne(Person::class);
+
     }
 
-    public function mobileAccount()
+    public function logins()
     {
-        //return $this->hasOne(MobileAccount::class);
+
+        return $this->hasMany(Login::class);
+
     }
-    
+
+    public function feeds()
+    {
+
+        return $this->hasMany(Feed::class);
+
+    }
+
 
 }

@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ mix('css/vue-router.css') }}">
     <link href="/images/logo.png" rel="shortcut icon">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="api-token" content="{{ Auth::check() ? 'Bearer '.Auth::user()->api_token : 'Bearer ' }}">
   </head>
   <body>
     <nav class="navbar navbar-expand-sm bg-light navbar-light border-bottom">

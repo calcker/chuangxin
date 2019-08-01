@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'IndexController@index');
 
 Route::get('/router', function(){
     return view('layouts.vue-router');
@@ -21,10 +21,16 @@ Route::post('/register/email', 'Auth\EmailRegisterController@register');
 
 Route::get('/register/email/verify/{token}', 'Auth\EmailVerificationController@verify');
 
+Route::post('/login', 'Auth\EmailLoginController@login');
+Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::post('feeds', 'Content\FeedsController@feeds');
+
+/*
 Route::group(['prefix' => 'login'], function(){
     Route::post('/email', 'Auth\EmailLoginController@login');
 });
-
+*/
 
 
 /*

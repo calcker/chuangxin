@@ -44,13 +44,9 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
-            'hash' => false,
+            //'hash' => false,
         ],
-
-        'email_accounts' => [
-            'driver' => 'session',
-            'provider' => 'email_accounts',
-        ],
+        
     ],
 
     /*
@@ -74,10 +70,6 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\Auth\User::class,
-        ],
-        'email_accounts' => [
-            'driver' => 'eloquent',
-            'model'  => App\Models\Auth\EmailAccount::class,
         ],
 
         // 'users' => [

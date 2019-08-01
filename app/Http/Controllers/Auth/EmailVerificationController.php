@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Auth\User;
 use App\Models\Auth\EmailRegister;
 use App\Events\EmailVerified;
 use App\Http\Controllers\Controller;
@@ -61,7 +62,20 @@ class EmailVerificationController extends Controller
                 'data' => null
             ], 422));
         }
+
+        $user = User::where('email', $register->email)->first();
         
+        if(is_object($user))
+        {
+            throw new HttpResponseException(response()->json([
+                'code' => 422,
+                'msg'  => [
+                    'token' => ['token错误'] 
+                ],
+                'data' => null
+            ], 422));
+        }
+
         event(new EmailVerified($request, $register));
 
         return response()->json([
