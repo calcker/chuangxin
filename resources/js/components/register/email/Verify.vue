@@ -10,7 +10,9 @@
         <h4 class="alert-heading">抱歉, 验证失败</h4>
         <hr>
         <p>{{ error }}</p>
-        <a class="btn btn-info btn-block" href="/">返回首页</a>
+        <div class="text-right">
+            <a class="btn btn-outline-danger" href="/">返回首页</a>
+        </div>
     </div>
 </template>
 
@@ -23,12 +25,6 @@
 </style>
 
 <script>
-    /*
-    window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-    var token = document.head.querySelector('meta[name="csrf-token"]');
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-    window.axios = require('axios');
-    */
     export default {
     	data: function() {
     		return {
@@ -40,7 +36,6 @@
             var self = this,
                 token = this.$route.params.token;
             axios.get('/register/email/verify/' + token).then(function(response) {
-                console.log(response);
                 if(response.data.code = 201){
                     self.success = 'success';
                 }else{
@@ -48,7 +43,6 @@
                     self.error = 'token错误';
                 }
             }).catch(function (error) {
-                console.log(error);
                 self.success = 'failure';
                 self.error = '未知错误';
             });

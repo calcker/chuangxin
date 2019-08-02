@@ -1,22 +1,18 @@
 <template>
 	<div id="app-home" class="row">
-		<div class="col">
-			<recommend></recommend>
+		<div class="col-9">
+			<feeds></feeds>
 		</div>
-		<div class="col-6">
-			<focus></focus>
-		</div>
-		<div class="col">
+		<div class="col-3">
 			<my></my>
 		</div>
 	</div>
 </template>
 
 <script>
-	import Recommend from './Recommend'
-	import Focus from './Focus'
+	import Feeds from './Feeds'
 	import My from './My'
 	export default {
-		components: {Recommend, Focus, My}
+		components: {Feeds, My}
 	}
 </script>

@@ -5,6 +5,7 @@ namespace App\Models\Auth;
 use Carbon\Carbon;
 use App\Models\Auth\User;
 use App\Models\Auth\Register;
+use App\Models\Auth\Person;
 use App\Mail\EmailVerification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -49,18 +50,22 @@ class EmailRegister extends Register implements MustVerifyEmail
             'domain'     => str_random(64),
             'reg_type'   => 'email',
             'created_ip' => $request->getClientIp(),
-            'email_binding' => 1,
+            'remember_token' => str_random(64),
+            'api_token'  => str_random(64),
         ]);
 
-        /*
-        $emailAccount = EmailAccount::create([
-            'user_id'     => $user->id,
-            'email'       => $this->email,
-            'password'    => $this->password,
-            'verified_at' => Carbon::now(),
-            'verified_ip' => $request->getClientIp(),
-        ]);
-        */
+        switch ($this->identity) {
+            case 'person':
+                $person = Person::create([
+                    'user_id' => $user->id,
+                ]);
+
+                return true;
+            
+            default:
+                # code...
+                break;
+        }
 
     }
     

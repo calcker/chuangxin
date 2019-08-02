@@ -28,9 +28,12 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->char('created_ip', 15);
             $table->rememberToken();
+            $table->string('api_token', 64)->unique();
             $table->tinyInteger('weixin_binding')->default(0);
             $table->tinyInteger('weibo_binding')->default(0);
             $table->tinyInteger('qq_binding')->default(0);
+            $table->timestamp('last_logined_at')->nullable();
+            $table->char('last_logined_ip', 15)->nullable();
         });
         /*
         Schema::create('email_accounts', function (Blueprint $table) {
@@ -67,6 +70,33 @@ class CreateUsersTable extends Migration
         });
         */
 
+        Schema::create('persons', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->mediumInteger('follows')->default(0);
+            $table->mediumInteger('followers')->default(0);
+            $table->mediumInteger('praises')->default(0);
+            $table->mediumInteger('collects')->default(0);
+            $table->mediumInteger('news')->default(0);
+            $table->mediumInteger('works')->default(0);
+            $table->mediumInteger('opinions')->default(0);
+            $table->mediumInteger('sales')->default(0);
+            $table->mediumInteger('groups')->default(0);
+            $table->mediumInteger('teams')->default(0);
+            $table->timestamps();
+            $table->char('updated_ip', 15)->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+
+        Schema::create('logins', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id');
+            $table->enum('client_type', ['web', 'app']);
+            $table->enum('account_type', ['email', 'mobile', 'weixin', 'weibo', 'qq']);
+            $table->timestamp('logined_at');
+            $table->char('logined_ip', 15);
+            $table->foreign('user_id')->references('id')->on('users');
+        });
+
+
     }
 
     /**
@@ -78,6 +108,8 @@ class CreateUsersTable extends Migration
     {
         Schema::dropIfExists('users');
         Schema::dropIfExists('email_registers');
+        Schema::dropIfExists('persons');
+        Schema::dropIfExists('logins');      
 
     }
 }
