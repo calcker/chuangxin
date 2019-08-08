@@ -1,32 +1,41 @@
 <template>
-	<div class="row" style="margin-top:20px">
-		<div class="col">
-			<ul class="nav nav-tabs">
-	  			<li class="nav-item">
-	 			   <a class="nav-link active" href="#">动态</a>
-	  			</li>
-	  			<li class="nav-item">
-	    			<a class="nav-link" href="#">作品</a>
-	  			</li>
-	  			<li class="nav-item">
-	    			<a class="nav-link" href="#">合作</a>
-	  			</li>
-	  			<li class="nav-item">
-	    			<a class="nav-link" href="#">招聘</a>
-	  			</li>
-	  			<li class="nav-item">
-	    			<a class="nav-link" href="#">出售</a>
-	  			</li>
-	  			<li class="nav-item">
-	    			<a class="nav-link" href="#">团队</a>
-	  			</li>
-	  			<li class="nav-item">
-	    			<a class="nav-link" href="#">外包</a>
-	  			</li>
-			</ul>
-		</div>
+	<div class="messageBox bg-light">
+		<form>
+			<div class="form-group">
+				<label for="message"><h5>新消息</h5></label>
+				<textarea class="form-control" id="message" rows="3"></textarea>
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<select id="inputState" class="form-control">
+		 			   	<option selected>消息类型...</option>
+		   				<option>求助</option>
+		   				<option>合作</option>
+		   				<option>通告</option>
+		 			</select>
+				</div>
+				<div class="form-group col-md-9 text-right">
+					<button type="submit" class="btn btn-primary">发布消息</button>
+				</div>
+			</div>
+		</form>
 	</div>
 </template>
+
+<style type="text/css">
+	.messageBox {
+	    padding: 1.25rem;
+	    margin-bottom: 1.25rem;
+	    border: 1px solid #eee;
+	    border-left-width: .25rem;
+	    border-radius: .25rem;
+	    border-left-color: #563d7c;
+	}
+
+	.messageBox h4 {
+		color: #d9534f;
+	}
+</style>
 
 <script>
 	import AlertBox from './../AlertBox'
@@ -47,7 +56,7 @@
 
 		mounted() {
 
-			this.update();
+			//this.update();
 
 		},
 

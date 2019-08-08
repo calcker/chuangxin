@@ -15,25 +15,22 @@ class CreateFeedsTable extends Migration
     {
         Schema::create('feeds', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
+            $table->integer('user_id')->index();
             /**
              * feed 类型
              */
-            $table->enum('feed_type', [
-                'nm', //new messages (新消息)
+            $table->enum('type', [
+                'nm', //new messages (新消息, 分包，合作，提问)
                 'nw', //new works (新作品)
-                'pw', //praise works (赞了新作品)
-                'nt', //new topic (新话题)
+                'pw', //praise works (赞了作品)
                 'no', //new opinion (新见解)
-                'po', //praise works (赞了新见解)
-                'ng', //new group (新建讨论组)
+                'po', //praise opinion (赞了见解)
                 'nt', //new team (新建团队)
                 'ns', //new sale (新建出售)
                 'nh', //new hire（新建招聘）
-                'nc', //contract（新建分包）
             ]);
-            $table->char('copy_key', 64)->unique();
-            $table->bigInteger('timestamp');
+            $table->integer('copy_id')->index();
+            $table->timestamp('created_at')->index();
             $table->softDeletes();
         });
     }

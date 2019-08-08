@@ -3,6 +3,7 @@
 namespace App\Models\Auth;
 
 use App\Models\Auth\Person;
+use App\Models\Content\Feed;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -63,6 +64,66 @@ class User extends Model implements
     {
 
         return $this->hasMany(Feed::class);
+
+    }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+    }
+
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+    }
+
+    //更新关注动态
+    public function updateFollowingsFeeds($max_feed_id)
+    {
+
+        $user_ids = $this->getFollowingUids();
+
+        if(is_null($max_feed_id)){
+
+            return Feed::whereIn('user_id', $user_ids)
+                            ->with('user')
+                            ->limit(30)
+                            ->orderBy('created_at', 'desc');
+        
+        }elseif(is_int($max_feed_id)){
+
+            return Feed::where('id', '>', $max_feed_id)
+                            ->whereIn('user_id', $user_ids)
+                            ->with('user')
+                            ->limit(30)
+                            ->orderBy('created_at', 'desc');
+
+        }
+
+    }
+
+    //回溯关注动态
+    public function backwardFollowingsFeeds($min_feed_id)
+    {
+
+        $user_ids = $this->getFollowingUids();
+
+        return Feed::where('id', '<', $min_feed_id)
+                        ->whereIn('user_id', $user_ids)
+                        ->with('user')
+                        ->limit(30)
+                        ->orderBy('created_at', 'desc');
+    }
+
+    //获取关注用户和自己的ID
+    protected function getFollowingUids()
+    {
+
+        $user_ids = $this->followings->pluck('id')->toArray();
+
+        array_push($user_ids, $this->id);
+
+        return $user_ids;
 
     }
 

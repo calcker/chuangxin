@@ -14,11 +14,11 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->char('key', 64)->unique();
             $table->string('name');
             $table->enum('identity', ['person', 'company', 'org', 'member']);
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->unique();
             $table->char('mobile', 11)->unique()->nullable();
             $table->string('password');
             $table->tinyInteger('pending')->default(0);
@@ -47,7 +47,7 @@ class CreateUsersTable extends Migration
         */
 
         Schema::create('email_registers', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('email');
             $table->string('password');
             $table->string('name');
@@ -71,7 +71,7 @@ class CreateUsersTable extends Migration
         */
 
         Schema::create('persons', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->unique();
+            $table->unsignedInteger('user_id')->unique();
             $table->mediumInteger('follows')->default(0);
             $table->mediumInteger('followers')->default(0);
             $table->mediumInteger('praises')->default(0);
@@ -84,16 +84,14 @@ class CreateUsersTable extends Migration
             $table->mediumInteger('teams')->default(0);
             $table->timestamps();
             $table->char('updated_ip', 15)->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
         });
 
         Schema::create('logins', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id')->index();
             $table->enum('client_type', ['web', 'app']);
             $table->enum('account_type', ['email', 'mobile', 'weixin', 'weibo', 'qq']);
             $table->timestamp('logined_at');
             $table->char('logined_ip', 15);
-            $table->foreign('user_id')->references('id')->on('users');
         });
 
 

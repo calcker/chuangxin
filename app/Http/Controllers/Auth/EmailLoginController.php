@@ -92,35 +92,8 @@ class EmailLoginController extends LoginController
             ], 422));
         }
 
-        /*
-        if($this->validator($request->input())->fails()) {
-            
-            throw new HttpResponseException(response()->json([
-                'code' => 422,
-                'msg'  => $this->validator($request->input())->errors(),
-                'data' => null
-            ], 422));
-
-        }
-        */
 
     }
-
-    /*
-    protected function attemptLogin(Request $request)
-    {
-
-    	$emailAccount = EmailAccount::where('email', $this->getInputEmail($request))->first();
-
-    	if(!is_object($emailAccount)) return false;
-
-    	if(!Hash::check($this->getInputPassword($request), $emailAccount->password)) return false;
-
-		Auth::login($emailAccount->user);
-
-    	return true;
-    }
-    */
 
     protected function validator(array $data)
     {

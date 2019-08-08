@@ -16,7 +16,7 @@
 		  			</div>
 		  		</div>
 		  		<div class="col text-right">
-		  			<router-link to="/password/reset" class="btn btn-link">忘记密码</router-link>
+		  			<router-link to="/password/reset" class="btn btn-link">忘记密码 ?</router-link>
 		  		</div>
 		  	</div>
 		  	<button class="btn btn-lg btn-primary btn-block" type="submit" :disabled="submitted">登录</button>
