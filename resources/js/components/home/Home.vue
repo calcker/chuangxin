@@ -5,7 +5,7 @@
 			<feeds></feeds>
 		</div>
 		<div class="col-4">
-			<my></my>
+			<user></user>
 		</div>
 	</div>
 </template>
@@ -13,8 +13,8 @@
 <script>
 	import Message from './Message'
 	import Feeds from './Feeds'
-	import My from './My'
+	import User from './User'
 	export default {
-		components: {Message, Feeds, My}
+		components: {Message, Feeds, User}
 	}
 </script>

@@ -72,7 +72,7 @@ class CreateUsersTable extends Migration
 
         Schema::create('persons', function (Blueprint $table) {
             $table->unsignedInteger('user_id')->unique();
-            $table->mediumInteger('follows')->default(0);
+            $table->mediumInteger('followings')->default(0);
             $table->mediumInteger('followers')->default(0);
             $table->mediumInteger('praises')->default(0);
             $table->mediumInteger('collects')->default(0);

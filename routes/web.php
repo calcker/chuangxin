@@ -25,12 +25,15 @@ Route::post('/login', 'Auth\EmailLoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::group(['prefix' => 'feeds'], function(){
-
     Route::post('update', 'Content\FeedsController@update');
     Route::post('backward', 'Content\FeedsController@backward');
     Route::post('my', 'Content\FeedsController@my');
     Route::post('someone/{id}', 'Content\FeedsController@someone');
+});
 
+Route::group(['prefix' => 'counts'], function(){
+    Route::post('my', 'Content\CountsController@my');
+    Route::post('someone/{id}', 'Content\CountsController@someone');
 });
 
 /*

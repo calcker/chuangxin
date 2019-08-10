@@ -7,7 +7,7 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-3">
-					<select id="inputState" class="form-control">
+					<select id="messageType" class="form-control">
 		 			   	<option selected>消息类型...</option>
 		   				<option>求助</option>
 		   				<option>合作</option>
@@ -32,8 +32,8 @@
 	    border-left-color: #563d7c;
 	}
 
-	.messageBox h4 {
-		color: #d9534f;
+	.messageBox h5 {
+		color: #563d7c;
 	}
 </style>
 

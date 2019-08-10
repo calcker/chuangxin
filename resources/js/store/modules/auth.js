@@ -1,4 +1,6 @@
 
+import { mapGetters } from 'vuex'
+
 const state = {
 	id:  sessionStorage.getItem('id') || '',
 	key: localStorage.getItem('key') || '',
@@ -9,7 +11,13 @@ const state = {
 
 const getters = {
 	isLoggedIn: state => !!state.id,
-	user_id: state => state.user_id
+	userInfo: state => {
+		return {
+			id: state.id,
+			key: state.key,
+			name: state.name
+		}
+	}
 };
 
 const mutations = {

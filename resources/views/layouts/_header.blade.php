@@ -6,6 +6,7 @@
     </a>
     <ul class="nav nav-pills justify-content-end">
       @if (Auth::check())
+        <li class="nav-item"><a class="nav-link" href="/router#/home"><strong>我的空间</strong></a></li>
       	<li class="nav-item"><a class="nav-link" href="/logout"><strong>退出</strong></a></li>
       @else
       	<li class="nav-item"><a class="nav-link active" href="{{ config('app.vue_router').'/login' }}"><strong>登录</strong></a></li>

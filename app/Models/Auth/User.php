@@ -48,23 +48,17 @@ class User extends Model implements
 
     public function person()
     {
-
-        return $this->hasOne(Person::class);
-
+        return $this->hasOne(Person::class, 'user_id');
     }
 
     public function logins()
     {
-
         return $this->hasMany(Login::class);
-
     }
 
     public function feeds()
     {
-
         return $this->hasMany(Feed::class);
-
     }
 
     public function followers()
@@ -75,6 +69,19 @@ class User extends Model implements
     public function followings()
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
+    }
+
+    public function counts()
+    {
+        $person = $this->person();
+
+        //die(var_dump($person));
+
+        return [
+            'works' => $person->works,
+            'praises' => $person->praises,
+            'followers' => $person->followers,
+        ];
     }
 
     //更新关注动态
