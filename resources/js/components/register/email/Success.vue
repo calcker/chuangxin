@@ -1,19 +1,22 @@
 <template>
-    <div class="email-register-success alert alert-success" role="alert">
-        <h4 class="alert-heading">恭喜您, 注册成功</h4>
-        <hr>
-        <p>亲爱的, <strong>{{ name }}</strong></p>
-        <p>感谢您的加入</p>
-        <p>请尽快登录<a :href="'http://' + gotoEmail" class="alert-link"> 您的邮箱</a> ( {{ email }} ), 完成邮箱验证</p>
-        <hr>
-        <a class="btn btn-primary btn-block" :href="'http://' + gotoEmail">
-            登录我的邮箱 {{ gotoEmail }}
-        </a>
+    <div id="email-register-success">
+        <topBarUnLogin></topBarUnLogin>
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">恭喜您, 注册成功</h4>
+            <hr>
+            <p>亲爱的, <strong>{{ name }}</strong></p>
+            <p>感谢您的加入</p>
+            <p>请尽快登录<a :href="'http://' + gotoEmail" class="alert-link"> 您的邮箱</a> ( {{ email }} ), 完成邮箱验证</p>
+            <hr>
+            <a class="btn btn-primary btn-block" :href="'http://' + gotoEmail">
+                登录我的邮箱 {{ gotoEmail }}
+            </a>
+        </div>
     </div>
 </template>
 
 <style type="text/css">
-    .email-register-success {
+    #email-register-success .alert {
         max-width: 400px;
         padding: 40px;
         margin: 0 auto;
@@ -21,21 +24,25 @@
 </style>
 
 <script>
+    import { mapGetters } from 'vuex'
+    import TopBarUnLogin  from '../../TopBarUnLogin'
+    
     export default {
     	data: function() {
     		return {
-    			name: '',
-    			email: ''
+    			email: '',
+    			name: ''
     		}
   		},
-    	created: function() {
-    		var name = sessionStorage.getItem('name'),
-                email = sessionStorage.getItem('email');
-    		if(!email || !name) this.$router.push({path: '/register/email/person'});
-    		this.name = name;
-    		this.email = email;
+        created() {
+            this.email = this.regInfo.email;
+            this.name = this.regInfo.name;
+            if(!this.email || !this.name) this.$router.push({path: '/register/email/person'});
         },
         computed: {
+            ...mapGetters([
+                'regInfo'
+            ]),
         	gotoEmail: function() {
         		var $t = this.email.split('@')[1];
                 $t = $t.toLowerCase();
@@ -85,6 +92,7 @@
                     return 'mail.' + $t;
                 }
         	}
-        }
+        },
+        components: {TopBarUnLogin}
     }
 </script>

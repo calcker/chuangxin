@@ -26,7 +26,16 @@ const routes = [
 			requireAuth: true			
 		}
 	},
-
+	
+	{
+		path: '/works/new',
+		name: '新作品',
+		components: require('../components/works/New'),
+		meta: {
+			requireAuth: true			
+		}
+	},
+	
 	{
 		path: '/register/email/person',
 		name: '个人注册',

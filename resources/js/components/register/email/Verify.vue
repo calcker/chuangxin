@@ -1,17 +1,20 @@
 <template>
-    <div v-if="success == 'success'" class="email-verify-success alert alert-success" role="alert">
-        <h4 class="alert-heading">恭喜您, 验证成功</h4>
-        <hr>
-        <p>我们一起, 改变世界!</p>
-        <hr>
-        <router-link to="/login" class="btn btn-primary btn-block">立即登录您的账号</router-link>
-    </div>
-    <div v-else-if="success == 'failure'" class="email-verify-failure alert alert-danger" role="alert">
-        <h4 class="alert-heading">抱歉, 验证失败</h4>
-        <hr>
-        <p>{{ error }}</p>
-        <div class="text-right">
-            <a class="btn btn-outline-danger" href="/">返回首页</a>
+    <div id="email-register-verify">
+        <topBarUnLogin></topBarUnLogin>
+        <div v-if="success == 'success'" class="email-verify-success alert alert-success" role="alert">
+            <h4 class="alert-heading">恭喜您, 验证成功</h4>
+            <hr>
+            <p>我们一起, 改变世界!</p>
+            <hr>
+            <router-link to="/login" class="btn btn-primary btn-block">立即登录您的账号</router-link>
+        </div>
+        <div v-else-if="success == 'failure'" class="email-verify-failure alert alert-danger" role="alert">
+            <h4 class="alert-heading">抱歉, 验证失败</h4>
+            <hr>
+            <p>{{ error }}</p>
+            <div class="text-right">
+                <a class="btn btn-outline-danger" href="/">返回首页</a>
+            </div>
         </div>
     </div>
 </template>
@@ -25,6 +28,7 @@
 </style>
 
 <script>
+    import TopBarUnLogin  from '../../TopBarUnLogin'
     export default {
     	data: function() {
     		return {
@@ -46,6 +50,7 @@
                 self.success = 'failure';
                 self.error = '未知错误';
             });
-        }
+        },
+        components: {TopBarUnLogin}
     }
 </script>

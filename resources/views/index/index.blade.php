@@ -12,7 +12,7 @@
       <a href="/market" class="list-group-item list-group-item-action"><strong>市场</strong></a>
       <a href="/project" class="list-group-item list-group-item-action"><strong>外包</strong></a>
       <a href="/company" class="list-group-item list-group-item-action"><strong>企业</strong></a>
-      <a href="/college" class="list-group-item list-group-item-action"><strong>院校</strong></a>
+      <a href="/college" class="list-group-item list-group-item-action"><strong>校园</strong></a>
       <a href="/city" class="list-group-item list-group-item-action"><strong>城市</strong></a>
     </div>
   </div>

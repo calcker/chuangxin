@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'failed'           => '用户名或密码不正确',
+    'failed'           => '用户不存在或密码不正确',
     'throttle'         => '超过最大登录验证次数, 请 :seconds 秒后再试',
     'login'            => '登录',
     'weixin_login'     => '微信 登录',

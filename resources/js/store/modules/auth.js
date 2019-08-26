@@ -1,6 +1,4 @@
 
-import { mapGetters } from 'vuex'
-
 const state = {
 	id:  sessionStorage.getItem('id') || '',
 	key: localStorage.getItem('key') || '',

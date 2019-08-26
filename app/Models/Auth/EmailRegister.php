@@ -2,14 +2,13 @@
 
 namespace App\Models\Auth;
 
-use Carbon\Carbon;
-use App\Models\Auth\User;
-use App\Models\Auth\Register;
-use App\Models\Auth\Person;
+use App\Models\Works\Album;
+use App\Models\User\Person;
 use App\Mail\EmailVerification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class EmailRegister extends Register implements MustVerifyEmail
 {
@@ -42,7 +41,7 @@ class EmailRegister extends Register implements MustVerifyEmail
     {
 
         $user = User::create([
-            'key'        => str_random(64),
+            'key'        => str_random(24),
             'name'       => $this->name,
             'identity'   => $this->identity,
             'email'      => $this->email,
@@ -52,6 +51,14 @@ class EmailRegister extends Register implements MustVerifyEmail
             'created_ip' => $request->getClientIp(),
             'remember_token' => str_random(64),
             'api_token'  => str_random(64),
+        ]);
+
+        //作品默认专辑
+        $album = Album::create([
+            'key' => str_random(24),
+            'user_id' => $user->id,
+            'name' => '默认专辑',
+            'is_default' => true,
         ]);
 
         switch ($this->identity) {

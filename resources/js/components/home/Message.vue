@@ -2,20 +2,15 @@
 	<div class="messageBox bg-light">
 		<form>
 			<div class="form-group">
-				<label for="message"><h5>新消息</h5></label>
+				<label for="message"><h5>记录灵感 <i class="fas fa-bolt"></i></h5></label>
 				<textarea class="form-control" id="message" rows="3"></textarea>
 			</div>
 			<div class="form-row">
-				<div class="form-group col-md-3">
-					<select id="messageType" class="form-control">
-		 			   	<option selected>消息类型...</option>
-		   				<option>求助</option>
-		   				<option>合作</option>
-		   				<option>通告</option>
-		 			</select>
+				<div class="form-group col-md-6">
+					<i class="fas fa-map-marker-alt"></i> 位置
 				</div>
-				<div class="form-group col-md-9 text-right">
-					<button type="submit" class="btn btn-primary">发布消息</button>
+				<div class="form-group col-md-6 text-right">
+					<button type="submit" class="btn btn-primary">提交</button>
 				</div>
 			</div>
 		</form>
@@ -56,6 +51,7 @@
 
 		mounted() {
 
+			$('.messageBox .selectpicker').selectpicker();
 			//this.update();
 
 		},

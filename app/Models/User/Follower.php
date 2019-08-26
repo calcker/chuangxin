@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models\Content;
+namespace App\Models\User;
 
+use App\Models\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Follower extends Model
@@ -12,4 +13,11 @@ class Follower extends Model
     	'user_id',
     	'follower_id',
     ];
+
+    public function user()
+	{
+
+		return $this->belongsTo(User::class);
+
+	}
 }

@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('key', 64)->unique();
+            $table->char('key', 24)->unique();
             $table->string('name');
             $table->enum('identity', ['person', 'company', 'org', 'member']);
             $table->string('email')->unique();
@@ -29,22 +29,12 @@ class CreateUsersTable extends Migration
             $table->char('created_ip', 15);
             $table->rememberToken();
             $table->string('api_token', 64)->unique();
-            $table->tinyInteger('weixin_binding')->default(0);
-            $table->tinyInteger('weibo_binding')->default(0);
-            $table->tinyInteger('qq_binding')->default(0);
+            $table->boolean('weixin_binding')->default(false);
+            $table->boolean('weibo_binding')->default(false);
+            $table->boolean('qq_binding')->default(false);
             $table->timestamp('last_logined_at')->nullable();
             $table->char('last_logined_ip', 15)->nullable();
         });
-        /*
-        Schema::create('email_accounts', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->timestamp('verified_at');
-            $table->char('verified_ip', 15);
-            $table->foreign('user_id')->references('id')->on('users');
-        });
-        */
 
         Schema::create('email_registers', function (Blueprint $table) {
             $table->increments('id');
@@ -55,33 +45,25 @@ class CreateUsersTable extends Migration
             $table->string('token')->unique();
             $table->timestamps();
             $table->char('created_ip', 15);
-            $table->tinyInteger('verified')->default(0);
+            $table->boolean('verified')->default(false);
         });
-
-        /*
-        Schema::create('mobile_accounts', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id')->unique();
-            $table->char('mobile', 11)->unique();
-            $table->string('password');
-            $table->string('token')->nullable();
-            $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
-        });
-        */
 
         Schema::create('persons', function (Blueprint $table) {
             $table->unsignedInteger('user_id')->unique();
-            $table->mediumInteger('followings')->default(0);
-            $table->mediumInteger('followers')->default(0);
-            $table->mediumInteger('praises')->default(0);
-            $table->mediumInteger('collects')->default(0);
-            $table->mediumInteger('news')->default(0);
-            $table->mediumInteger('works')->default(0);
-            $table->mediumInteger('opinions')->default(0);
-            $table->mediumInteger('sales')->default(0);
-            $table->mediumInteger('groups')->default(0);
-            $table->mediumInteger('teams')->default(0);
+            $table->unsignedInteger('followings')->default(0);
+            $table->unsignedInteger('followers')->default(0);
+            $table->unsignedInteger('praises')->default(0);
+            $table->unsignedInteger('collects')->default(0);
+            $table->unsignedInteger('messages')->default(0);
+            $table->unsignedInteger('works')->default(0);
+            $table->unsignedInteger('topics')->default(0);
+            $table->unsignedInteger('opinions')->default(0);
+            $table->unsignedInteger('sales')->default(0);
+            $table->unsignedInteger('hires')->default(0);
+            $table->unsignedInteger('build_groups')->default(0);
+            $table->unsignedInteger('join_groups')->default(0);
+            $table->unsignedInteger('build_teams')->default(0);
+            $table->unsignedInteger('join_teams')->default(0);
             $table->timestamps();
             $table->char('updated_ip', 15)->nullable();
         });
@@ -92,6 +74,14 @@ class CreateUsersTable extends Migration
             $table->enum('account_type', ['email', 'mobile', 'weixin', 'weibo', 'qq']);
             $table->timestamp('logined_at');
             $table->char('logined_ip', 15);
+        });
+
+        Schema::create('followers', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('follower_id')->index();
+            $table->timestamp('created_at');
+            $table->softDeletes();
         });
 
 
@@ -107,7 +97,8 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('email_registers');
         Schema::dropIfExists('persons');
-        Schema::dropIfExists('logins');      
+        Schema::dropIfExists('logins');
+        Schema::dropIfExists('followers');
 
     }
 }

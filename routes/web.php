@@ -25,16 +25,39 @@ Route::post('/login', 'Auth\EmailLoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::group(['prefix' => 'feeds'], function(){
-    Route::post('update', 'Content\FeedsController@update');
-    Route::post('backward', 'Content\FeedsController@backward');
-    Route::post('my', 'Content\FeedsController@my');
-    Route::post('someone/{id}', 'Content\FeedsController@someone');
+    Route::post('update', 'Feed\FeedsController@update');
+    Route::post('backward', 'Feed\FeedsController@backward');
+    Route::post('my', 'Feed\FeedsController@my');
+    Route::post('someone/{id}', 'Feed\FeedsController@someone');
 });
 
+Route::group(['prefix' => 'my'], function(){
+    Route::post('counts', 'MyController@counts');
+    //Route::post('someone/{id}', 'Content\CountsController@someone');
+});
+
+Route::group(['prefix' => 'works'], function(){
+    Route::post('new', 'Works\WorksController@new');
+    Route::post('albums', 'Works\AlbumsController@my');
+    //Route::post('someone/{id}', 'Content\CountsController@someone');
+});
+
+Route::group(['prefix' => 'albums'], function(){
+    Route::post('my', 'Works\AlbumsController@my');
+    //Route::post('someone/{id}', 'Content\CountsController@someone');
+});
+
+
+
+
+
+
+/*
 Route::group(['prefix' => 'counts'], function(){
     Route::post('my', 'Content\CountsController@my');
     Route::post('someone/{id}', 'Content\CountsController@someone');
 });
+*/
 
 /*
 Route::group(['prefix' => 'login'], function(){

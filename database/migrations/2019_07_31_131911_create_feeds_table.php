@@ -14,8 +14,8 @@ class CreateFeedsTable extends Migration
     public function up()
     {
         Schema::create('feeds', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id')->index();
+            $table->char('key', 24)->primary();
+            $table->unsignedInteger('user_id')->index();
             /**
              * feed 类型
              */
@@ -29,10 +29,26 @@ class CreateFeedsTable extends Migration
                 'ns', //new sale (新建出售)
                 'nh', //new hire（新建招聘）
             ]);
-            $table->integer('copy_id')->index();
+            $table->char('copy_key', 24)->index();
             $table->timestamp('created_at')->index();
             $table->softDeletes();
         });
+
+        Schema::create('copies', function (Blueprint $table) {
+            $table->char('key', 24)->primary();
+            $table->char('original_key', 24);
+            $table->enum('type', [
+                'works',//作品
+                'topic',//话题
+                'opinion',//观点
+                'team',//团队
+            ]);
+            $table->text('brief');
+            $table->boolean('delete')->default(false);
+            $table->index('original_key', 'type');
+        });
+
+
     }
 
     /**
@@ -43,5 +59,6 @@ class CreateFeedsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('feeds');
+        Schema::dropIfExists('copies');
     }
 }

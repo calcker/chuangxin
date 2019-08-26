@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Content;
+namespace App\Http\Controllers\Feed;
 
 use App\Models\Content\Feed;
 use Illuminate\Http\Request;
@@ -15,7 +15,8 @@ class FeedsController extends Controller
 
 
     //更新关注动态
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
         $array = auth()->user()->updateFollowingsFeeds(self::$max_feed_id)->get();
 
@@ -38,7 +39,8 @@ class FeedsController extends Controller
     }
 
     //回溯关注动态
-    public function backward(Request $request){
+    public function backward(Request $request)
+    {
 
         $array = auth()->user()->backwardFollowingsFeeds(self::$min_feed_id)->get();
 
@@ -65,7 +67,7 @@ class FeedsController extends Controller
     public function my(Request $request)
     {
 
-    	$data = auth()->user()->feeds();
+    	$data = auth()->user()->feeds()->get();
 
         return response()->json([
             'code' => 201,

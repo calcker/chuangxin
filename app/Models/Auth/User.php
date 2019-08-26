@@ -2,8 +2,11 @@
 
 namespace App\Models\Auth;
 
-use App\Models\Auth\Person;
-use App\Models\Content\Feed;
+use App\Models\User\Person;
+use App\Models\User\Follower;
+use App\Models\Feed\Feed;
+use App\Models\Works\Works;
+use App\Models\Works\Album;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -48,7 +51,7 @@ class User extends Model implements
 
     public function person()
     {
-        return $this->hasOne(Person::class, 'user_id');
+        return $this->hasOne(Person::class, 'user_id', 'id');
     }
 
     public function logins()
@@ -71,16 +74,37 @@ class User extends Model implements
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
     }
 
+    public function works()
+    {
+        return $this->hasMany(Works::class);
+    } 
+
+    public function albums()
+    {
+        return $this->hasMany(Album::class);
+    }
+
+
+
     public function counts()
     {
-        $person = $this->person();
-
-        //die(var_dump($person));
+        $person = $this->person;
 
         return [
-            'works' => $person->works,
-            'praises' => $person->praises,
+            'followings' => $person->followings,
             'followers' => $person->followers,
+            'praises' => $person->praises,
+            'collects' => $person->collects,
+            'messages' => $person->messages,
+            'works' => $person->works,
+            'topics' => $person->topics,
+            'opinions' => $person->opinions,
+            'sales' => $person->sales,
+            'hires' => $person->hires,
+            'build_groups' => $person->build_groups,
+            'join_groups' => $person->join_groups,
+            'build_teams' => $person->build_teams,
+            'join_teams' => $person->join_teams,
         ];
     }
 
