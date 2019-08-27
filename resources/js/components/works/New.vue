@@ -7,53 +7,33 @@
                     <input type="text" class="title form-control" name="title" placeholder="新作品标题">
                     <textarea class="brief form-control" rows="2" placeholder="作品简介（选填）"></textarea>
                     <div class="options row">
-                        <div class="col-md-6">
-                            <form class="form-inline">
-                                <div class="form-group">
-                                    <select class="selectpicker" title="选择分类...">
-                                        <option data-icon="fas fa-bookmark" value="science">科学</option>
-                                        <option data-icon="fas fa-bookmark" value="engineering">工程</option>
-                                        <option data-icon="fas fa-bookmark" value="art">艺术</option>
-                                        <option data-icon="fas fa-bookmark" value="philosophy">哲学</option>
-                                        <option data-icon="fas fa-bookmark" value="it">IT</option>
-                                        <option data-icon="fas fa-bookmark" value="medicine">医药</option>
-                                        <option data-icon="fas fa-bookmark" value="business">商业</option>
-                                        <option data-icon="fas fa-bookmark" value="design">设计</option>
-                                        <option data-icon="fas fa-bookmark" value="literature">文学</option>
-                                        <option data-icon="fas fa-bookmark" value="music">音乐</option>
-                                        <option data-icon="fas fa-bookmark" value="film">影视</option>
-                                        <option data-icon="fas fa-bookmark" value="comic">动漫</option>
-                                        <option data-icon="fas fa-bookmark" value="entertainment">娱乐</option>
-                                        <option data-icon="fas fa-bookmark" value="education">教育</option>
-                                        <option data-icon="fas fa-bookmark" value="sport">体育</option>
-                                        <option data-icon="fas fa-bookmark" value="product">产品</option>
-                                        <option data-icon="fas fa-bookmark" value="service">服务</option>
-                                        <option data-icon="fas fa-bookmark" value="blog">博客</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <select class="selectpicker">
-                                        <option data-icon="fas fa-bookmark" value="science">开启评论</option>
-                                        <option data-icon="fas fa-bookmark" value="engineering">关闭评论</option>
-                                    </select>
-                                </div>
-                            </form>
-                            <!--
-                            <div class="checkbox-custom checkbox-default">
-                                <input type="checkbox" id="RememberMe">
-                                <label for="RememberMe">允许评论</label>
-                            </div>
-                        -->
+                        <div class="col-md-4">
+                             <select class="selectpicker" title="选择分类...">
+                                <option data-icon="fas fa-microscope" value="science">科学</option>
+                                <option data-icon="fas fa-rocket" value="engineering">工程</option>
+                                <option data-icon="fas fa-palette" value="art">艺术</option>
+                                <option data-icon="fas fa-leaf" value="philosophy">哲学</option>
+                                <option data-icon="fas fa-laptop-code" value="it">IT</option>
+                                <option data-icon="fas fa-syringe" value="medicine">医药</option>
+                                <option data-icon="fas fa-dollar-sign" value="business">商业</option>
+                                <option data-icon="fas fa-drafting-compass" value="design">设计</option>
+                                <option data-icon="fas fa-book-open" value="literature">文学</option>
+                                <option data-icon="fas fa-music" value="music">音乐</option>
+                                <option data-icon="fas fa-film" value="film">影视</option>
+                                <option data-icon="fas fa-fish" value="comic">动漫</option>
+                                <option data-icon="fas fa-gamepad" value="entertainment">娱乐</option>
+                                <option data-icon="fas fa-graduation-cap" value="education">教育</option>
+                                <option data-icon="fas fa-skiing" value="sport">体育</option>
+                                <option data-icon="fas fa-robot" value="product">产品</option>
+                                <option data-icon="fas fa-people-carry" value="service">服务</option>
+                                <option data-icon="fas fa-blog" value="blog">博客</option>
+                            </select>
                         </div>
-                        <div class="col-md-6 text-right">
+                        <div class="col-md-8 text-right">
                             <button type="button" class="submit btn btn-primary">发表作品&nbsp;&nbsp;<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         </div>
                     </div>
-                    <div class="editor"></div>
-                    <!--
-                    <div class="editor" style="margin-top:40px;"></div>
-                    <style type="text/css">.fr-toolbar{border-top:0;}</style>
-                    -->
+                    <editor :init="init" v-model="data"></editor>
                 </div>
             </div>
         </div>
@@ -129,68 +109,25 @@
     margin-top: 0;
     display: inline-block;
 }
-/*
-将初始的checkbox的样式改变
-*/
-.checkbox-custom input[type="checkbox"] {
-    opacity: 0;/*将初始的checkbox隐藏起来*/
-    position: absolute;
-    cursor: pointer;
-    z-index: 2;
-    margin: -6px 0 0 0;
-    top: 50%;
-    left: 3px;
-}
-/*
-设计新的checkbox，位置
-*/
-.checkbox-custom label:before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    margin-top: -9px;
-    width: 19px;
-    height: 18px;
-    display: inline-block;
-    border-radius: 2px;
-    border: 1px solid #bbb;
-    background: #fff;
-}
-/*
-点击初始的checkbox，将新的checkbox关联起来
-*/
-.checkbox-custom input[type="checkbox"]:checked +label:after {
-    position: absolute;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    content: "\e013";
-    top: 42%;
-    left: 3px;
-    margin-top: -5px;
-    font-size: 11px;
-    line-height: 1;
-    width: 16px;
-    height: 16px;
-    color: #333;
-}
-.checkbox-custom label {
-    cursor: pointer;
-    line-height: 1.2;
-    font-weight: normal;/*改变了rememberme的字体*/
-    margin-bottom: 0;
-    text-align: left;
-}
-    
-
         
 
 </style>
 
 <script>
     import TopBar from './../home/TopBar'
+    import tinymce from 'tinymce/tinymce';
+    import 'tinymce/themes/silver/theme.min.js';
+    import 'tinymce/skins/ui/oxide/skin.min.css';
+    //import './tinymce/langs/zh_CN.js';
+    import Editor from '@tinymce/tinymce-vue';
 
     export default {
-        components: {TopBar}
+        data() {
+            return {
+                data: '',
+                init: {}
+            };
+        },
+        components: {TopBar, Editor}
     }
 </script>
