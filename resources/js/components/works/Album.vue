@@ -43,12 +43,12 @@
                                             <td>
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item">
-                                                        <a class="updatePopover" role="button" data-toggle="popover" :data-album-name="album.name" :data-album-key="album.key" @click="showUpdatePopover">
+                                                        <a class="update" role="button" data-toggle="popover" :data-album-name="album.name" :data-album-key="album.key">
                                                             <i class="fas fa-pencil-alt"></i>
                                                         </a>
                                                     </li>
                                                     <li class="list-inline-item">
-                                                        <a class="deletePopover" role="button" data-toggle="popover" @click="showDeletePopover">
+                                                        <a class="delete" role="button" data-toggle="popover" @click="showDeletePopover">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </a>
                                                     </li>
@@ -72,7 +72,7 @@
 
 <style type="text/css">
     
-    .album .updatePopover, .album .deletePopover{
+    .album .update, .album .delete{
 
         cursor: pointer;
 
@@ -196,36 +196,29 @@
                     container: 'body',
                     html: true,
                     content:    '<form>'                                                                       +
-                                    '<div class="form-group">'                                             +
+                                    '<div class="form-group">'                                                 +
                                         '<input type="text" class="form-control" placeholder="输入新名称...">'  +
                                     '</div>'                                                                   +
-                                    '<div class="form-group text-right">'                                  +
-                                        '<button class="confirm btn btn-primary btn-sm">提交</button>'+
-                                        '<button class="cancel btn btn-secondary btn-sm">取消</button>'+
+                                    '<div class="form-group text-right">'                                      +
+                                        '<button class="confirm btn btn-primary btn-sm">提交</button>'         +
+                                        '<button class="cancel btn btn-secondary btn-sm">取消</button>'        +
                                     '</div>'                                                                   +
                                 '</form>',
-                    template:   '<div class="popover" role="tooltip">'                          +
-                                    '<div class="arrow"></div>'                                 +
-                                    '<h3 class="popover-header"></h3>'                          +
-                                    '<div class="popover-body"></div>'                          +
+                    template:   '<div class="updatePopover popover" role="tooltip">'                       +
+                                    '<div class="arrow"></div>'                                            +
+                                    '<h3 class="popover-header"></h3>'                                     +
+                                    '<div class="popover-body"></div>'                                     +
                                 '</div>'
-
-                    /*
-                    content:    '<div class="input-group">'                                         +
-                                    '<input type="text" class="form-control">'                      +
-                                    '<span class="input-group-btn">'                                + 
-                                        '<button class="confirm btn btn-default" type="button">'    +
-                                            '<i class="fas fa-check"></i>'                          +
-                                        '</button>'                                                 + 
-                                        '<button class="cancel btn btn-default" type="button">'     +
-                                            '<i class="fas fa-times"></i>'                          +
-                                        '</button>'                                                 +
-                                    '</span>'                                                       +
-                                '</div>'
-                    */
                 };
 
-                $('.album .updatePopover').popover(options);
+                $('.album .update').popover(options);
+
+                $('.album .update').on('shown.bs.popover', function (e) {
+
+                    console.log(e);
+                    
+                    alert("当显示时警告消息");
+                });
 
 
 
@@ -240,7 +233,7 @@
 
                 var key  = $(e.currentTarget).attr('data-album-key'),
                     name = $(e.currentTarget).attr('data-album-name'),
-                    $popover = $(e.currentTarget).siblings('.popover'),
+                    $popover = $('.updatePopover'),
                     $input   = $popover.find('input'),
                     $confirm = $popover.find('.confirm'),
                     $cancel  = $popover.find('.cancel');
@@ -250,10 +243,15 @@
                 $input.val(name).focus();
 
                 $confirm.click(function(){
+                    var $popover = $('.updatePopover');
+
+                    console.log($popover);
 
 
+                });
 
-
+                $cancel.click(function(){
+                    $popover.popover('hide');
                 });
 
                 //console.log($(e.currentTarget).attr('data-album-key'));

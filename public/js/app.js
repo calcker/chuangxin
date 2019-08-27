@@ -2845,268 +2845,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/Album.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/works/Album.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      loading: null,
-      selected: '',
-      albums: [],
-      $selectpicker: null,
-      $modal: null
-    };
-  },
-  created: function created() {
-    this.getAlbums();
-  },
-  mounted: function mounted() {
-    //开启bootstrap popover 标签
-
-    /*
-    $.fn.popover.Constructor.Default.whiteList.form = [];
-    $.fn.popover.Constructor.Default.whiteList.div = [];
-    $.fn.popover.Constructor.Default.whiteList.input = ['type', 'placeholder'];
-    $.fn.popover.Constructor.Default.whiteList.button = ['type'];
-    */
-    this.$selectpicker = $('.album .selectpicker');
-    this.$modal = $('.album .modal');
-  },
-  watch: {
-    selected: function selected() {
-      if (this.selected == -1) {
-        this.showAlbumsModal();
-      }
-
-      this.initUpdatePopover();
-    },
-    albums: function albums() {
-      this.fillAlbums();
-      this.initUpdatePopover();
-      this.initDeletePopover();
-    }
-  },
-  computed: {
-    /*
-    getAlbums: function(){
-         axios.post('/albums/my').then(response => {
-             if(response.data.code == 201) {
-                 return response.data.data;
-             } else {
-                 //console.log(response.data.msg);
-            
-            }
-        });
-     }
-    */
-  },
-  methods: {
-    getAlbums: function getAlbums() {
-      var _this2 = this;
-
-      axios.post('/albums/my').then(function (response) {
-        if (response.data.code == 201) {
-          _this2.albums = response.data.data;
-        } else {
-          console.log(response.data.msg);
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    fillAlbums: function fillAlbums() {
-      var latest = null,
-          _this = this;
-
-      this.$selectpicker.empty();
-      $.each(this.albums, function (i, album) {
-        _this.$selectpicker.prepend('<option data-icon="fas fa-bookmark" data-subtext="(' + album.works_count + ')" value="' + album.key + '">' + album.name + '</option>');
-
-        latest = album.key;
-      });
-      this.$selectpicker.append('<option data-divider="true"></option><option data-icon="fas fa-plus" value="-1">新增专辑</option>').val(latest);
-      this.$selectpicker.selectpicker('refresh');
-      this.$selectpicker.selectpicker('render');
-    },
-    showAlbumsModal: function showAlbumsModal() {
-      this.$modal.modal('show');
-    },
-    initUpdatePopover: function initUpdatePopover() {
-      var options = {
-        trigger: 'click',
-        placement: 'top',
-        title: '修改专辑名称',
-        sanitize: false,
-        container: 'body',
-        html: true,
-        content: '<form>' + '<div class="form-group">' + '<input type="text" class="form-control" placeholder="输入新名称...">' + '</div>' + '<div class="form-group text-right">' + '<button class="confirm btn btn-primary btn-sm">提交</button>' + '<button class="cancel btn btn-secondary btn-sm">取消</button>' + '</div>' + '</form>',
-        template: '<div class="popover" role="tooltip">' + '<div class="arrow"></div>' + '<h3 class="popover-header"></h3>' + '<div class="popover-body"></div>' + '</div>'
-        /*
-        content:    '<div class="input-group">'                                         +
-                        '<input type="text" class="form-control">'                      +
-                        '<span class="input-group-btn">'                                + 
-                            '<button class="confirm btn btn-default" type="button">'    +
-                                '<i class="fas fa-check"></i>'                          +
-                            '</button>'                                                 + 
-                            '<button class="cancel btn btn-default" type="button">'     +
-                                '<i class="fas fa-times"></i>'                          +
-                            '</button>'                                                 +
-                        '</span>'                                                       +
-                    '</div>'
-        */
-
-      };
-      console.log($('.album .updatePopover').popover(options));
-    },
-    initDeletePopover: function initDeletePopover() {},
-    showUpdatePopover: function showUpdatePopover(e) {
-      var key = $(e.currentTarget).attr('data-album-key'),
-          name = $(e.currentTarget).attr('data-album-name'),
-          $popover = $(e.currentTarget).siblings('.popover'),
-          $input = $popover.find('input'),
-          $confirm = $popover.find('.confirm'),
-          $cancel = $popover.find('.cancel');
-      console.log($popover);
-      $input.val(name).focus();
-      $confirm.click(function () {}); //console.log($(e.currentTarget).attr('data-album-key'));
-      //console.log('fsdaf');
-    },
-    showDeletePopover: function showDeletePopover() {}
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/New.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/works/New.vue?vue&type=script&lang=js& ***!
@@ -3117,7 +2855,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_TopBar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../home/TopBar */ "./resources/js/components/home/TopBar.vue");
-/* harmony import */ var _Album__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Album */ "./resources/js/components/works/Album.vue");
 //
 //
 //
@@ -3220,12 +2957,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    TopBar: _home_TopBar__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Album: _Album__WEBPACK_IMPORTED_MODULE_1__["default"]
+    TopBar: _home_TopBar__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -10895,25 +10717,6 @@ exports.push([module.i, "\n.email-verify-success, .email-verify-failure {\n    m
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/Album.vue?vue&type=style&index=0&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--8-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/works/Album.vue?vue&type=style&index=0&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.album .updatePopover, .album .deletePopover{\n\n    cursor: pointer;\n}\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/New.vue?vue&type=style&index=0&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--8-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/works/New.vue?vue&type=style&index=0&lang=css& ***!
@@ -10926,7 +10729,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#app-new-works {\n\n    background-color: #eee;\n}\n#app-new-works .main  a{\n    text-decoration: none;\n}\n#app-new-works .main  > .card{\n    padding: 20px 80px;\n}\n#app-new-works .works .title, .works .brief{\n    box-shadow: none;\n    border-radius: 0;\n    outline: none;\n    resize:none;\n    transition: none;\n}\n#app-new-works .works .title:focus, .works .brief:focus{\n    box-shadow: none;\n}\n#app-new-works .works .title{\n    display: block;\n    font: 34px/50px STHeiti,'Microsoft YaHei';\n    margin-top: 20px;\n    overflow: auto;\n    resize: none;\n    height: 80px;\n    padding: 28px 0 10px;\n    outline: none;\n    border: none;\n    border-bottom: .5px solid #ddd;\n    color: #444;\n}\n#app-new-works .works .brief{\n    display: block;\n    margin: 0 auto;\n    padding: 10px 0 30px;\n    border: none;\n    border-bottom: .5px solid #ddd;\n    outline: none;\n    font-size: 16px;\n}\n#app-new-works .works .options{\n    margin-top: 20px;\n    margin-bottom: 20px;\n}\n#app-new-works .works .settings .icon{\n    \n    font-size: 20px;\n    line-height: 34px;\n    color: #444;\n    margin-right: 20px;\n}\n    \n\n", ""]);
+exports.push([module.i, "\n#app-new-works {\n\n        background-color: #eee;\n}\n#app-new-works .main  a{\n        text-decoration: none;\n}\n#app-new-works .main  > .card{\n        padding: 20px 80px;\n}\n#app-new-works .works .title, .works .brief{\n        box-shadow: none;\n        border-radius: 0;\n        outline: none;\n        resize:none;\n        transition: none;\n}\n#app-new-works .works .title:focus, .works .brief:focus{\n        box-shadow: none;\n}\n#app-new-works .works .title{\n        display: block;\n        font: 34px/50px STHeiti,'Microsoft YaHei';\n        margin-top: 20px;\n        overflow: auto;\n        resize: none;\n        height: 80px;\n        padding: 28px 0 10px;\n        outline: none;\n        border: none;\n        border-bottom: .5px solid #ddd;\n        color: #444;\n}\n#app-new-works .works .brief{\n        display: block;\n        margin: 0 auto;\n        padding: 10px 0 30px;\n        border: none;\n        border-bottom: .5px solid #ddd;\n        outline: none;\n        font-size: 16px;\n}\n#app-new-works .works .options{\n        margin-top: 20px;\n        margin-bottom: 20px;\n}\n#app-new-works .works .settings .icon{\n        \n        font-size: 20px;\n        line-height: 34px;\n        color: #444;\n        margin-right: 20px;\n}\n.checkbox-custom {\n    position: relative;\n    padding: 0 15px 0 25px;\n    margin-bottom: 7px;\n    margin-top: 0;\n    display: inline-block;\n}\n/*\n将初始的checkbox的样式改变\n*/\n.checkbox-custom input[type=\"checkbox\"] {\n    opacity: 0;/*将初始的checkbox隐藏起来*/\n    position: absolute;\n    cursor: pointer;\n    z-index: 2;\n    margin: -6px 0 0 0;\n    top: 50%;\n    left: 3px;\n}\n/*\n设计新的checkbox，位置\n*/\n.checkbox-custom label:before {\n    content: '';\n    position: absolute;\n    top: 50%;\n    left: 0;\n    margin-top: -9px;\n    width: 19px;\n    height: 18px;\n    display: inline-block;\n    border-radius: 2px;\n    border: 1px solid #bbb;\n    background: #fff;\n}\n/*\n点击初始的checkbox，将新的checkbox关联起来\n*/\n.checkbox-custom input[type=\"checkbox\"]:checked +label:after {\n    position: absolute;\n    display: inline-block;\n    font-family: 'Glyphicons Halflings';\n    content: \"\\E013\";\n    top: 42%;\n    left: 3px;\n    margin-top: -5px;\n    font-size: 11px;\n    line-height: 1;\n    width: 16px;\n    height: 16px;\n    color: #333;\n}\n.checkbox-custom label {\n    cursor: pointer;\n    line-height: 1.2;\n    font-weight: normal;/*改变了rememberme的字体*/\n    margin-bottom: 0;\n    text-align: left;\n}\n    \n\n        \n\n", ""]);
 
 // exports
 
@@ -41909,36 +41712,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/Album.vue?vue&type=style&index=0&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--8-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/works/Album.vue?vue&type=style&index=0&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--8-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--8-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Album.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/Album.vue?vue&type=style&index=0&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/New.vue?vue&type=style&index=0&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--8-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/works/New.vue?vue&type=style&index=0&lang=css& ***!
@@ -44057,226 +43830,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/Album.vue?vue&type=template&id=eb5a10f2&":
-/*!**************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/works/Album.vue?vue&type=template&id=eb5a10f2& ***!
-  \**************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "album" }, [
-    _c("select", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.selected,
-          expression: "selected"
-        }
-      ],
-      staticClass: "selectpicker",
-      attrs: { title: "选择专辑..." },
-      on: {
-        change: function($event) {
-          var $$selectedVal = Array.prototype.filter
-            .call($event.target.options, function(o) {
-              return o.selected
-            })
-            .map(function(o) {
-              var val = "_value" in o ? o._value : o.value
-              return val
-            })
-          _vm.selected = $event.target.multiple
-            ? $$selectedVal
-            : $$selectedVal[0]
-        }
-      }
-    }),
-    _vm._v(" "),
-    _c("div", { staticClass: "modal fade", attrs: { role: "dialog" } }, [
-      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [
-            _c("div", { staticClass: "container-fluid" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("table", { staticClass: "table table-hover" }, [
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.albums, function(album) {
-                      return _c("tr", [
-                        _vm._m(3, true),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(album.name))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(album.works_count))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("ul", { staticClass: "list-inline" }, [
-                            _c("li", { staticClass: "list-inline-item" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "updatePopover",
-                                  attrs: {
-                                    role: "button",
-                                    "data-toggle": "popover",
-                                    "data-album-name": album.name,
-                                    "data-album-key": album.key
-                                  },
-                                  on: { click: _vm.showUpdatePopover }
-                                },
-                                [_c("i", { staticClass: "fas fa-pencil-alt" })]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("li", { staticClass: "list-inline-item" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "deletePopover",
-                                  attrs: {
-                                    role: "button",
-                                    "data-toggle": "popover"
-                                  },
-                                  on: { click: _vm.showDeletePopover }
-                                },
-                                [_c("i", { staticClass: "fas fa-trash-alt" })]
-                              )
-                            ])
-                          ])
-                        ])
-                      ])
-                    }),
-                    0
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(4)
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title" }, [_vm._v("专辑管理")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col align-self-center" }, [
-        _c("div", { staticClass: "input-group mb-3" }, [
-          _c("div", { staticClass: "input-group-prepend" }, [
-            _c("span", { staticClass: "input-group-text", attrs: { id: "" } }, [
-              _c("i", {
-                staticClass: "fas fa-plus",
-                attrs: { "aria-hidden": "true" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: { type: "text", placeholder: "请输入新专辑名称..." }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-append" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "button" } },
-              [_vm._v("添加专辑")]
-            )
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th"),
-        _vm._v(" "),
-        _c("th", [_vm._v("专辑名称")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("作品数")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("设置")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("i", {
-        staticClass: "fas fa-bookmark",
-        attrs: { "aria-hidden": "true" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("关闭")]
-      )
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/New.vue?vue&type=template&id=19dda238&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/works/New.vue?vue&type=template&id=19dda238& ***!
@@ -44295,33 +43848,7 @@ var render = function() {
   return _c(
     "div",
     { attrs: { id: "app-new-works" } },
-    [
-      _c("topBar"),
-      _vm._v(" "),
-      _c("div", { staticClass: "main container" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "works card-body" }, [
-            _c("input", {
-              staticClass: "title form-control",
-              attrs: { type: "text", name: "title", placeholder: "新作品标题" }
-            }),
-            _vm._v(" "),
-            _c("textarea", {
-              staticClass: "brief form-control",
-              attrs: { rows: "2", placeholder: "作品简介（选填）" }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "options row" }, [
-              _c("div", { staticClass: "col-md-3" }, [_c("album")], 1),
-              _vm._v(" "),
-              _vm._m(0)
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "editor" })
-          ])
-        ])
-      ])
-    ],
+    [_c("topBar"), _vm._v(" "), _vm._m(0)],
     1
   )
 }
@@ -44330,54 +43857,275 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4 offset-md-5" }, [
-      _c("div", { staticClass: "btn-toolbar" }, [
-        _c("div", { staticClass: "btn-group" }, [
-          _c(
-            "button",
-            { staticClass: "cover btn btn-default", attrs: { type: "button" } },
-            [
-              _c("i", {
-                staticClass: "fa fa-image",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v(" 封面")
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "btn-group" }, [
-          _c(
-            "button",
-            {
-              staticClass: "settings btn btn-default",
-              attrs: { type: "button" }
-            },
-            [
-              _c("i", {
-                staticClass: "fa fa-cog",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v(" 设置")
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "btn-group" }, [
-          _c(
-            "button",
-            {
-              staticClass: "submit btn btn-primary",
-              attrs: { type: "button" }
-            },
-            [
-              _vm._v("发布作品  "),
-              _c("i", {
-                staticClass: "fa fa-paper-plane",
-                attrs: { "aria-hidden": "true" }
-              })
-            ]
-          )
+    return _c("div", { staticClass: "main container" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "works card-body" }, [
+          _c("input", {
+            staticClass: "title form-control",
+            attrs: { type: "text", name: "title", placeholder: "新作品标题" }
+          }),
+          _vm._v(" "),
+          _c("textarea", {
+            staticClass: "brief form-control",
+            attrs: { rows: "2", placeholder: "作品简介（选填）" }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "options row" }, [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("form", { staticClass: "form-inline" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "select",
+                    {
+                      staticClass: "selectpicker",
+                      attrs: { title: "选择分类..." }
+                    },
+                    [
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "science"
+                          }
+                        },
+                        [_vm._v("科学")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "engineering"
+                          }
+                        },
+                        [_vm._v("工程")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "art"
+                          }
+                        },
+                        [_vm._v("艺术")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "philosophy"
+                          }
+                        },
+                        [_vm._v("哲学")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: { "data-icon": "fas fa-bookmark", value: "it" }
+                        },
+                        [_vm._v("IT")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "medicine"
+                          }
+                        },
+                        [_vm._v("医药")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "business"
+                          }
+                        },
+                        [_vm._v("商业")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "design"
+                          }
+                        },
+                        [_vm._v("设计")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "literature"
+                          }
+                        },
+                        [_vm._v("文学")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "music"
+                          }
+                        },
+                        [_vm._v("音乐")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "film"
+                          }
+                        },
+                        [_vm._v("影视")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "comic"
+                          }
+                        },
+                        [_vm._v("动漫")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "entertainment"
+                          }
+                        },
+                        [_vm._v("娱乐")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "education"
+                          }
+                        },
+                        [_vm._v("教育")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "sport"
+                          }
+                        },
+                        [_vm._v("体育")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "product"
+                          }
+                        },
+                        [_vm._v("产品")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "service"
+                          }
+                        },
+                        [_vm._v("服务")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        {
+                          attrs: {
+                            "data-icon": "fas fa-bookmark",
+                            value: "blog"
+                          }
+                        },
+                        [_vm._v("博客")]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("select", { staticClass: "selectpicker" }, [
+                    _c(
+                      "option",
+                      {
+                        attrs: {
+                          "data-icon": "fas fa-bookmark",
+                          value: "science"
+                        }
+                      },
+                      [_vm._v("开启评论")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "option",
+                      {
+                        attrs: {
+                          "data-icon": "fas fa-bookmark",
+                          value: "engineering"
+                        }
+                      },
+                      [_vm._v("关闭评论")]
+                    )
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6 text-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "submit btn btn-primary",
+                  attrs: { type: "button" }
+                },
+                [
+                  _vm._v("发表作品  "),
+                  _c("i", {
+                    staticClass: "fa fa-paper-plane",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "editor" })
         ])
       ])
     ])
@@ -61286,93 +61034,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Verify_vue_vue_type_template_id_07fa991d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Verify_vue_vue_type_template_id_07fa991d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/works/Album.vue":
-/*!*************************************************!*\
-  !*** ./resources/js/components/works/Album.vue ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Album_vue_vue_type_template_id_eb5a10f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Album.vue?vue&type=template&id=eb5a10f2& */ "./resources/js/components/works/Album.vue?vue&type=template&id=eb5a10f2&");
-/* harmony import */ var _Album_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Album.vue?vue&type=script&lang=js& */ "./resources/js/components/works/Album.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Album_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Album.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/works/Album.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _Album_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Album_vue_vue_type_template_id_eb5a10f2___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Album_vue_vue_type_template_id_eb5a10f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/works/Album.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/works/Album.vue?vue&type=script&lang=js&":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/works/Album.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Album.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/Album.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/works/Album.vue?vue&type=style&index=0&lang=css&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/works/Album.vue?vue&type=style&index=0&lang=css& ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_8_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--8-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--8-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Album.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/Album.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_8_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_8_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_8_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_8_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_8_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/components/works/Album.vue?vue&type=template&id=eb5a10f2&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/components/works/Album.vue?vue&type=template&id=eb5a10f2& ***!
-  \********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_template_id_eb5a10f2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Album.vue?vue&type=template&id=eb5a10f2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/works/Album.vue?vue&type=template&id=eb5a10f2&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_template_id_eb5a10f2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Album_vue_vue_type_template_id_eb5a10f2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
