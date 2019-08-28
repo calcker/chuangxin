@@ -125,7 +125,10 @@
         data() {
             return {
                 data: '',
-                init: {}
+                init: {
+                    menubar: false,
+
+                }
             };
         },
         components: {TopBar, Editor}
