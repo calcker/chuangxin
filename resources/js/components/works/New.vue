@@ -30,7 +30,7 @@
                             </select>
                         </div>
                         <div class="col-md-8 text-right">
-                            <button type="button" class="submit btn btn-primary">发表作品&nbsp;&nbsp;<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                            <button type="button" class="submit btn btn-primary">提交作品&nbsp;&nbsp;<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         </div>
                     </div>
                     <editor :init="init" v-model="data"></editor>
@@ -103,12 +103,12 @@
     }
 
     .checkbox-custom {
-    position: relative;
-    padding: 0 15px 0 25px;
-    margin-bottom: 7px;
-    margin-top: 0;
-    display: inline-block;
-}
+        position: relative;
+        padding: 0 15px 0 25px;
+        margin-bottom: 7px;
+        margin-top: 0;
+        display: inline-block;
+    }
         
 
 </style>
