@@ -37,6 +37,15 @@ const routes = [
 	},
 	
 	{
+		path: '/profile',
+		name: '用户资料',
+		components: require('../components/profile/Person'),
+		meta: {
+			requireAuth: true			
+		}
+	},
+
+	{
 		path: '/register/email/person',
 		name: '个人注册',
 		components: require('../components/register/email/Person')

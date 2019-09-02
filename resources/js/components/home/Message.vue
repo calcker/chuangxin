@@ -2,7 +2,7 @@
 	<div class="messageBox bg-light">
 		<form>
 			<div class="form-group">
-				<label for="message"><h5>记录灵感 <i class="fas fa-bolt"></i></h5></label>
+				<label for="message"><h5>灵感 <i class="fas fa-bolt"></i></h5></label>
 				<textarea class="form-control" id="message" rows="3"></textarea>
 			</div>
 			<div class="form-row">

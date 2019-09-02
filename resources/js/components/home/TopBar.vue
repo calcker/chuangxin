@@ -12,14 +12,14 @@
 					          </a>
 				        </li>
                 <li>
-                	  <a class="mails"   href="/mail/" data-toggle="tooltip" data-placement="bottom" title="私信">
+                	  <a class="mails" href="/mail/" data-toggle="tooltip" data-placement="bottom" title="私信">
                 		    <i class="far fa-envelope"></i>
                 	  </a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="far fa-user"></i></a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-         				        <a class="dropdown-item" href="#"><i class="far fa-address-card"></i> 个人资料</a>
+         				        <a class="dropdown-item" href="/router#/profile"><i class="far fa-address-card"></i> 个人资料</a>
          				        <a class="dropdown-item" href="#"><i class="fas fa-cog"></i> 设置</a>
          				        <a class="dropdown-item" href="#"><i class="fas fa-home"></i> 我的主页</a>
           				      <div class="dropdown-divider"></div>
