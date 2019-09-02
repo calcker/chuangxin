@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title mt-3 mb-3"><i class="far fa-envelope"></i> 邮箱绑定</h3>
+            <h3 class="card-title mt-3 mb-3"><i class="far fa-envelope"></i>邮箱绑定</h3>
             <hr>
             <form>
                 <div class="form-group row">

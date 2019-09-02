@@ -8,7 +8,7 @@
                     <textarea class="brief form-control" rows="2" placeholder="作品简介（选填）"></textarea>
                     <div class="options row">
                         <div class="col-md-4">
-                             <select class="selectpicker" title="选择分类...">
+                            <select class="selectpicker" title="选择分类...">
                                 <option data-icon="fas fa-microscope" value="science">科学</option>
                                 <option data-icon="fas fa-rocket" value="engineering">工程</option>
                                 <option data-icon="fas fa-palette" value="art">艺术</option>

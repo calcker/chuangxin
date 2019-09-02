@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title mt-3 mb-3"><i class="fas fa-info-circle"></i> 基本信息</h3>
+            <h3 class="card-title mt-3 mb-3"><i class="fas fa-info-circle"></i>基本信息</h3>
             <hr>
             <form>
                 <div class="form-group row">
@@ -98,7 +98,15 @@
     export default {
         data() {
             return {
-                data: ''
+                info: {
+                    username: '未知',
+                    realname: '未填写',
+                    gender: '未填写',
+                    birthday: '未填写',
+                    field: '未填写',
+                    city: '未填写',
+                    brief: '未填写'
+                }
             };
         }
     }

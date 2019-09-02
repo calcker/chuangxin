@@ -72200,7 +72200,7 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "fas fa-key" }),
-                  _vm._v(" 密码设置\n                    ")
+                  _vm._v(" 密码修改\n                    ")
                 ]
               ),
               _vm._v(" "),
@@ -72620,7 +72620,7 @@ var staticRenderFns = [
                 staticClass: "col-sm-2 col-form-label",
                 attrs: { for: "username" }
               },
-              [_c("b", [_vm._v("出生日期")])]
+              [_c("b", [_vm._v("生日")])]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-10" }, [
