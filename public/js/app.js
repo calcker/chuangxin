@@ -3128,6 +3128,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Name */ "./resources/js/components/profile/person/Name.vue");
 //
 //
 //
@@ -3220,15 +3221,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      data: ''
+      data: {
+        name: '未知',
+        realname: '未填写',
+        gender: '未填写',
+        birthday: '未填写',
+        field: '未填写',
+        city: '未填写',
+        brief: '未填写'
+      },
+      updating: {
+        username: false,
+        realname: false
+      }
     };
+  },
+  methods: {
+    update: function update(item) {},
+    changeUpdateState: function changeUpdateState(item) {
+      console.log(item);
+
+      switch (item) {
+        case 'username':
+          this.updating.username = !this.updating.username;
+          break;
+
+        case 'realname':
+          this.updating.realname = !this.updating.realname;
+          break;
+      }
+    }
+  },
+  components: {
+    Name: _Name__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -3275,6 +3304,53 @@ __webpack_require__.r(__webpack_exports__);
     return {
       data: ''
     };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile/person/Name.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/profile/person/Name.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['value'],
+  data: function data() {
+    return {
+      name: this.value,
+      updating: false
+    };
+  },
+  methods: {
+    update: function update() {
+      console.log('ffa');
+    },
+    changeUpdateState: function changeUpdateState() {
+      this.updating = !this.updating;
+    }
   }
 });
 
@@ -71929,9 +72005,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("h6", { staticClass: "card-title" }, [
-      _c("b", [_vm._v("创新者:")])
-    ])
+    return _c("h6", { staticClass: "card-title" }, [_c("b", [_vm._v("创客:")])])
   },
   function() {
     var _vm = this
@@ -72293,7 +72367,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "card-body" }, [
         _c("h3", { staticClass: "card-title mt-3 mb-3" }, [
           _c("i", { staticClass: "fas fa-user-circle" }),
-          _vm._v(" 头像设置")
+          _vm._v("头像设置")
         ]),
         _vm._v(" "),
         _c("hr"),
@@ -72380,7 +72454,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "card-body" }, [
         _c("h3", { staticClass: "card-title mt-3 mb-3" }, [
           _c("i", { staticClass: "far fa-envelope" }),
-          _vm._v(" 邮箱绑定")
+          _vm._v("邮箱绑定")
         ]),
         _vm._v(" "),
         _c("hr"),
@@ -72456,315 +72530,316 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("form", [
+        _c("div", { staticClass: "form-group row" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "col-sm-10" },
+            [_c("name", { attrs: { value: "data.name" } })],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-10" }, [
+            _vm.updating.realname
+              ? _c("div", { staticClass: "input-group" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { id: "realname", type: "text" },
+                    domProps: { value: _vm.data.realname }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.update("realname")
+                          }
+                        }
+                      },
+                      [_vm._v("提交")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-secondary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.changeUpdateState("realname")
+                          }
+                        }
+                      },
+                      [_vm._v("取消")]
+                    )
+                  ])
+                ])
+              : _c("div", { staticClass: "input-group" }, [
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "realname",
+                      type: "text",
+                      placeholder: "Password",
+                      readonly: ""
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.changeUpdateState("realname")
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-pencil-alt" }),
+                        _vm._v(" 修改")
+                      ]
+                    )
+                  ])
+                ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(3),
+        _vm._v(" "),
+        _vm._m(4),
+        _vm._v(" "),
+        _vm._m(5),
+        _vm._v(" "),
+        _vm._m(6),
+        _vm._v(" "),
+        _vm._m(7)
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("h3", { staticClass: "card-title mt-3 mb-3" }, [
-          _c("i", { staticClass: "fas fa-info-circle" }),
-          _vm._v(" 基本信息")
-        ]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("form", [
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "account" }
-              },
-              [_c("b", [_vm._v("账号类型")])]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-10" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "account",
-                  type: "text",
-                  placeholder: "个人账号",
-                  readonly: ""
-                }
-              })
-            ])
-          ]),
+    return _c("h3", { staticClass: "card-title mt-3 mb-3" }, [
+      _c("i", { staticClass: "fas fa-info-circle" }),
+      _vm._v("基本信息")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-2 col-form-label", attrs: { for: "name" } },
+      [_c("b", [_vm._v("名字")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-2 col-form-label", attrs: { for: "name" } },
+      [_c("b", [_vm._v("真实姓名")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "col-sm-2 col-form-label", attrs: { for: "username" } },
+        [_c("b", [_vm._v("性别")])]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-10" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "username",
+              type: "text",
+              placeholder: "Password",
+              readonly: ""
+            }
+          }),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
+          _c("div", { staticClass: "input-group-append" }, [
             _c(
-              "label",
+              "button",
               {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "username" }
+                staticClass: "btn btn-primary",
+                attrs: { type: "button", id: "changeUsername" }
               },
-              [_c("b", [_vm._v("用户名")])]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-10" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "username",
-                    type: "text",
-                    placeholder: "Password",
-                    readonly: ""
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button", id: "changeUsername" }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-pencil-alt" }),
-                      _vm._v(" 修改")
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "username" }
-              },
-              [_c("b", [_vm._v("真实姓名")])]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-10" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "username",
-                    type: "text",
-                    placeholder: "Password",
-                    readonly: ""
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button", id: "changeUsername" }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-pencil-alt" }),
-                      _vm._v(" 修改")
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "username" }
-              },
-              [_c("b", [_vm._v("性别")])]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-10" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "username",
-                    type: "text",
-                    placeholder: "Password",
-                    readonly: ""
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button", id: "changeUsername" }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-pencil-alt" }),
-                      _vm._v(" 修改")
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "username" }
-              },
-              [_c("b", [_vm._v("生日")])]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-10" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "username",
-                    type: "text",
-                    placeholder: "Password",
-                    readonly: ""
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button", id: "changeUsername" }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-pencil-alt" }),
-                      _vm._v(" 修改")
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "username" }
-              },
-              [_c("b", [_vm._v("创新领域")])]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-10" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "username",
-                    type: "text",
-                    placeholder: "Password",
-                    readonly: ""
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-primary",
-                      attrs: { type: "button", id: "changeUserField" }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-info-circle" }),
-                      _vm._v(" 修改")
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "username" }
-              },
-              [_c("b", [_vm._v("所在城市")])]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-10" }, [
-              _c("div", { staticClass: "input-group" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "username",
-                    type: "text",
-                    placeholder: "Password",
-                    readonly: ""
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "input-group-append" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-outline-primary",
-                      attrs: { type: "button", id: "changeUserField" }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-info-circle" }),
-                      _vm._v(" 修改")
-                    ]
-                  )
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "username" }
-              },
-              [_c("b", [_vm._v("个人简介")])]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-10" }, [
-              _c("textarea", {
-                staticClass: "form-control mb-2",
-                attrs: {
-                  id: "exampleFormControlTextarea1",
-                  rows: "10",
-                  readonly: ""
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "text-right" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-primary",
-                    attrs: { type: "button", id: "changeUserField" }
-                  },
-                  [
-                    _c("i", { staticClass: "fas fa-info-circle" }),
-                    _vm._v(" 修改")
-                  ]
-                )
-              ])
-            ])
+              [_c("i", { staticClass: "fas fa-pencil-alt" }), _vm._v(" 修改")]
+            )
           ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "col-sm-2 col-form-label", attrs: { for: "username" } },
+        [_c("b", [_vm._v("生日")])]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-10" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "username",
+              type: "text",
+              placeholder: "Password",
+              readonly: ""
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "button", id: "changeUsername" }
+              },
+              [_c("i", { staticClass: "fas fa-pencil-alt" }), _vm._v(" 修改")]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "col-sm-2 col-form-label", attrs: { for: "username" } },
+        [_c("b", [_vm._v("创新领域")])]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-10" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "username",
+              type: "text",
+              placeholder: "Password",
+              readonly: ""
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary",
+                attrs: { type: "button", id: "changeUserField" }
+              },
+              [_c("i", { staticClass: "fas fa-info-circle" }), _vm._v(" 修改")]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "col-sm-2 col-form-label", attrs: { for: "username" } },
+        [_c("b", [_vm._v("所在城市")])]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-10" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "username",
+              type: "text",
+              placeholder: "Password",
+              readonly: ""
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary",
+                attrs: { type: "button", id: "changeUserField" }
+              },
+              [_c("i", { staticClass: "fas fa-info-circle" }), _vm._v(" 修改")]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c(
+        "label",
+        { staticClass: "col-sm-2 col-form-label", attrs: { for: "username" } },
+        [_c("b", [_vm._v("个人简介")])]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-10" }, [
+        _c("textarea", {
+          staticClass: "form-control mb-2",
+          attrs: { id: "exampleFormControlTextarea1", rows: "10", readonly: "" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "text-right" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-primary",
+              attrs: { type: "button", id: "changeUserField" }
+            },
+            [_c("i", { staticClass: "fas fa-info-circle" }), _vm._v(" 修改")]
+          )
         ])
       ])
     ])
@@ -72802,7 +72877,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "card-body" }, [
         _c("h3", { staticClass: "card-title mt-3 mb-3" }, [
           _c("i", { staticClass: "fas fa-mobile-alt" }),
-          _vm._v(" 手机绑定")
+          _vm._v("手机绑定")
         ]),
         _vm._v(" "),
         _c("hr"),
@@ -72863,6 +72938,24 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile/person/Name.vue?vue&type=template&id=ef3e9f78&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/profile/person/Name.vue?vue&type=template&id=ef3e9f78& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {}
+var staticRenderFns = []
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile/person/Password.vue?vue&type=template&id=18f52fd4&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/profile/person/Password.vue?vue&type=template&id=18f52fd4& ***!
@@ -72889,7 +72982,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "card-body" }, [
         _c("h3", { staticClass: "card-title mt-3 mb-3" }, [
           _c("i", { staticClass: "fas fa-key" }),
-          _vm._v(" 密码设置")
+          _vm._v("密码设置")
         ]),
         _vm._v(" "),
         _c("hr"),
@@ -90628,6 +90721,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Mobile_vue_vue_type_template_id_3fd982ca___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Mobile_vue_vue_type_template_id_3fd982ca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/profile/person/Name.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/profile/person/Name.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Name_vue_vue_type_template_id_ef3e9f78___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Name.vue?vue&type=template&id=ef3e9f78& */ "./resources/js/components/profile/person/Name.vue?vue&type=template&id=ef3e9f78&");
+/* harmony import */ var _Name_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Name.vue?vue&type=script&lang=js& */ "./resources/js/components/profile/person/Name.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Name_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Name_vue_vue_type_template_id_ef3e9f78___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Name_vue_vue_type_template_id_ef3e9f78___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/profile/person/Name.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/profile/person/Name.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/profile/person/Name.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Name_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Name.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile/person/Name.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Name_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/profile/person/Name.vue?vue&type=template&id=ef3e9f78&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/profile/person/Name.vue?vue&type=template&id=ef3e9f78& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Name_vue_vue_type_template_id_ef3e9f78___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Name.vue?vue&type=template&id=ef3e9f78& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/profile/person/Name.vue?vue&type=template&id=ef3e9f78&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Name_vue_vue_type_template_id_ef3e9f78___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Name_vue_vue_type_template_id_ef3e9f78___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

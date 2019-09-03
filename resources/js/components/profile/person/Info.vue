@@ -5,29 +5,25 @@
             <hr>
             <form>
                 <div class="form-group row">
-                    <label for="account" class="col-sm-2 col-form-label"><b>账号类型</b></label>
+                    <label for="name" class="col-sm-2 col-form-label"><b>名字</b></label>
                     <div class="col-sm-10">
-                        <input id="account" class="form-control" type="text" placeholder="个人账号" readonly>
+                        <name value="data.name"></name>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label"><b>用户名</b></label>
+                    <label for="name" class="col-sm-2 col-form-label"><b>真实姓名</b></label>
                     <div class="col-sm-10">
-                        <div class="input-group">
-                            <input id="username" class="form-control" type="text" placeholder="Password" readonly>
+                        <div v-if="updating.realname" class="input-group">
+                            <input id="realname" class="form-control" type="text" :value="data.realname">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="changeUsername"><i class="fas fa-pencil-alt"></i> 修改</button>
+                                <button @click="update('realname')" class="btn btn-outline-primary" type="button">提交</button>
+                                <button @click="changeUpdateState('realname')" class="btn btn-outline-secondary" type="button">取消</button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label"><b>真实姓名</b></label>
-                    <div class="col-sm-10">
-                        <div class="input-group">
-                            <input id="username" class="form-control" type="text" placeholder="Password" readonly>
+                        <div v-else class="input-group">
+                            <input id="realname" class="form-control" type="text" placeholder="Password" readonly>
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="changeUsername"><i class="fas fa-pencil-alt"></i> 修改</button>
+                                <button  @click="changeUpdateState('realname')" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 修改</button>
                             </div>
                         </div>
                     </div>
@@ -95,19 +91,52 @@
 </style>
 
 <script>
+    import Name from './Name'
+
     export default {
         data() {
             return {
-                info: {
-                    username: '未知',
+                data: {
+                    name: '未知',
                     realname: '未填写',
                     gender: '未填写',
                     birthday: '未填写',
                     field: '未填写',
                     city: '未填写',
                     brief: '未填写'
+                },
+                updating: {
+                    username: false,
+                    realname: false
                 }
             };
-        }
+        },
+        methods: {
+            update: function(item){
+
+            },
+            changeUpdateState: function(item){
+
+                console.log(item);
+
+                switch(item) {
+
+                    case 'username':
+                        this.updating.username = !this.updating.username;
+                        break;
+                    case 'realname':
+                        this.updating.realname = !this.updating.realname;
+                        break;
+
+
+                }
+
+                
+
+            }
+
+        },
+        components: {Name}
+
     }
 </script>

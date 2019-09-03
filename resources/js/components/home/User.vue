@@ -1,7 +1,7 @@
 <template>
 	<div class="card">
  		<div class="card-body">
- 			<h6 class="card-title"><b>创新者:</b></h6>
+ 			<h6 class="card-title"><b>创客:</b></h6>
  			<a :href="'/user/'+ user.id" class="text-center">
  				<p>
  					<img class="rounded-circle" src="/images/img_avatar.png" style="width:96px;height:96px" :alt="user.name" :title="user.name">
