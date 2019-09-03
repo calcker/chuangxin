@@ -73010,7 +73010,7 @@ var render = function() {
           _c("input", {
             staticClass: "form-control",
             attrs: {
-              id: "username",
+              id: "name",
               type: "text",
               placeholder: _vm.value,
               readonly: ""
