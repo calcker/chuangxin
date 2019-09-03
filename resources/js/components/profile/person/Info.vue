@@ -1,31 +1,13 @@
 <template>
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title mt-3 mb-3"><i class="fas fa-info-circle"></i>基本信息</h3>
+            <h3 class="card-title mt-3 mb-3"><i class="fas fa-info-circle"></i>个人信息</h3>
             <hr>
             <form>
                 <div class="form-group row">
                     <label for="name" class="col-sm-2 col-form-label"><b>名字</b></label>
                     <div class="col-sm-10">
-                        <name value="data.name"></name>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="name" class="col-sm-2 col-form-label"><b>真实姓名</b></label>
-                    <div class="col-sm-10">
-                        <div v-if="updating.realname" class="input-group">
-                            <input id="realname" class="form-control" type="text" :value="data.realname">
-                            <div class="input-group-append">
-                                <button @click="update('realname')" class="btn btn-outline-primary" type="button">提交</button>
-                                <button @click="changeUpdateState('realname')" class="btn btn-outline-secondary" type="button">取消</button>
-                            </div>
-                        </div>
-                        <div v-else class="input-group">
-                            <input id="realname" class="form-control" type="text" placeholder="Password" readonly>
-                            <div class="input-group-append">
-                                <button  @click="changeUpdateState('realname')" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 修改</button>
-                            </div>
-                        </div>
+                        <name :value = "data.name"></name>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -40,7 +22,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label"><b>生日</b></label>
+                    <label for="username" class="col-sm-2 col-form-label"><b>出生日期</b></label>
                     <div class="col-sm-10">
                         <div class="input-group">
                             <input id="username" class="form-control" type="text" placeholder="Password" readonly>

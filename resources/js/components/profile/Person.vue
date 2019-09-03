@@ -6,7 +6,7 @@
                 <div class="col-2">
                     <div class="list-group">
                         <button type="button" :class="{'active': showingComponent == 'Info'}" class="list-group-item list-group-item-action" @click="showComponent('Info')">
-                            <i class="fas fa-info-circle"></i> 基本信息
+                            <i class="fas fa-info-circle"></i> 个人信息
                         </button>
                         <button type="button" :class="{'active': showingComponent == 'Avatar'}" class="list-group-item list-group-item-action" @click="showComponent('Avatar')">
                             <i class="fas fa-user-circle"></i> 头像设置

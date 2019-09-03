@@ -3203,24 +3203,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -72238,7 +72220,7 @@ var render = function() {
                 },
                 [
                   _c("i", { staticClass: "fas fa-info-circle" }),
-                  _vm._v(" 基本信息\n                    ")
+                  _vm._v(" 个人信息\n                    ")
                 ]
               ),
               _vm._v(" "),
@@ -72543,85 +72525,12 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col-sm-10" },
-            [_c("name", { attrs: { value: "data.name" } })],
+            [_c("name", { attrs: { value: _vm.data.name } })],
             1
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-10" }, [
-            _vm.updating.realname
-              ? _c("div", { staticClass: "input-group" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { id: "realname", type: "text" },
-                    domProps: { value: _vm.data.realname }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group-append" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-outline-primary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.update("realname")
-                          }
-                        }
-                      },
-                      [_vm._v("提交")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-outline-secondary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.changeUpdateState("realname")
-                          }
-                        }
-                      },
-                      [_vm._v("取消")]
-                    )
-                  ])
-                ])
-              : _c("div", { staticClass: "input-group" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "realname",
-                      type: "text",
-                      placeholder: "Password",
-                      readonly: ""
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "input-group-append" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.changeUpdateState("realname")
-                          }
-                        }
-                      },
-                      [
-                        _c("i", { staticClass: "fas fa-pencil-alt" }),
-                        _vm._v(" 修改")
-                      ]
-                    )
-                  ])
-                ])
-          ])
-        ]),
+        _vm._m(2),
         _vm._v(" "),
         _vm._m(3),
         _vm._v(" "),
@@ -72629,9 +72538,7 @@ var render = function() {
         _vm._v(" "),
         _vm._m(5),
         _vm._v(" "),
-        _vm._m(6),
-        _vm._v(" "),
-        _vm._m(7)
+        _vm._m(6)
       ])
     ])
   ])
@@ -72643,7 +72550,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("h3", { staticClass: "card-title mt-3 mb-3" }, [
       _c("i", { staticClass: "fas fa-info-circle" }),
-      _vm._v("基本信息")
+      _vm._v("个人信息")
     ])
   },
   function() {
@@ -72654,16 +72561,6 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-sm-2 col-form-label", attrs: { for: "name" } },
       [_c("b", [_vm._v("名字")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "col-sm-2 col-form-label", attrs: { for: "name" } },
-      [_c("b", [_vm._v("真实姓名")])]
     )
   },
   function() {
@@ -72711,7 +72608,7 @@ var staticRenderFns = [
       _c(
         "label",
         { staticClass: "col-sm-2 col-form-label", attrs: { for: "username" } },
-        [_c("b", [_vm._v("生日")])]
+        [_c("b", [_vm._v("出生日期")])]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "col-sm-10" }, [
