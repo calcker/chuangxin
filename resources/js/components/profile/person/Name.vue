@@ -8,7 +8,7 @@
             </div>
         </div>
         <div v-else class="input-group">
-            <input id="username" class="form-control" type="text" ：placeholder=value}} readonly>
+            <input id="name" class="form-control" type="text" :placeholder="value" readonly>
             <div class="input-group-append">
                 <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 修改</button>
             </div>
@@ -21,7 +21,7 @@
         props: ['value'],
         data() {
             return {
-                name: this.value,
+                name: 'adfa',
                 updating: false
             };
         },
