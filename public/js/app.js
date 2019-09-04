@@ -3102,12 +3102,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['value'],
   data: function data() {
     return {
-      time: new Date(),
+      time: null,
       name: this.value,
       updating: false
     };
@@ -3119,6 +3123,9 @@ __webpack_require__.r(__webpack_exports__);
     changeUpdateState: function changeUpdateState() {
       this.updating = !this.updating;
     }
+  },
+  components: {
+    VueDatepickerLocal: vue_datepicker_local__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -74024,8 +74031,6 @@ var render = function() {
           { staticClass: "input-group" },
           [
             _c("vue-datepicker-local", {
-              attrs: { "show-buttons": "" },
-              on: { confirm: _vm.confirm },
               model: {
                 value: _vm.time,
                 callback: function($$v) {
@@ -74033,7 +74038,29 @@ var render = function() {
                 },
                 expression: "time"
               }
-            })
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.update }
+                },
+                [_vm._v("保存")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.changeUpdateState }
+                },
+                [_vm._v("取消")]
+              )
+            ])
           ],
           1
         )
@@ -74297,7 +74324,7 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col-sm-10" },
-            [_c("birthday", { attrs: { value: _vm.data.gender } })],
+            [_c("birthday", { attrs: { value: _vm.data.birthday } })],
             1
           )
         ]),

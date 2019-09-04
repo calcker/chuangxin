@@ -19,11 +19,11 @@
                 <div class="form-group row">
                     <label for="birthday" class="col-sm-2 col-form-label"><b>出生日期</b></label>
                     <div class="col-sm-10">
-                        <birthday :value = "data.gender"></birthday>
+                        <birthday :value = "data.birthday"></birthday>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label"><b>创新领域</b></label>
+                    <label for="username" class="col-sm-2 col-form-label"><b>从事领域</b></label>
                     <div class="col-sm-10">
                         <div class="input-group">
                             <input id="username" class="form-control" type="text" placeholder="Password" readonly>

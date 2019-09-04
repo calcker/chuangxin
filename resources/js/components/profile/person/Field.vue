@@ -1,10 +1,17 @@
 <template>
-    <div class="birthday">
+    <div class="field">
         <div v-if="updating" class="input-group">
-            <vue-datepicker-local v-model="time"></vue-datepicker-local>
-            <div class="input-group-append">
-                <button @click="update" class="btn btn-outline-primary" type="button">保存</button>
-                <button @click="changeUpdateState" class="btn btn-outline-secondary" type="button">取消</button>
+            <div id="test">
+                <select v-model="selected">
+                    <option v-for="yx in YX" :value="yx.text">
+                        {{yx.text}}
+                    </option>
+                </select>
+                <select>
+                    <option v-for="zy in selection" :value="zy.text" :selected="$index == 0 ? true : false">
+                        {{zy.text}}
+                    </option>
+                  </select>
             </div>
         </div>
         <div v-else class="input-group">
@@ -17,8 +24,6 @@
 </template>
 
 <script>
-    import VueDatepickerLocal from 'vue-datepicker-local'
-
     export default {
         props: ['value'],
         data() {
@@ -39,9 +44,6 @@
 
             }
 
-        },
-        components: {
-            VueDatepickerLocal
         }
     }
 </script>
