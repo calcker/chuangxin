@@ -2,15 +2,20 @@
 	<div class="messageBox bg-light">
 		<form>
 			<div class="form-group">
-				<label for="message"><h5>灵感 <i class="fas fa-bolt"></i></h5></label>
+				<label for="message"><h5>灵感 <i class="fas fa-fan"></i></h5></label>
 				<textarea class="form-control" id="message" rows="3"></textarea>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<i class="fas fa-map-marker-alt"></i> 位置
-				</div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="private" checked disabled>
+                        <label class="form-check-label" for="private">
+                            只有自己可见
+                        </label>
+                    </div>
+                </div>
 				<div class="form-group col-md-6 text-right">
-					<button type="submit" class="btn btn-primary">提交</button>
+					<button type="submit" class="btn btn-primary"><i class="fas fa-paperclip"></i> 保存</button>
 				</div>
 			</div>
 		</form>
@@ -98,7 +103,7 @@
 				//if()
 
 				//console.log('fasd');
-				
+
 				//let data = {
 				//	user_id: this.$store.getters.user_id
 				//};
@@ -109,11 +114,11 @@
 
 
 		      	}).catch(error => {
-					
+
 					console.log(error);
 
 	        	});
-				
+
 
 			},
 
@@ -125,7 +130,7 @@
 
 
 		      	}).catch(error => {
-					
+
 					console.log(error);
 
 	        	});

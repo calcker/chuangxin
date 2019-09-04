@@ -11,25 +11,15 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label"><b>性别</b></label>
+                    <label for="gender" class="col-sm-2 col-form-label"><b>性别</b></label>
                     <div class="col-sm-10">
-                        <div class="input-group">
-                            <input id="username" class="form-control" type="text" placeholder="Password" readonly>
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="changeUsername"><i class="fas fa-pencil-alt"></i> 修改</button>
-                            </div>
-                        </div>
+                        <gender :value = "data.gender"></gender>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label"><b>出生日期</b></label>
+                    <label for="birthday" class="col-sm-2 col-form-label"><b>出生日期</b></label>
                     <div class="col-sm-10">
-                        <div class="input-group">
-                            <input id="username" class="form-control" type="text" placeholder="Password" readonly>
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="changeUsername"><i class="fas fa-pencil-alt"></i> 修改</button>
-                            </div>
-                        </div>
+                        <birthday :value = "data.gender"></birthday>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -44,7 +34,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label"><b>所在城市</b></label>
+                    <label for="username" class="col-sm-2 col-form-label"><b>居住地区</b></label>
                     <div class="col-sm-10">
                         <div class="input-group">
                             <input id="username" class="form-control" type="text" placeholder="Password" readonly>
@@ -74,6 +64,8 @@
 
 <script>
     import Name from './Name'
+    import Gender from './Gender'
+    import Birthday from './Birthday'
 
     export default {
         data() {
@@ -113,12 +105,12 @@
 
                 }
 
-                
+
 
             }
 
         },
-        components: {Name}
+        components: {Name, Gender, Birthday}
 
     }
 </script>

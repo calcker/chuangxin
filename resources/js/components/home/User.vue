@@ -38,7 +38,7 @@
     		</li>
     		<li class="list-group-item">
     			<a href="/router#/team/new" class="btn btn-outline-secondary btn-block">
-    				<i class="fas fa-users"></i> 新建团队
+    				<i class="fas fa-users"></i> 创建团队
     			</a>
     		</li>
     		<li class="list-group-item">
@@ -146,7 +146,7 @@ export default {
 	methods: {
 
 		getCounts: function(){
-			
+
 			axios.post('/my/counts').then(response => {
 
 	      		if(response.data.code == 201) {
@@ -169,11 +169,11 @@ export default {
 	      		} else {
 
 	 				console.log(response.data.msg);
-	      		
+
 	      		}
 
 		    }).catch(error => {
-					
+
 				console.log(error);
 
 	        });

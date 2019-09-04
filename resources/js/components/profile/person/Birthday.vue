@@ -1,14 +1,10 @@
 <template>
-    <div class="name">
+    <div class="birthday">
         <div v-if="updating" class="input-group">
-            <input id="name" class="form-control" type="text" v-model="name" data-toggle="tooltip" data-placement="bottom" title="名字每年只能修改2次">
-            <div class="input-group-append">
-                <button @click="update" class="btn btn-outline-primary" type="button">保存</button>
-                <button @click="changeUpdateState" class="btn btn-outline-secondary" type="button">取消</button>
-            </div>
+            <vue-datepicker-local v-model="time" @confirm="confirm" show-buttons></vue-datepicker-local>
         </div>
         <div v-else class="input-group">
-            <input id="name" class="form-control" type="text" :placeholder="value" readonly>
+            <input id="birthday" class="form-control" type="text" :placeholder="value" readonly>
             <div class="input-group-append">
                 <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 修改</button>
             </div>
@@ -17,10 +13,13 @@
 </template>
 
 <script>
+    import VueDatepickerLocal from 'vue-datepicker-local'
+
     export default {
         props: ['value'],
         data() {
             return {
+                time: new Date(),
                 name: this.value,
                 updating: false
             };

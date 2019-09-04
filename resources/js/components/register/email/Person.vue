@@ -6,7 +6,7 @@
 			  	<h1 class="h3 mb-3 font-weight-normal">个人注册</h1>
 			  	<alert-box v-if="errors" :errors="errors"></alert-box>
 			  	<label for="name" class="sr-only">姓名</label>
-			  	<input type="text" name="name" class="form-control" v-model="post.name" placeholder="您的姓名" value="" required>
+			  	<input type="text" name="name" class="form-control" v-model="post.name" placeholder="您的名字" value="" required>
 			  	<label for="email" class="sr-only">邮箱</label>
 			  	<input type="email" name="email" class="form-control" v-model="post.email" placeholder="邮箱" value="" required>
 			  	<label for="password" class="sr-only">密码</label>
@@ -15,7 +15,7 @@
 					<div class="col text-left">
 			  	   		<div class="checkbox mt-2">
 			    			<label>
-			      				<input type="checkbox" name="agree" v-model="post.agree" value=""> 我同意并遵守 
+			      				<input type="checkbox" name="agree" v-model="post.agree" value=""> 我同意并遵守
 			      					<router-link to="/policy">
 			      						《创新之城相关协议和隐私政策》
 			      					</router-link>
@@ -57,11 +57,11 @@
 			createPost: function(){
 
 		      	this.beforeSubmit();
-		      	
+
 		      	axios.post('/register/email', this.post).then(response => {
-		      		
+
 		      		if(response.data.code == 201) {
-		      			
+
 		      			const data = response.data.data;
 
 		      			this.$store.dispatch('SET_REG_DATA', data);
@@ -71,18 +71,18 @@
 
 		      			this.errors = response.data.msg;
 		      			this.afterSubmit();
-		      		
+
 		      		}
 		    	}).catch(error => {
-		       		
+
 		       		this.errors = error.response.data.errors;
-		      		
+
 		      		if(!this.errors) this.errors = {unknown: ["未知错误"]};
 
 		      		this.$store.dispatch('DEL_REG_DATA');
-		      		
+
 		      		this.afterSubmit();
-		      	
+
 		      	});
     		},
     		beforeSubmit: function(){

@@ -9,24 +9,17 @@
                     <div class="options row">
                         <div class="col-md-4">
                             <select class="selectpicker" title="选择分类...">
-                                <option data-icon="fas fa-microscope" value="science">科学</option>
-                                <option data-icon="fas fa-rocket" value="engineering">工程</option>
-                                <option data-icon="fas fa-palette" value="art">艺术</option>
-                                <option data-icon="fas fa-leaf" value="philosophy">哲学</option>
-                                <option data-icon="fas fa-laptop-code" value="it">IT</option>
-                                <option data-icon="fas fa-syringe" value="medicine">医药</option>
-                                <option data-icon="fas fa-dollar-sign" value="business">商业</option>
+                                <option data-icon="fas fa-robot" value="invention">发明</option>
                                 <option data-icon="fas fa-drafting-compass" value="design">设计</option>
-                                <option data-icon="fas fa-book-open" value="literature">文学</option>
+                                <option data-icon="fas fa-palette" value="art">艺术</option>
+                                <option data-icon="fas fa-laptop-code" value="program">程序</option>
+                                <option data-icon="fas fa-microscope" value="research">研究</option>
                                 <option data-icon="fas fa-music" value="music">音乐</option>
-                                <option data-icon="fas fa-film" value="film">影视</option>
-                                <option data-icon="fas fa-fish" value="comic">动漫</option>
-                                <option data-icon="fas fa-gamepad" value="entertainment">娱乐</option>
-                                <option data-icon="fas fa-graduation-cap" value="education">教育</option>
-                                <option data-icon="fas fa-skiing" value="sport">体育</option>
-                                <option data-icon="fas fa-robot" value="product">产品</option>
-                                <option data-icon="fas fa-people-carry" value="service">服务</option>
+                                <option data-icon="fas fa-book-open" value="literature">文学</option>
+                                <option data-icon="fas fa-video" value="video">影视</option>
                                 <option data-icon="fas fa-blog" value="blog">博客</option>
+                                <option data-icon="fas fa-gift" value="product">产品</option>
+                                <option data-icon="fas fa-people-carry" value="service">服务</option>
                             </select>
                         </div>
                         <div class="col-md-8 text-right">
@@ -95,7 +88,7 @@
     }
 
     #app-new-works .works .settings .icon{
-        
+
         font-size: 20px;
         line-height: 34px;
         color: #444;
@@ -109,7 +102,7 @@
         margin-top: 0;
         display: inline-block;
     }
-        
+
 
 </style>
 
