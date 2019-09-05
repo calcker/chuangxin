@@ -17,20 +17,21 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="birthday" class="col-sm-2 col-form-label"><b>出生日期</b></label>
+                    <label for="name" class="col-sm-2 col-form-label"><b>职业</b></label>
                     <div class="col-sm-10">
-                        <birthday :value = "data.birthday"></birthday>
+                        <profession :value = "data.profession"></profession>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label"><b>从事领域</b></label>
+                    <label for="field" class="col-sm-2 col-form-label"><b>创新领域</b></label>
                     <div class="col-sm-10">
-                        <div class="input-group">
-                            <input id="username" class="form-control" type="text" placeholder="Password" readonly>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-primary" type="button" id="changeUserField"><i class="fas fa-info-circle"></i> 修改</button>
-                            </div>
-                        </div>
+                        <field :value = "data.field"></field>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="birthday" class="col-sm-2 col-form-label"><b>出生日期</b></label>
+                    <div class="col-sm-10">
+                        <birthday :value = "data.birthday"></birthday>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -66,18 +67,20 @@
     import Name from './Name'
     import Gender from './Gender'
     import Birthday from './Birthday'
+    import Profession from './Profession'
+    import Field from './Field'
 
     export default {
         data() {
             return {
                 data: {
                     name: '未知',
-                    realname: '未填写',
-                    gender: '未填写',
-                    birthday: '未填写',
-                    field: '未填写',
-                    city: '未填写',
-                    brief: '未填写'
+                    gender: '未知',
+                    birthday: '未知',
+                    profession: '未知',
+                    field: '未知',
+                    district: '未知',
+                    brief: '未知'
                 },
                 updating: {
                     username: false,
@@ -110,7 +113,7 @@
             }
 
         },
-        components: {Name, Gender, Birthday}
+        components: {Name, Gender, Birthday, Profession, Field}
 
     }
 </script>

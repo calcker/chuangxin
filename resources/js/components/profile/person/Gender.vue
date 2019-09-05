@@ -13,7 +13,7 @@
         <div v-else class="input-group">
             <input id="gender" class="form-control" type="text" :placeholder="value" readonly>
             <div class="input-group-append">
-                <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 修改</button>
+                <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 编辑</button>
             </div>
         </div>
     </div>
