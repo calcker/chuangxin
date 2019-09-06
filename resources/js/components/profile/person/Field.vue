@@ -1,18 +1,17 @@
 <template>
     <div class="field">
         <div v-if="updating" class="input-group">
-            <select class="custom-select">
-                <option selected>选择大类...</option>
-                <option value="science"><i class="fas fa-venus"></i> 科学</option>
-                <option value="engineering"><i class="fas fa-mars"></i> 工程</option>
-                <option value="art"><i class="fas fa-mars"></i> 艺术</option>
-                <option value="literature"><i class="fas fa-mars"></i> 文学</option>
-                <option value="business"><i class="fas fa-mars"></i> 商业</option>
+            <select class="custom-select" v-model="selected">
+                <option selected>请选择...</option>
+                <option v-for="field in fields">
+                    {{field.name}}
+                </option>
             </select>
             <select class="custom-select">
-                <option selected>选择小类...</option>
-                <option value="female"><i class="fas fa-venus"></i> 女</option>
-                <option value="male"><i class="fas fa-mars"></i> 男</option>
+                <option selected>请选择...</option>
+                <option v-for="item in items">
+                    {{item.name}}
+                </option>
             </select>
             <div class="input-group-append">
                 <button @click="update" class="btn btn-outline-primary" type="button">保存</button>
@@ -35,8 +34,57 @@
             return {
                 time: null,
                 name: this.value,
-                updating: false
+                updating: false,
+                selected: null,
+                fields: [
+                    {
+                        name: '工程技术类',
+                        items: [
+                            {name: '互联网'},
+                            {name: '软件'},
+                            {name: '硬件'},
+                            {name: '人工智能'},
+                        ],
+                    },
+                    {
+                        name: '社会服务类',
+                        items: [
+                            {name: '餐饮'},
+                            {name: '旅游'},
+                            {name: '金融'},
+                            {name: '医疗'},
+                        ],
+                    },
+                    {
+                        name: '自然科学类',
+                        items: [
+                            {name: '数学'},
+                            {name: '力学'},
+                            {name: '物理'},
+                            {name: '化学'},
+                        ],
+                    },
+                    {
+                        name: '人文科学类',
+                        items: [
+                            {name: '经济'},
+                            {name: '管理'},
+                            {name: '法律'},
+                            {name: '心理'},
+                        ],
+                    },
+                ]
             };
+        },
+        computed:{
+            items: function() {
+                for (var i = 0; i < this.fields.length; i++) {
+                    if (this.fields[i].name === this.selected) {
+
+                        return this.fields[i].items;
+                    }
+                }
+            }
         },
         methods: {
             update: function(){

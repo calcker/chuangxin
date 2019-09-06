@@ -1,7 +1,7 @@
 <template>
     <div class="birthday">
         <div v-if="updating" class="input-group">
-            <date-picker v-model="birthday" width="200" :default-value="defaultVal" :not-after="notAfter" :not-before="notBefore"></date-picker>
+            <date-picker v-model="birthday" :default-value="defaultVal" :not-after="notAfter" :not-before="notBefore"></date-picker>
             <div class="input-group-append">
                 <button @click="update" class="btn btn-outline-primary" type="button">保存</button>
                 <button @click="changeUpdateState" class="btn btn-outline-secondary" type="button">取消</button>
