@@ -6,21 +6,28 @@
                 <div class="works card-body">
                     <input type="text" class="title form-control" name="title" placeholder="新作品标题">
                     <textarea class="brief form-control" rows="2" placeholder="作品简介（选填）"></textarea>
-                    <div class="options row">
+                    <div class="row">
                         <div class="col-md-4">
+                            <settings></settings>
+                            <!--
                             <select class="selectpicker" title="选择分类...">
                                 <option data-icon="fas fa-robot" value="invention">发明</option>
+                                <option data-icon="fas fa-drafting-compass" value="design">技术</option>
                                 <option data-icon="fas fa-drafting-compass" value="design">设计</option>
-                                <option data-icon="fas fa-palette" value="art">艺术</option>
-                                <option data-icon="fas fa-laptop-code" value="program">程序</option>
                                 <option data-icon="fas fa-microscope" value="research">研究</option>
+                                <option data-icon="fas fa-laptop-code" value="program">程序</option>
+                                <option data-icon="fas fa-palette" value="art">艺术</option>
                                 <option data-icon="fas fa-music" value="music">音乐</option>
                                 <option data-icon="fas fa-book-open" value="literature">文学</option>
                                 <option data-icon="fas fa-video" value="video">影视</option>
-                                <option data-icon="fas fa-blog" value="blog">博客</option>
+                                <option data-icon="fas fa-video" value="video">动漫</option>
+                                <option data-icon="fas fa-video" value="video">娱乐</option>
+                                <option data-icon="fas fa-music" value="music">运动</option>
                                 <option data-icon="fas fa-gift" value="product">产品</option>
                                 <option data-icon="fas fa-people-carry" value="service">服务</option>
+                                <option data-icon="fas fa-blog" value="blog">个人博客</option>
                             </select>
+                            -->
                         </div>
                         <div class="col-md-8 text-right">
                             <button type="button" class="submit btn btn-primary">提交作品&nbsp;&nbsp;<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
@@ -108,11 +115,12 @@
 
 <script>
     import TopBar from './../home/TopBar'
-    import tinymce from 'tinymce/tinymce';
-    import 'tinymce/themes/silver/theme.min.js';
-    import 'tinymce/skins/ui/oxide/skin.min.css';
+    import Settings from './Settings'
+    import tinymce from 'tinymce/tinymce'
+    import 'tinymce/themes/silver/theme.min.js'
+    import 'tinymce/skins/ui/oxide/skin.min.css'
     //import './tinymce/langs/zh_CN.js';
-    import Editor from '@tinymce/tinymce-vue';
+    import Editor from '@tinymce/tinymce-vue'
 
     export default {
         data() {
@@ -124,6 +132,6 @@
                 }
             };
         },
-        components: {TopBar, Editor}
+        components: {TopBar, Settings, Editor}
     }
 </script>

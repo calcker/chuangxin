@@ -23,6 +23,18 @@ class MyController extends Controller
 
     }
 
+    public function baseInfo(Request $request)
+    {
+        $baseInfo = auth()->user()->baseInfo();
+
+        return response()->json([
+            'code' => 201,
+            'message' => 'Success',
+            'data' => $baseInfo,
+        ]);
+
+    }
+
 
     public function __construct()
     {

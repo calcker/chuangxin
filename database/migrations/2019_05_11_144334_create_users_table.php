@@ -53,19 +53,22 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('followings')->default(0);
             $table->unsignedInteger('followers')->default(0);
             $table->unsignedInteger('praises')->default(0);
-            $table->unsignedInteger('collects')->default(0);
-            $table->unsignedInteger('messages')->default(0);
+            $table->unsignedInteger('collections')->default(0);
+            $table->unsignedInteger('mails')->default(0);
             $table->unsignedInteger('works')->default(0);
-            $table->unsignedInteger('topics')->default(0);
-            $table->unsignedInteger('opinions')->default(0);
-            $table->unsignedInteger('sales')->default(0);
-            $table->unsignedInteger('hires')->default(0);
-            $table->unsignedInteger('build_groups')->default(0);
-            $table->unsignedInteger('join_groups')->default(0);
+            $table->unsignedInteger('inspirations')->default(0);
+            $table->unsignedInteger('sellings')->default(0);
+            $table->unsignedInteger('questions')->default(0);
+            $table->unsignedInteger('answers')->default(0);
             $table->unsignedInteger('build_teams')->default(0);
             $table->unsignedInteger('join_teams')->default(0);
+            $table->enum('gender', [1, 2]);
+            $table->string('profession')->index();
+            $table->unsignedSmallInteger('field')->index();
+            $table->datetime('birthday');
+            $table->unsignedSmallInteger('district')->index();
+            $table->text('brief');
             $table->timestamps();
-            $table->char('updated_ip', 15)->nullable();
         });
 
         Schema::create('logins', function (Blueprint $table) {

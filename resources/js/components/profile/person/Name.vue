@@ -1,7 +1,7 @@
 <template>
     <div class="name">
         <div v-if="updating" class="input-group">
-            <input id="name" class="form-control" type="text" v-model="name" data-toggle="tooltip" data-placement="bottom" title="名字每年只能修改2次">
+            <input id="name" class="form-control" type="text" v-model="name" data-toggle="tooltip" data-placement="bottom" title="一年只能修改两次">
             <div class="input-group-append">
                 <button @click="update" class="btn btn-outline-primary" type="button">保存</button>
                 <button @click="changeUpdateState" class="btn btn-outline-secondary" type="button">取消</button>

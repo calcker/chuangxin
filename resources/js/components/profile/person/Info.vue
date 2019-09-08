@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label"><b>居住地区</b></label>
+                    <label for="username" class="col-sm-2 col-form-label"><b>所在地区</b></label>
                     <div class="col-sm-10">
                         <district :value = "data.district"></district>
                     </div>
@@ -82,6 +82,47 @@
                 }
             };
         },
+
+        created(){
+
+            console.log('fasd');
+
+            axios.post('person/info').then(response => {
+
+                /*
+                if(response.data.code == 201) {
+
+                    const data = response.data.data;
+
+                    this.$store.dispatch('SET_AUTH_DATA', data);
+                    this.$router.push({ path: '/home' });
+
+                } else {
+
+                    this.errors = response.data.msg;
+                    this.afterSubmit();
+                }
+                */
+
+
+            }).catch(error => {
+
+                /*
+                this.errors = error.response.data.errors;
+
+                if(!this.errors) this.errors = {unknown: ["未知错误"]};
+
+                this.$store.dispatch('DEL_AUTH_DATA');
+
+                this.afterSubmit();
+                */
+
+            });
+
+
+
+        },
+
         methods: {
             update: function(item){
 

@@ -33,6 +33,7 @@ Route::group(['prefix' => 'feeds'], function(){
 
 Route::group(['prefix' => 'my'], function(){
     Route::post('counts', 'MyController@counts');
+    Route::post('info', 'MyController@info');
     //Route::post('someone/{id}', 'Content\CountsController@someone');
 });
 

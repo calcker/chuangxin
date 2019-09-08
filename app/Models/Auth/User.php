@@ -108,6 +108,22 @@ class User extends Model implements
         ];
     }
 
+    public function baseInfo()
+    {
+
+        $person = $this->person;
+
+        return [
+            'gender' => $person->gender,
+            'profession' => $person->profession,
+            'field' => $person->field,
+            'birthday' => $person->birthday,
+            'distirct' => $person->district,
+            'brief' => $person->brief,
+        ];
+
+    }
+
     //更新关注动态
     public function updateFollowingsFeeds($max_feed_id)
     {
