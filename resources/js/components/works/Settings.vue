@@ -16,11 +16,11 @@
                                 <div class="col-8">
                                     <div class="custom-control custom-switch">
                                         <input id="public" type="checkbox" class="custom-control-input" v-model="public">
-                                        <label class="custom-control-label" for="public">作品公开</label>
+                                        <label class="custom-control-label" for="public">公开作品 <i class="far fa-eye"></i></label>
                                     </div>
                                     <div class="custom-control custom-switch">
                                         <input id="top" type="checkbox" class="custom-control-input" v-model="top">
-                                        <label class="custom-control-label" for="top">作品置顶</label>
+                                        <label class="custom-control-label" for="top">作品置顶 <i class="fas fa-level-up-alt"></i></label>
                                     </div>
                                     <div class="custom-control custom-switch">
                                         <input id="remarkable" type="checkbox" class="custom-control-input" v-model="remarkable">
@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="custom-control custom-switch">
                                         <input id="payable" type="checkbox" class="custom-control-input" v-model="payable">
-                                        <label class="custom-control-label" for="payable">付费观赏</label>
+                                        <label class="custom-control-label" for="payable">付费观看</label>
                                     </div>
                                     <div v-if="payable" class="input-group">
                                         <div class="input-group-prepend">

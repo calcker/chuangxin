@@ -8,7 +8,7 @@
                     <textarea class="brief form-control" rows="2" placeholder="作品简介（选填）"></textarea>
                     <div class="options row">
                         <div class="col-md-4">
-                            <settings></settings>
+                            <album></album>
                             <!--
                             <select class="selectpicker" title="选择分类...">
                                 <option data-icon="fas fa-robot" value="invention">发明</option>
@@ -30,6 +30,7 @@
                             -->
                         </div>
                         <div class="col-md-8 text-right">
+                            <settings></settings>
                             <copyright></copyright>
                             <button type="button" class="submit btn btn-primary">提交作品&nbsp;&nbsp;<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         </div>
@@ -116,6 +117,7 @@
 
 <script>
     import TopBar from './../home/TopBar'
+    import Album from  './Album'
     import Copyright from './Copyright'
     import Settings from './Settings'
     import tinymce from 'tinymce/tinymce'
@@ -134,6 +136,6 @@
                 }
             };
         },
-        components: {TopBar, Copyright, Settings, Editor}
+        components: {TopBar, Album, Copyright, Settings, Editor}
     }
 </script>

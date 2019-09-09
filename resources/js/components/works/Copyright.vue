@@ -11,15 +11,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col">
-                                    <p>
-                                        本人郑重声明所提交的作品, 是本人独立研究与创作的成果, 未照搬和抄袭他人作品。如此作品牵涉到任何法律法规问题，本人将承担全部后果。
-                                    </p>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-8">
+                                    <p>本人郑重声明所提交的作品, 是本人独立研究与创作的成果, 未抄袭和剽窃他人作品.</p>
+                                    <p>作品内容完全符合国家互联网法规定.</p>
+                                    <p>如作品涉及到任何版权及法律法规问题, 本人愿承担全部法律责任及后果.</p>
                                     <div class="form-group form-check">
                                         <input type="checkbox" class="form-check-input" id="copyright">
-                                        <label class="form-check-label" for="copyright">本人同意以上声明</label>
+                                        <label class="form-check-label" for="copyright">本人特此声明</label>
                                     </div>
                                 </div>
                             </div>

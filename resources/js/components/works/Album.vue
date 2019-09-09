@@ -1,5 +1,5 @@
 <template>
-    <div class="album">
+    <span class="album">
         <select class="selectpicker" title="选择专辑..." v-model="selected"></select>
         <div class="modal fade" role="dialog">
             <div class="modal-dialog" role="document">
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </span>
 </template>
 
 <style type="text/css">
