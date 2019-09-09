@@ -30,6 +30,7 @@
                             -->
                         </div>
                         <div class="col-md-8 text-right">
+                            <copyright></copyright>
                             <button type="button" class="submit btn btn-primary">提交作品&nbsp;&nbsp;<i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                         </div>
                     </div>
@@ -115,6 +116,7 @@
 
 <script>
     import TopBar from './../home/TopBar'
+    import Copyright from './Copyright'
     import Settings from './Settings'
     import tinymce from 'tinymce/tinymce'
     import 'tinymce/themes/silver/theme.min.js'
@@ -132,6 +134,6 @@
                 }
             };
         },
-        components: {TopBar, Settings, Editor}
+        components: {TopBar, Copyright, Settings, Editor}
     }
 </script>
