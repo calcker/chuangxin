@@ -1,11 +1,11 @@
 <template>
     <div class="settings">
-        <button type="button" class="btn btn-outline-secondary"><i class="fas fa-cog" aria-hidden="true" @click="showModal"></i> 选项</button>
+        <button type="button" class="btn btn-outline-secondary"  @click="showModal"><i class="fas fa-cog" aria-hidden="true"></i> 设置</button>
         <div class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">选项</h5>
+                        <h5 class="modal-title">><i class="fas fa-cog" aria-hidden="true"></i> 设置</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -93,7 +93,7 @@
 <script>
 
     export default {
-        
+
         data: function() {
             return {
                 showed: false,
@@ -107,16 +107,16 @@
             //this.getAlbums();
 
         },
-        
+
         mounted() {
-            
+
             this.$modal = $('.settings .modal');
         },
 
         watch: {
 
             selected: function() {
-                
+
                 if(this.selected == -1){
 
                     this.showModal();
@@ -131,7 +131,7 @@
             showModal: function(){
 
                 this.$modal.modal('show');
-                
+
                 this.showed = true;
             }
         }

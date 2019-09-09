@@ -4208,6 +4208,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -74601,14 +74603,9 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("div", { staticClass: "options row" }, [
-                _vm._m(0),
+                _c("div", { staticClass: "col-md-4" }, [_c("settings")], 1),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-md-8 text-right" },
-                  [_c("settings"), _vm._v(" "), _vm._m(1)],
-                  1
-                )
+                _vm._m(0)
               ]),
               _vm._v(" "),
               _c("editor", {
@@ -74635,123 +74632,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
+    return _c("div", { staticClass: "col-md-8 text-right" }, [
       _c(
-        "select",
-        { staticClass: "selectpicker", attrs: { title: "选择分类..." } },
+        "button",
+        { staticClass: "submit btn btn-primary", attrs: { type: "button" } },
         [
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-robot", value: "invention" } },
-            [_vm._v("发明")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            {
-              attrs: { "data-icon": "fas fa-drafting-compass", value: "design" }
-            },
-            [_vm._v("设计")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-microscope", value: "research" } },
-            [_vm._v("研究")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            {
-              attrs: { "data-icon": "fas fa-drafting-compass", value: "design" }
-            },
-            [_vm._v("技术")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-laptop-code", value: "program" } },
-            [_vm._v("程序")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-palette", value: "art" } },
-            [_vm._v("艺术")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-music", value: "music" } },
-            [_vm._v("音乐")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-book-open", value: "literature" } },
-            [_vm._v("文学")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-video", value: "video" } },
-            [_vm._v("动漫")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-video", value: "video" } },
-            [_vm._v("影视")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-video", value: "video" } },
-            [_vm._v("游戏")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-music", value: "music" } },
-            [_vm._v("运动")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-gift", value: "product" } },
-            [_vm._v("产品")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-people-carry", value: "service" } },
-            [_vm._v("服务")]
-          ),
-          _vm._v(" "),
-          _c(
-            "option",
-            { attrs: { "data-icon": "fas fa-blog", value: "blog" } },
-            [_vm._v("个人博客")]
-          )
+          _vm._v("提交作品  "),
+          _c("i", {
+            staticClass: "fa fa-paper-plane",
+            attrs: { "aria-hidden": "true" }
+          })
         ]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "submit btn btn-primary", attrs: { type: "button" } },
-      [
-        _vm._v("提交作品  "),
-        _c("i", {
-          staticClass: "fa fa-paper-plane",
-          attrs: { "aria-hidden": "true" }
-        })
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -74775,20 +74668,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [
+  return _c("div", { staticClass: "settings" }, [
     _c(
       "button",
       {
-        staticClass: "settings btn btn-outline-secondary",
-        attrs: { type: "button" }
+        staticClass: "btn btn-link",
+        attrs: { type: "button" },
+        on: { click: _vm.showModal }
       },
       [
         _c("i", {
           staticClass: "fas fa-cog",
-          attrs: { "aria-hidden": "true" },
-          on: { click: _vm.showModal }
+          attrs: { "aria-hidden": "true" }
         }),
-        _vm._v(" 选项")
+        _vm._v(" 设置")
       ]
     ),
     _vm._v(" "),
@@ -74810,7 +74703,14 @@ var staticRenderFns = [
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title" }, [_vm._v("选项")]),
+                _c("h5", { staticClass: "modal-title" }, [
+                  _vm._v(">"),
+                  _c("i", {
+                    staticClass: "fas fa-cog",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v(" 设置")
+                ]),
                 _vm._v(" "),
                 _c(
                   "button",

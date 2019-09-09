@@ -6,7 +6,7 @@
                 <div class="works card-body">
                     <input type="text" class="title form-control" name="title" placeholder="新作品标题">
                     <textarea class="brief form-control" rows="2" placeholder="作品简介（选填）"></textarea>
-                    <div class="row">
+                    <div class="options row">
                         <div class="col-md-4">
                             <settings></settings>
                             <!--
