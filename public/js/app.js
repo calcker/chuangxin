@@ -75192,7 +75192,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "container" }, [
                   _c("div", { staticClass: "row justify-content-center" }, [
-                    _c("div", { staticClass: "col-8" }, [
+                    _c("div", { staticClass: "col-8 text-left" }, [
                       _c("p", [
                         _vm._v(
                           "本人郑重声明所提交的作品, 是本人独立研究与创作的成果, 未抄袭和剽窃他人作品."
@@ -75219,7 +75219,7 @@ var staticRenderFns = [
                             staticClass: "form-check-label",
                             attrs: { for: "copyright" }
                           },
-                          [_vm._v("本人同意以上声明")]
+                          [_vm._v("本人特此声明")]
                         )
                       ])
                     ])
@@ -75397,7 +75397,7 @@ var render = function() {
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "container" }, [
                   _c("div", { staticClass: "row justify-content-center" }, [
-                    _c("div", { staticClass: "col-8" }, [
+                    _c("div", { staticClass: "col-8 text-left" }, [
                       _c(
                         "div",
                         { staticClass: "custom-control custom-switch" },
@@ -75488,14 +75488,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _c(
-                            "label",
-                            {
-                              staticClass: "custom-control-label",
-                              attrs: { for: "top" }
-                            },
-                            [_vm._v("作品置顶")]
-                          )
+                          _vm._m(2)
                         ]
                       ),
                       _vm._v(" "),
@@ -75610,7 +75603,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.payable
                         ? _c("div", { staticClass: "input-group" }, [
-                            _vm._m(2),
+                            _vm._m(3),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -75644,7 +75637,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(3)
+              _vm._m(4)
             ])
           ]
         )
@@ -75688,6 +75681,16 @@ var staticRenderFns = [
       "label",
       { staticClass: "custom-control-label", attrs: { for: "public" } },
       [_vm._v("公开作品 "), _c("i", { staticClass: "far fa-eye" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "custom-control-label", attrs: { for: "top" } },
+      [_vm._v("作品置顶 "), _c("i", { staticClass: "fas fa-level-up-alt" })]
     )
   },
   function() {

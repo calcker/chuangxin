@@ -13,14 +13,14 @@
                     <div class="modal-body">
                         <div class="container">
                             <div class="row justify-content-center">
-                                <div class="col-8">
+                                <div class="col-8 text-left">
                                     <div class="custom-control custom-switch">
                                         <input id="public" type="checkbox" class="custom-control-input" v-model="public">
-                                        <label class="custom-control-label" for="public">公开作品 <i class="far fa-eye"></i></label>
+                                        <label class="custom-control-label" for="public">公开作品</label>
                                     </div>
                                     <div class="custom-control custom-switch">
                                         <input id="top" type="checkbox" class="custom-control-input" v-model="top">
-                                        <label class="custom-control-label" for="top">作品置顶 <i class="fas fa-level-up-alt"></i></label>
+                                        <label class="custom-control-label" for="top">作品置顶</label>
                                     </div>
                                     <div class="custom-control custom-switch">
                                         <input id="remarkable" type="checkbox" class="custom-control-input" v-model="remarkable">

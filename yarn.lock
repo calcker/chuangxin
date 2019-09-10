@@ -1468,11 +1468,6 @@ charenc@~0.0.1:
   resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
   integrity sha1-wKHS86cJLgN3S/qD8UwPxXkKhmc=
 
-china-area-data@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/china-area-data/-/china-area-data-4.0.0.tgz#95c27bf4dff8b99ee92f972b1739d551da7f303b"
-  integrity sha512-RG9b/ic5ZIGrPXfWgeDvf1DpMZyD6jKAi5ZBjzAlt500nF5uqH9javgKC7ookGtJzFPHwc7+9hs8NRiGj+nFNw==
-
 chokidar@^2.0.0, chokidar@^2.0.2, chokidar@^2.0.3, chokidar@^2.1.5:
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.5.tgz#0ae8434d962281a5f56c72869e79cb6d9d86ad4d"
@@ -2294,14 +2289,6 @@ electron-to-chromium@^1.3.127:
   version "1.3.131"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.131.tgz#205a0b7a276b3f56bc056f19178909243054252a"
   integrity sha512-NSO4jLeyGLWrT4mzzfYX8vt1MYCoMI5LxSYAjt0H9+LF/14JyiKJSyyjA6AJTxflZlEM5v3QU33F0ohbPMCAPg==
-
-element-china-area-data@^4.1.2:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/element-china-area-data/-/element-china-area-data-4.1.2.tgz#3185e6c930a019103527c2a96b3df8cca1069ae2"
-  integrity sha512-pu7sLoxa7hcdu0qbeDSwEarhXE4mczvlu9cuPhOox7BNL6JL5HACCJayCM2oeD0hXxA1NiZtC2bNBiTrGKKQOg==
-  dependencies:
-    china-area-data "^4.0.0"
-    lodash "^4.17.10"
 
 elliptic@^6.0.0:
   version "6.4.1"
@@ -3839,15 +3826,15 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@^4.17.10, lodash@^4.17.15:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
-
 lodash@^4.17.11, lodash@^4.17.5:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+
+lodash@^4.17.15:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 loglevel@^1.6.1:
   version "1.6.1"
@@ -6363,8 +6350,8 @@ vue-template-es2015-compiler@^1.9.0:
 
 vue2-datepicker@^2.12.0:
   version "2.12.0"
-  resolved "https://registry.yarnpkg.com/vue2-datepicker/-/vue2-datepicker-2.12.0.tgz#36f2d5dd5ba67ea6abe7d336ab6bddc822828da6"
-  integrity sha512-09PRIFm5hWrpfSBxWKJqm78yC0MTUZlq9MItLsWDe1OPgRqwWpex4fGkL7/nJG+d39v60wckQoVdk9RpLx8C9w==
+  resolved "https://registry.npm.taobao.org/vue2-datepicker/download/vue2-datepicker-2.12.0.tgz#36f2d5dd5ba67ea6abe7d336ab6bddc822828da6"
+  integrity sha1-NvLV3Vumfqar59M2q2vdyCKCjaY=
   dependencies:
     fecha "^2.3.3"
 
