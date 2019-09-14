@@ -58,16 +58,18 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('works')->default(0);
             $table->unsignedInteger('inspirations')->default(0);
             $table->unsignedInteger('sellings')->default(0);
-            $table->unsignedInteger('questions')->default(0);
-            $table->unsignedInteger('answers')->default(0);
+            $table->unsignedInteger('build_groups')->default(0);
+            $table->unsignedInteger('join_groups')->default(0);
+            $table->unsignedInteger('build_topics')->default(0);
+            $table->unsignedInteger('join_topics')->default(0);
             $table->unsignedInteger('build_teams')->default(0);
             $table->unsignedInteger('join_teams')->default(0);
-            $table->enum('gender', [1, 2]);
-            $table->string('profession')->index();
-            $table->unsignedSmallInteger('field')->index();
-            $table->datetime('birthday');
-            $table->unsignedSmallInteger('district')->index();
-            $table->text('brief');
+            $table->enum('gender', [1, 2])->nullable();
+            $table->string('profession')->nullable()->index();
+            $table->unsignedSmallInteger('field')->nullable()->index();
+            $table->datetime('birthday')->nullable();
+            $table->unsignedSmallInteger('district')->nullable()->index();
+            $table->text('brief')->nullable();
             $table->timestamps();
         });
 

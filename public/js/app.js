@@ -2242,7 +2242,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.afterSubmit();
         }
       })["catch"](function (error) {
-        _this.errors = error.response.data.errors;
+        _this.errors = error.response.data.msg;
         if (!_this.errors) _this.errors = {
           unknown: ["未知错误"]
         };
@@ -3003,6 +3003,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3457,13 +3460,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Name */ "./resources/js/components/profile/person/Name.vue");
-/* harmony import */ var _Gender__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Gender */ "./resources/js/components/profile/person/Gender.vue");
-/* harmony import */ var _Profession__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Profession */ "./resources/js/components/profile/person/Profession.vue");
-/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Field */ "./resources/js/components/profile/person/Field.vue");
-/* harmony import */ var _Birthday__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Birthday */ "./resources/js/components/profile/person/Birthday.vue");
-/* harmony import */ var _District__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./District */ "./resources/js/components/profile/person/District.vue");
-/* harmony import */ var _Brief__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Brief */ "./resources/js/components/profile/person/Brief.vue");
+/* harmony import */ var _AlertBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AlertBox */ "./resources/js/components/AlertBox.vue");
+/* harmony import */ var _Name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Name */ "./resources/js/components/profile/person/Name.vue");
+/* harmony import */ var _Gender__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Gender */ "./resources/js/components/profile/person/Gender.vue");
+/* harmony import */ var _Profession__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Profession */ "./resources/js/components/profile/person/Profession.vue");
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Field */ "./resources/js/components/profile/person/Field.vue");
+/* harmony import */ var _Birthday__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Birthday */ "./resources/js/components/profile/person/Birthday.vue");
+/* harmony import */ var _District__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./District */ "./resources/js/components/profile/person/District.vue");
+/* harmony import */ var _Brief__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Brief */ "./resources/js/components/profile/person/Brief.vue");
 //
 //
 //
@@ -3521,6 +3525,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -3531,7 +3544,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      data: {
+      info: {
         name: '',
         gender: '',
         birthday: '',
@@ -3543,55 +3556,44 @@ __webpack_require__.r(__webpack_exports__);
       updating: {
         username: false,
         realname: false
-      }
+      },
+      loaded: false,
+      errors: ''
     };
   },
   created: function created() {
-    console.log('fasd');
+    var _this = this;
+
     axios.post('person/info').then(function (response) {
-      /*
-      if(response.data.code == 201) {
-           const data = response.data.data;
-           this.$store.dispatch('SET_AUTH_DATA', data);
-          this.$router.push({ path: '/home' });
-       } else {
-           this.errors = response.data.msg;
-          this.afterSubmit();
+      if (response.data.code == 201) {
+        var data = response.data.data;
+        _this.info.name = data.name;
+
+        _this.changeLoadedState();
+      } else {
+        _this.errors = response.data.msg;
       }
-      */
     })["catch"](function (error) {
-      /*
-      this.errors = error.response.data.errors;
-       if(!this.errors) this.errors = {unknown: ["未知错误"]};
-       this.$store.dispatch('DEL_AUTH_DATA');
-       this.afterSubmit();
-      */
+      _this.errors = error.response.data.msg;
+      if (!_this.errors) _this.errors = {
+        unknown: ["未知错误"]
+      };
     });
   },
   methods: {
-    update: function update(item) {},
-    changeUpdateState: function changeUpdateState(item) {
-      console.log(item);
-
-      switch (item) {
-        case 'username':
-          this.updating.username = !this.updating.username;
-          break;
-
-        case 'realname':
-          this.updating.realname = !this.updating.realname;
-          break;
-      }
+    changeLoadedState: function changeLoadedState() {
+      this.loaded = true;
     }
   },
   components: {
-    Name: _Name__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Gender: _Gender__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Profession: _Profession__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Field: _Field__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Birthday: _Birthday__WEBPACK_IMPORTED_MODULE_4__["default"],
-    District: _District__WEBPACK_IMPORTED_MODULE_5__["default"],
-    Brief: _Brief__WEBPACK_IMPORTED_MODULE_6__["default"]
+    AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Name: _Name__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Gender: _Gender__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Profession: _Profession__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Field: _Field__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Birthday: _Birthday__WEBPACK_IMPORTED_MODULE_5__["default"],
+    District: _District__WEBPACK_IMPORTED_MODULE_6__["default"],
+    Brief: _Brief__WEBPACK_IMPORTED_MODULE_7__["default"]
   }
 });
 
@@ -3652,6 +3654,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AlertBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AlertBox */ "./resources/js/components/AlertBox.vue");
 //
 //
 //
@@ -3670,21 +3673,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['value'],
   data: function data() {
     return {
       name: this.value,
-      updating: false
+      updating: false,
+      submitting: false,
+      errors: ''
     };
   },
   methods: {
     update: function update() {
-      console.log('ffa');
+      var _this = this;
+
+      this.startSubmitState();
+      axios.post('person/name', {
+        name: this.name
+      }).then(function (response) {
+        if (response.data.code == 201) {
+          var data = response.data.data;
+          _this.info.name = data.name;
+
+          _this.changeLoadedState();
+        } else {
+          _this.errors = response.data.msg;
+        }
+      })["catch"](function (error) {
+        _this.errors = error.response.data.msg;
+        if (!_this.errors) _this.errors = {
+          unknown: ["未知错误"]
+        };
+      });
     },
     changeUpdateState: function changeUpdateState() {
       this.updating = !this.updating;
+    },
+    changeSubmitState: function changeSubmitState() {
+      this.submitting = !this.submitting;
     }
+  },
+  components: {
+    AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -3867,7 +3905,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.afterSubmit();
         }
       })["catch"](function (error) {
-        _this.errors = error.response.data.errors;
+        _this.errors = error.response.data.msg;
         if (!_this.errors) _this.errors = {
           unknown: ["未知错误"]
         };
@@ -12264,7 +12302,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#app-profile .list-group i{\n    width: 20px;\n}\n#app-profile .card-title i{\n    width: 40px;\n}\n", ""]);
+exports.push([module.i, "\n#app-profile .list-group i{\n    width: 20px;\n}\n#app-profile .card-title i{\n    width: 40px;\n}\n#app-profile .card{\n    min-height: 780px;\n}\n", ""]);
 
 // exports
 
@@ -73916,90 +73954,107 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-body" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("form", [
-        _c("div", { staticClass: "form-group row" }, [
-          _vm._m(1),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-sm-10" },
-            [_c("name", { attrs: { value: _vm.data.name } })],
-            1
-          )
-        ]),
+    _c(
+      "div",
+      { staticClass: "card-body" },
+      [
+        _vm._m(0),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _vm._m(2),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-sm-10" },
-            [_c("gender", { attrs: { value: _vm.data.gender } })],
-            1
-          )
-        ]),
+        _c("hr"),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _vm._m(3),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-sm-10" },
-            [_c("profession", { attrs: { value: _vm.data.profession } })],
-            1
-          )
-        ]),
+        _vm.errors
+          ? _c("alert-box", { attrs: { errors: _vm.errors } })
+          : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _vm._m(4),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-sm-10" },
-            [_c("field", { attrs: { value: _vm.data.field } })],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _vm._m(5),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-sm-10" },
-            [_c("birthday", { attrs: { value: _vm.data.birthday } })],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _vm._m(6),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-sm-10" },
-            [_c("district", { attrs: { value: _vm.data.district } })],
-            1
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _vm._m(7),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-sm-10" },
-            [_c("brief", { attrs: { value: _vm.data.brief } })],
-            1
-          )
-        ])
-      ])
-    ])
+        _vm.loaded
+          ? _c("div", { staticClass: "info" }, [
+              _c("form", [
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-sm-10" },
+                    [_c("name", { attrs: { value: _vm.info.name } })],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-sm-10" },
+                    [_c("gender", { attrs: { value: _vm.info.gender } })],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-sm-10" },
+                    [
+                      _c("profession", {
+                        attrs: { value: _vm.info.profession }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-sm-10" },
+                    [_c("field", { attrs: { value: _vm.info.field } })],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-sm-10" },
+                    [_c("birthday", { attrs: { value: _vm.info.birthday } })],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-sm-10" },
+                    [_c("district", { attrs: { value: _vm.info.district } })],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-sm-10" },
+                    [_c("brief", { attrs: { value: _vm.info.brief } })],
+                    1
+                  )
+                ])
+              ])
+            ])
+          : _c("div", { staticClass: "text-center" }, [_vm._m(8)])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -74080,6 +74135,16 @@ var staticRenderFns = [
       "label",
       { staticClass: "col-sm-2 col-form-label", attrs: { for: "brief" } },
       [_c("b", [_vm._v("个人简介")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "spinner-border m-5", attrs: { role: "status" } },
+      [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
     )
   }
 ]
@@ -74191,85 +74256,117 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "name" }, [
-    _vm.updating
-      ? _c("div", { staticClass: "input-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              id: "name",
-              type: "text",
-              "data-toggle": "tooltip",
-              "data-placement": "bottom",
-              title: "一年只能修改两次"
-            },
-            domProps: { value: _vm.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+  return _c(
+    "div",
+    { staticClass: "name" },
+    [
+      _vm.errors
+        ? _c("alert-box", { attrs: { errors: _vm.errors } })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.updating
+        ? _c("div", { staticClass: "input-group" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
                 }
-                _vm.name = $event.target.value
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "name",
+                type: "text",
+                "data-toggle": "tooltip",
+                "data-placement": "bottom",
+                title: "一年只能修改两次",
+                disabled: _vm.submitting == true
+              },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
               }
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-append" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary",
-                attrs: { type: "button" },
-                on: { click: _vm.update }
-              },
-              [_vm._v("保存")]
-            ),
+            }),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-secondary",
-                attrs: { type: "button" },
-                on: { click: _vm.changeUpdateState }
-              },
-              [_vm._v("取消")]
-            )
+            _vm.submitting
+              ? _c("div", { staticClass: "input-group-append" }, [_vm._m(0)])
+              : _c("div", { staticClass: "input-group-append" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-primary",
+                      attrs: { type: "button" },
+                      on: { click: _vm.update }
+                    },
+                    [_vm._v("保存")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-secondary",
+                      attrs: { type: "button" },
+                      on: { click: _vm.changeUpdateState }
+                    },
+                    [_vm._v("取消")]
+                  )
+                ])
           ])
-        ])
-      : _c("div", { staticClass: "input-group" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "name",
-              type: "text",
-              placeholder: _vm.value,
-              readonly: ""
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-append" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                attrs: { type: "button" },
-                on: { click: _vm.changeUpdateState }
-              },
-              [_c("i", { staticClass: "fas fa-pencil-alt" }), _vm._v(" 编辑")]
-            )
+        : _c("div", { staticClass: "input-group" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                id: "name",
+                type: "text",
+                placeholder: _vm.value,
+                readonly: ""
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.changeUpdateState }
+                },
+                [_c("i", { staticClass: "fas fa-pencil-alt" }), _vm._v(" 编辑")]
+              )
+            ])
           ])
-        ])
-  ])
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: { type: "button", disabled: "" }
+      },
+      [
+        _c("span", {
+          staticClass: "spinner-border spinner-border-sm",
+          attrs: { role: "status", "aria-hidden": "true" }
+        }),
+        _vm._v("\n                正在提交...\n            ")
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -75441,7 +75538,14 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _vm._m(1)
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "public" }
+                            },
+                            [_vm._v("公开作品")]
+                          )
                         ]
                       ),
                       _vm._v(" "),
@@ -75488,7 +75592,14 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _vm._m(2)
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: "top" }
+                            },
+                            [_vm._v("作品置顶")]
+                          )
                         ]
                       ),
                       _vm._v(" "),
@@ -75603,7 +75714,7 @@ var render = function() {
                       _vm._v(" "),
                       _vm.payable
                         ? _c("div", { staticClass: "input-group" }, [
-                            _vm._m(3),
+                            _vm._m(1),
                             _vm._v(" "),
                             _c("input", {
                               directives: [
@@ -75637,7 +75748,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(4)
+              _vm._m(2)
             ])
           ]
         )
@@ -75672,26 +75783,6 @@ var staticRenderFns = [
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "custom-control-label", attrs: { for: "public" } },
-      [_vm._v("公开作品 "), _c("i", { staticClass: "far fa-eye" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "label",
-      { staticClass: "custom-control-label", attrs: { for: "top" } },
-      [_vm._v("作品置顶 "), _c("i", { staticClass: "fas fa-level-up-alt" })]
-    )
   },
   function() {
     var _vm = this

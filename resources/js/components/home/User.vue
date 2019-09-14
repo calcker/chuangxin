@@ -37,8 +37,8 @@
     			</a>
     		</li>
     		<li class="list-group-item">
-    			<a href="/router#/team/new" class="btn btn-outline-secondary btn-block">
-    				<i class="fas fa-users"></i> 创建团队
+    			<a href="/router#/project/new" class="btn btn-outline-secondary btn-block">
+    				<i class="fas fa-users"></i> 发起项目
     			</a>
     		</li>
     		<li class="list-group-item">

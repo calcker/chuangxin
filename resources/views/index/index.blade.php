@@ -6,11 +6,9 @@
     <div class="side-nav list-group">
       <a href="/" class="list-group-item list-group-item-action active"><strong>首页</strong></a>
       <a href="/works" class="list-group-item list-group-item-action"><strong>作品</strong></a>
-      <a href="/team" class="list-group-item list-group-item-action"><strong>团队</strong></a>
-      <a href="/topic" class="list-group-item list-group-item-action"><strong>话题</strong></a>
+      <a href="/project" class="list-group-item list-group-item-action"><strong>项目</strong></a>
       <a href="/hire" class="list-group-item list-group-item-action"><strong>招聘</strong></a>
-      <a href="/market" class="list-group-item list-group-item-action"><strong>市场</strong></a>
-      <a href="/project" class="list-group-item list-group-item-action"><strong>外包</strong></a>
+      <a href="/sale" class="list-group-item list-group-item-action"><strong>出售</strong></a>
       <a href="/company" class="list-group-item list-group-item-action"><strong>企业</strong></a>
       <a href="/college" class="list-group-item list-group-item-action"><strong>校园</strong></a>
       <a href="/city" class="list-group-item list-group-item-action"><strong>城市</strong></a>

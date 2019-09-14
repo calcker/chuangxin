@@ -73,9 +73,10 @@
 		      			this.afterSubmit();
 
 		      		}
+
 		    	}).catch(error => {
 
-		       		this.errors = error.response.data.errors;
+		       		this.errors = error.response.data.msg;
 
 		      		if(!this.errors) this.errors = {unknown: ["未知错误"]};
 

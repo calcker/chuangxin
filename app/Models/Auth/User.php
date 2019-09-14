@@ -108,12 +108,12 @@ class User extends Model implements
         ];
     }
 
-    public function baseInfo()
+    public function info()
     {
-
         $person = $this->person;
 
         return [
+            'name' => $this->name,
             'gender' => $person->gender,
             'profession' => $person->profession,
             'field' => $person->field,
@@ -121,6 +121,13 @@ class User extends Model implements
             'distirct' => $person->district,
             'brief' => $person->brief,
         ];
+
+    }
+
+    public function name($name)
+    {
+        $this->name = $name;
+        $this->save();
 
     }
 

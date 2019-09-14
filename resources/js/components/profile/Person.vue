@@ -39,6 +39,9 @@
     #app-profile .card-title i{
         width: 40px;
     }
+    #app-profile .card{
+        min-height: 780px;
+    }
 </style>
 
 <script>
