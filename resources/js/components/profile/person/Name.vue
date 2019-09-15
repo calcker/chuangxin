@@ -1,7 +1,7 @@
 <template>
     <div class="name">
         <alert-box v-if="errors" :errors="errors"></alert-box>
-        <alert-box v-if="success" :success="errors"></alert-box>
+        <alert-box v-if="success" :success="success"></alert-box>
         <div v-if="updating" class="input-group">
             <input id="name" class="form-control" type="text" v-model="name" data-toggle="tooltip" data-placement="bottom" title="一年只能修改两次" :disabled="submitting == true">
             <div v-if="submitting" class="input-group-append">
@@ -49,11 +49,7 @@
 
                     if(response.data.code == 201) {
 
-                        const data = response.data.data;
-
-                        this.info.name = data.name;
-                    
-                        this.showSuccess();
+                        this.showSuccess(response.data.msg);
                     
                     } else {
 
@@ -75,7 +71,6 @@
                     }
                 });
 
-                this.finishSubmit();
 
             },
 
@@ -96,24 +91,23 @@
             finishSubmit() {
 
                 this.submitting = false;
-
                 return false;
             
             },
 
-            showSuccess() {
+            showSuccess(msg) {
 
-                this.success = '修改成功';
+                this.success = msg;
+                this.finishSubmit();
 
             },
 
             showErrors(errors) {
 
                 this.errors = errors;
+                this.finishSubmit();
 
             }
-
-
 
         },
         components: {AlertBox}
