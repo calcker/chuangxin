@@ -57,7 +57,7 @@ class EmailLoginController extends LoginController
 
         return response()->json([
             'code' => 201,
-            'message'  => 'Success',
+            'msg'  => 'Success',
             'data' => [
                 'id'    => $user['id'],
                 'key'   => $user['key'],
@@ -87,7 +87,7 @@ class EmailLoginController extends LoginController
         if ($this->validator($request->input())->fails()) {
             throw new HttpResponseException(response()->json([
                 'code' => 422,
-                'message' => 'Failure',
+                'msg' => 'Failure',
                 'errors'  => $this->validator($request->input())->errors(),
             ], 422));
         }

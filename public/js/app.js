@@ -2152,6 +2152,25 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2161,7 +2180,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['errors']
+  props: ['errors', 'success'],
+  computed: {
+    errorsType: function errorsType() {
+      return _typeof(this.errors);
+    }
+  }
 });
 
 /***/ }),
@@ -3680,6 +3704,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['value'],
@@ -3688,37 +3713,57 @@ __webpack_require__.r(__webpack_exports__);
       name: this.value,
       updating: false,
       submitting: false,
-      errors: ''
+      errors: '',
+      success: ''
     };
   },
   methods: {
     update: function update() {
       var _this = this;
 
-      this.startSubmitState();
+      this.startSubmit();
+      if (this.value == this.name) return this.finishSubmit();
       axios.post('person/name', {
         name: this.name
       }).then(function (response) {
         if (response.data.code == 201) {
-          var data = response.data.data;
-          _this.info.name = data.name;
-
-          _this.changeLoadedState();
+          _this.showSuccess(response.data.msg);
         } else {
-          _this.errors = response.data.msg;
+          _this.showErrors(response.data.msg);
         }
       })["catch"](function (error) {
-        _this.errors = error.response.data.msg;
-        if (!_this.errors) _this.errors = {
-          unknown: ["未知错误"]
-        };
+        var errors = error.response.data.msg;
+
+        if (errors) {
+          _this.showErrors(errors);
+        } else {
+          _this.showErrors({
+            unknown: ["未知错误"]
+          });
+        }
       });
     },
     changeUpdateState: function changeUpdateState() {
       this.updating = !this.updating;
+      return false;
     },
-    changeSubmitState: function changeSubmitState() {
-      this.submitting = !this.submitting;
+    startSubmit: function startSubmit() {
+      this.errors = '';
+      this.success = '';
+      this.submitting = true;
+    },
+    finishSubmit: function finishSubmit() {
+      this.changeUpdateState();
+      this.submitting = false;
+      return false;
+    },
+    showSuccess: function showSuccess(msg) {
+      this.success = msg;
+      this.finishSubmit();
+    },
+    showErrors: function showErrors(errors) {
+      this.errors = errors;
+      this.finishSubmit();
     }
   },
   components: {
@@ -72046,21 +72091,77 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "alert alert-danger", attrs: { role: "alert" } },
-    [
-      _c(
-        "ul",
-        _vm._l(_vm.errors, function(value, key, index) {
-          return _c("li", [_vm._v(_vm._s(value[0]))])
-        }),
-        0
-      )
-    ]
-  )
+  return _c("div", { staticClass: "alertBox" }, [
+    _vm.errors
+      ? _c(
+          "div",
+          { staticClass: "alert alert-danger", attrs: { role: "alert" } },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("p", [
+              _vm.errorsType == "string"
+                ? _c("ul", [_c("li", [_vm._v(_vm._s(_vm.errors))])])
+                : _c(
+                    "ul",
+                    _vm._l(_vm.errors, function(value, key, index) {
+                      return _c("li", [_vm._v(_vm._s(value[0]))])
+                    }),
+                    0
+                  )
+            ])
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.success
+      ? _c(
+          "div",
+          {
+            staticClass: "alert alert-danger alert-dismissible fade show",
+            attrs: { role: "alert" }
+          },
+          [_vm._v("\n        " + _vm._s(_vm.success) + "\n        "), _vm._m(1)]
+        )
+      : _vm._e()
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -72427,7 +72528,7 @@ var staticRenderFns = [
               _c(
                 "a",
                 { staticClass: "nav-link active", attrs: { href: "#" } },
-                [_vm._v("动态")]
+                [_vm._v("创新圈")]
               )
             ]),
             _vm._v(" "),
@@ -72946,11 +73047,11 @@ var staticRenderFns = [
         "a",
         {
           staticClass: "btn btn-outline-secondary btn-block",
-          attrs: { href: "/router#/team/new" }
+          attrs: { href: "/router#/project/new" }
         },
         [
           _c("i", { staticClass: "fas fa-users" }),
-          _vm._v(" 创建团队\n    \t\t\t")
+          _vm._v(" 发起项目\n    \t\t\t")
         ]
       )
     ])
@@ -74262,6 +74363,10 @@ var render = function() {
     [
       _vm.errors
         ? _c("alert-box", { attrs: { errors: _vm.errors } })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.success
+        ? _c("alert-box", { attrs: { success: _vm.success } })
         : _vm._e(),
       _vm._v(" "),
       _vm.updating

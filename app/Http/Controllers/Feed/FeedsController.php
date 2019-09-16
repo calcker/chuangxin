@@ -32,7 +32,7 @@ class FeedsController extends Controller
 
         return response()->json([
             'code' => 201,
-            'message' => 'Success',
+            'msg' => 'Success',
             'data' =>  $array,
         ]);
         
@@ -56,7 +56,7 @@ class FeedsController extends Controller
 
         return response()->json([
             'code' => 201,
-            'message' => 'Success',
+            'msg' => 'Success',
             'data' =>  $array,
         ]);
 
@@ -71,7 +71,7 @@ class FeedsController extends Controller
 
         return response()->json([
             'code' => 201,
-            'message' => 'Success',
+            'msg' => 'Success',
             'data' =>  $data,
         ]);
 
@@ -85,7 +85,7 @@ class FeedsController extends Controller
 
         return response()->json([
             'code' => 201,
-            'message' => 'Success',
+            'msg' => 'Success',
             'data' =>  $data,
         ]);
 

@@ -34,6 +34,7 @@ Route::group(['prefix' => 'feeds'], function(){
 Route::group(['prefix' => 'person'], function(){
     Route::post('counts', 'PersonController@counts');
     Route::post('info', 'PersonController@info');
+    Route::post('name', 'PersonController@name');
     //Route::post('someone/{id}', 'Content\CountsController@someone');
 });
 

@@ -16,7 +16,7 @@
             </div>
         </div>
         <div v-else class="input-group">
-            <input id="name" class="form-control" type="text" :placeholder="value" readonly>
+            <input id="name" class="form-control" type="text" :placeholder="name" readonly>
             <div class="input-group-append">
                 <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 编辑</button>
             </div>
@@ -43,7 +43,7 @@
 
                 this.startSubmit();
 
-                if(this.value != this.name) return this.finishSubmit();
+                if(this.value == this.name) return this.finishSubmit();
 
                 axios.post('person/name', {name: this.name}).then(response => {
 
@@ -62,7 +62,7 @@
                    
                     if(errors){
 
-                        this.showErrors(error.response.data.msg);
+                        this.showErrors(errors);
 
                     }else{
 
@@ -78,6 +78,8 @@
 
                 this.updating = !this.updating;
 
+                return false;
+
             },
 
             startSubmit() {
@@ -90,6 +92,7 @@
 
             finishSubmit() {
 
+                this.changeUpdateState();
                 this.submitting = false;
                 return false;
             

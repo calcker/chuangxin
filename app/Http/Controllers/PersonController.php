@@ -16,7 +16,7 @@ class PersonController extends Controller
 
         return response()->json([
             'code' => 201,
-            'message' => 'Success',
+            'msg' => 'Success',
             'data' => $counts,
         ]);
 
@@ -29,7 +29,7 @@ class PersonController extends Controller
 
         return response()->json([
             'code' => 201,
-            'message' => 'Success',
+            'msg' => 'Success',
             'data' => $info,
         ]);
 
@@ -38,7 +38,6 @@ class PersonController extends Controller
     //修改名字
     public function name(Request $request)
     {
-        
         $data = $request->input();
 
         $messages = [
@@ -64,10 +63,14 @@ class PersonController extends Controller
         $user = auth()->user();
 
         $user->name($data['name']);
+
+        return response()->json([
+            'code' => 201,
+            'msg' => '修改成功',
+            'data' => $info,
+        ]);
         
         //每年修改姓名时间
-
-
 
     }
 

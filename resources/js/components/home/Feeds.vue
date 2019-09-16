@@ -6,10 +6,10 @@
 	 			   <a class="nav-link active" href="#">动态</a>
 	  			</li>
 	  			<li class="nav-item">
-	 			   <a class="nav-link" href="#">灵感</a>
+	    			<a class="nav-link" href="#">作品</a>
 	  			</li>
 	  			<li class="nav-item">
-	    			<a class="nav-link" href="#">作品</a>
+	 			   <a class="nav-link" href="#">灵感</a>
 	  			</li>
 	  			<li class="nav-item">
 	    			<a class="nav-link" href="#">招聘</a>

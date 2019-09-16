@@ -62,8 +62,8 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('join_groups')->default(0);
             $table->unsignedInteger('build_topics')->default(0);
             $table->unsignedInteger('join_topics')->default(0);
-            $table->unsignedInteger('build_teams')->default(0);
-            $table->unsignedInteger('join_teams')->default(0);
+            $table->unsignedInteger('build_projects')->default(0);
+            $table->unsignedInteger('join_projects')->default(0);
             $table->enum('gender', [1, 2])->nullable();
             $table->string('profession')->nullable()->index();
             $table->unsignedSmallInteger('field')->nullable()->index();
