@@ -20,7 +20,7 @@
             </div>
         </div>
         <div v-else class="input-group">
-            <input id="gender" class="form-control" type="text" :placeholder="lang" readonly>
+            <input id="gender" class="form-control" type="text" :placeholder="placeholder" readonly>
             <div class="input-group-append">
                 <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 编辑</button>
             </div>
@@ -47,15 +47,14 @@
             };
         },
         computed: {
-            lang() {
+            placeholder() {
 
                 if(this.gender == 1){
-
                     return '男';
-
                 }else if(this.gender == 2){
-
                     return '女';
+                }else{
+                    return '未填写';
                 }
 
             }

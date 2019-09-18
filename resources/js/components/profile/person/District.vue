@@ -2,7 +2,7 @@
     <div class="district">
         <alert-box v-if="errors || success" :errors="errors" :success="success"></alert-box>
         <div v-if="updating" class="input-group">
-            <v-distpicker :placeholders="placeholders"></v-distpicker>
+            <v-distpicker :province="select.province" :city="select.city" :area="select.area" :placeholders="placeholders"></v-distpicker>
             <div class="input-group-append">
                 <button @click="update" class="btn btn-outline-primary" type="button">保存</button>
                 <button @click="changeUpdateState" class="btn btn-outline-secondary" type="button">取消</button>
@@ -30,12 +30,21 @@
                 submitting: false,
                 errors: '',
                 success: '',
+                select: {
+                    province: '',
+                    city: '',
+                    area: ''
+                },
                 placeholders: {
                     province: '------- 省 --------',
                     city: '--- 市 ---',
-                    area: '--- 区 ---',
+                    area: '--- 区 ---'
                 }
             }
+        },
+        computed: {
+            
+
         },
         methods: {
              update() {

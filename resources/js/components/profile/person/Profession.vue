@@ -15,7 +15,7 @@
             </div>
         </div>
         <div v-else class="input-group">
-            <input id="profession" class="form-control" type="text" :placeholder="lang" readonly>
+            <input id="profession" class="form-control" type="text" :placeholder="placeholder" readonly>
             <div class="input-group-append">
                 <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 编辑</button>
             </div>
@@ -38,12 +38,9 @@
             };
         },
         computed: {
-            lang() {
-
-                return this.profession ? this.profession : '未知';
-
+            placeholder() {
+                return this.profession ? this.profession : '未填写'
             }
-
         },
         methods: {
             update() {

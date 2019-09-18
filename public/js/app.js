@@ -3587,11 +3587,13 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    lang: function lang() {
+    placeholder: function placeholder() {
       if (this.gender == 1) {
         return '男';
       } else if (this.gender == 2) {
         return '女';
+      } else {
+        return '未填写';
       }
     }
   },
@@ -4048,8 +4050,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    lang: function lang() {
-      return this.profession ? this.profession : '未知';
+    placeholder: function placeholder() {
+      return this.profession ? this.profession : '未填写';
     }
   },
   methods: {
@@ -74317,7 +74319,7 @@ var render = function() {
               attrs: {
                 id: "gender",
                 type: "text",
-                placeholder: _vm.lang,
+                placeholder: _vm.placeholder,
                 readonly: ""
               }
             }),
@@ -74964,7 +74966,7 @@ var render = function() {
               attrs: {
                 id: "profession",
                 type: "text",
-                placeholder: _vm.lang,
+                placeholder: _vm.placeholder,
                 readonly: ""
               }
             }),
@@ -94720,10 +94722,10 @@ var reg = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
-module.exports = __webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
+module.exports = __webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
 
 
 /***/ })
