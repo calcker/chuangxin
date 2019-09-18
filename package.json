@@ -32,6 +32,7 @@
         "@tinymce/tinymce-vue": "2.1.0",
         "bootstrap-select": "^1.13.10",
         "tinymce": "5.0.7",
+        "v-distpicker": "^1.2.1",
         "vue-router": "^3.0.6",
         "vue2-datepicker": "^2.12.0"
     }

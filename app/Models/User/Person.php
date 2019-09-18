@@ -11,6 +11,8 @@ class Person extends Model
 	
 	protected $table = 'persons';
 
+	protected $primaryKey = 'user_id';
+
 	protected $fillable = ['user_id'];
 
 	public function user()

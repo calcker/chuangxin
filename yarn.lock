@@ -6284,6 +6284,13 @@ uuid@^3.0.1, uuid@^3.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
 
+v-distpicker@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/v-distpicker/-/v-distpicker-1.2.1.tgz#73ecce8a5e20c35fd6143619cbc14a6f3d5ee8d9"
+  integrity sha512-UxSSriEHGW5a6eWsd/z5OA4Nn++xUYfcjsUEnNEAaCL8OEPLDeaUUJY/cSRqz5EA4S6X8PJFRE3S4gQPYrNEKw==
+  dependencies:
+    vue "^2.6.10"
+
 v8-compile-cache@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.0.2.tgz#a428b28bb26790734c4fc8bc9fa106fccebf6a6c"
@@ -6355,7 +6362,7 @@ vue2-datepicker@^2.12.0:
   dependencies:
     fecha "^2.3.3"
 
-vue@^2.5.17:
+vue@^2.5.17, vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==

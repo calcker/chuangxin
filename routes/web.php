@@ -36,6 +36,11 @@ Route::group(['prefix' => 'person'], function(){
     Route::post('info', 'PersonController@info');
     Route::post('name', 'PersonController@name');
     Route::post('gender', 'PersonController@gender');
+    Route::post('profession', 'PersonController@profession');
+    Route::post('birthday', 'PersonController@birthday');
+    Route::post('district', 'PersonController@district');
+    Route::post('brief', 'PersonController@brief');
+
     //Route::post('someone/{id}', 'Content\CountsController@someone');
 });
 

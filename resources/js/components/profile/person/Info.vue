@@ -79,9 +79,9 @@
                 info: {
                     name: '',
                     gender: '',
-                    birthday: '',
                     profession: '',
                     field: '',
+                    birthday: '',
                     district: '',
                     brief: ''
                 },
@@ -103,6 +103,12 @@
                     const data = response.data.data;
 
                     this.info.name = data.name;
+                    this.info.gender = data.gender;
+                    this.info.profession = data.profession;
+                    this.info.field = data.field;
+                    this.info.birthday = data.birthday;
+                    this.info.district = data.district;
+                    this.info.brief = data.brief;
                 
                     this.changeLoadedState();
                 

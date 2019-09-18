@@ -87,7 +87,7 @@ class PersonController extends Controller
         ];
 
         $validator = Validator::make($data, [
-            'gender' => ['required', Rule::in(['male', 'female'])],
+            'gender' => ['required', Rule::in([1, 2])],
         ], $messages);
 
         if($validator->fails()) {
@@ -105,6 +105,165 @@ class PersonController extends Controller
         $person = $user->person;
 
         $person->gender = $data['gender'];
+
+        $person->save();
+
+        return response()->json([
+            'code' => 201,
+            'msg' => '修改成功',
+            'data' => $data,
+        ]);
+
+    }
+
+    //修改职业
+    public function profession(Request $request)
+    {
+        $data = $request->input();
+
+        $messages = [
+            'profession.required' => '请输入职业',
+            'profession.max' => '不能超过200个字符',
+        ];
+
+        $validator = Validator::make($data, [
+            'profession' => ['required', 'string', 'max:200'],
+        ], $messages);
+
+        if($validator->fails()) {
+            
+            throw new HttpResponseException(response()->json([
+                'code' => 422,
+                'msg'  => $validator->errors(),
+                'data' => null
+            ], 422));
+
+        }
+        
+        $user = auth()->user();
+
+        $person = $user->person;
+
+        $person->profession = $data['profession'];
+
+        $person->save();
+
+        return response()->json([
+            'code' => 201,
+            'msg' => '修改成功',
+            'data' => $data,
+        ]);
+
+    }
+
+    //增加创新领域
+    public function addField(Request $request)
+    {
+        $data = $request->input();
+
+        $messages = [
+            'field.required' => '请选择创新领域',
+        ];
+
+        $validator = Validator::make($data, [
+            'profession' => ['required', 'number'],
+        ], $messages);
+
+        if($validator->fails()) {
+            
+            throw new HttpResponseException(response()->json([
+                'code' => 422,
+                'msg'  => $validator->errors(),
+                'data' => null
+            ], 422));
+
+        }
+        
+        $user = auth()->user();
+
+        $person = $user->person;
+
+        $person->profession = $data['profession'];
+
+        $person->save();
+
+        return response()->json([
+            'code' => 201,
+            'msg' => '修改成功',
+            'data' => $data,
+        ]);
+
+    }
+
+    //修改生日
+    public function birthday(Request $request)
+    {
+        $data = $request->input();
+
+        $messages = [
+            'birthday.required' => '请选择出生日期',
+            'birthday.date' => '日期格式错误',
+        ];
+
+        $validator = Validator::make($data, [
+            'birthday' => ['required', 'date'],
+        ], $messages);
+
+        if($validator->fails()) {
+            
+            throw new HttpResponseException(response()->json([
+                'code' => 422,
+                'msg'  => $validator->errors(),
+                'data' => null
+            ], 422));
+
+        }
+        
+        $user = auth()->user();
+
+        $person = $user->person;
+
+        $person->birthday = $data['birthday'];
+
+        $person->save();
+
+        return response()->json([
+            'code' => 201,
+            'msg' => '修改成功',
+            'data' => $data,
+        ]);
+
+    }
+
+    //修改地区
+    public function district(Request $request)
+    {
+        $data = $request->input();
+
+        $messages = [
+            'birthday.required' => '请选择出生日期',
+            'birthday.date' => '日期格式错误',
+        ];
+
+        $validator = Validator::make($data, [
+            'birthday' => ['required', 'date'],
+        ], $messages);
+
+        if($validator->fails()) {
+            
+            throw new HttpResponseException(response()->json([
+                'code' => 422,
+                'msg'  => $validator->errors(),
+                'data' => null
+            ], 422));
+
+        }
+        
+        $user = auth()->user();
+
+        $person = $user->person;
+
+        $person->birthday = $data['birthday'];
 
         $person->save();
 

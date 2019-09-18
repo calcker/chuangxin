@@ -12,7 +12,7 @@
                             <i class="fas fa-user-circle"></i> 头像设置
                         </button>
                         <button type="button" :class="{'active': showingComponent == 'Password'}" class="list-group-item list-group-item-action" @click="showComponent('Password')">
-                            <i class="fas fa-key"></i> 密码修改
+                            <i class="fas fa-key"></i> 密码重设
                         </button>
                         <button type="button" :class="{'active': showingComponent == 'Email'}" class="list-group-item list-group-item-action" @click="showComponent('Email')">
                             <i class="far fa-envelope"></i> 邮箱绑定

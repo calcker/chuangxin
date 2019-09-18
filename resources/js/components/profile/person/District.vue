@@ -1,15 +1,8 @@
 <template>
     <div class="district">
+        <alert-box v-if="errors || success" :errors="errors" :success="success"></alert-box>
         <div v-if="updating" class="input-group">
-            <select class="custom-select">
-                <option value='' disabled selected style='display:none;'>Please Choose</option>
-            </select>
-            <select class="custom-select">
-                <option value='' disabled selected style='display:none;'>Please Choose</option>
-            </select>
-            <select class="custom-select">
-                <option value='' disabled selected style='display:none;'>Please Choose</option>
-            </select>
+            <v-distpicker :placeholders="placeholders"></v-distpicker>
             <div class="input-group-append">
                 <button @click="update" class="btn btn-outline-primary" type="button">保存</button>
                 <button @click="changeUpdateState" class="btn btn-outline-secondary" type="button">取消</button>
@@ -25,26 +18,100 @@
 </template>
 
 <script>
+    import AlertBox from '../../AlertBox'
+    import VDistpicker from 'v-distpicker'
+
     export default {
+        props: ['value'],
         data () {
             return {
-                name: this.value,
+                district: this.value,
                 updating: false,
-                value: null,
-                selected: null
+                submitting: false,
+                errors: '',
+                success: '',
+                placeholders: {
+                    province: '------- 省 --------',
+                    city: '--- 市 ---',
+                    area: '--- 区 ---',
+                }
             }
         },
         methods: {
-            update: function(){
-                console.log('ffa');
+             update() {
+
+                this.startSubmit();
+
+                if(this.value == this.district) return this.finishSubmit();
+
+                axios.post('person/district', {gender: this.district}).then(response => {
+
+                    if(response.data.code == 201) {
+
+                        this.showSuccess(response.data.msg);
+                    
+                    } else {
+
+                        this.showErrors(response.data.msg);
+                    }
+
+                }).catch(error => {
+                    
+                    const errors = error.response.data.msg;
+                   
+                    if(errors){
+
+                        this.showErrors(errors);
+
+                    }else{
+
+                        this.showErrors({unknown: ["未知错误"]});
+
+                    }
+                });
+
 
             },
-            changeUpdateState: function(){
+
+            changeUpdateState() {
 
                 this.updating = !this.updating;
 
+                return false;
+
+            },
+
+            startSubmit() {
+
+                this.errors = '';
+                this.success = '';
+                this.submitting = true;
+
+            },
+
+            finishSubmit() {
+
+                this.changeUpdateState();
+                this.submitting = false;
+                return false;
+            
+            },
+
+            showSuccess(msg) {
+
+                this.success = msg;
+                this.finishSubmit();
+
+            },
+
+            showErrors(errors) {
+
+                this.errors = errors;
+                this.finishSubmit();
+
             }
 
-        }
+        },
+        components: {AlertBox, VDistpicker}
     }
 </script>

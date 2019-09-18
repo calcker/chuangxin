@@ -3,8 +3,10 @@
         <alert-box v-if="errors || success" :errors="errors" :success="success"></alert-box>
         <div v-if="updating" class="input-group">
             <select class="custom-select" v-model="gender" :disabled="submitting == true">
-                <option value="male">男</option>
-                <option value="female">女</option>
+                <option disabled selected style='display:none;'>请选择...</option>
+                <option v-for="option in options" :value="option.value">
+                    {{option.text}}
+                </option>
             </select>
             <div v-if="submitting" class="input-group-append">
                 <button class="btn btn-primary" type="button" disabled>
@@ -37,17 +39,21 @@
                 updating: false,
                 submitting: false,
                 errors: '',
-                success: ''
+                success: '',
+                options: [
+                    {text: '男', value: 1},
+                    {text: '女', value: 2}
+                ]
             };
         },
         computed: {
             lang() {
 
-                if(this.gender == 'male'){
+                if(this.gender == 1){
 
                     return '男';
 
-                }else if(this.gender == 'female'){
+                }else if(this.gender == 2){
 
                     return '女';
                 }
@@ -59,7 +65,7 @@
 
                 this.startSubmit();
 
-                if(this.value == this.name) return this.finishSubmit();
+                if(this.value == this.gender) return this.finishSubmit();
 
                 axios.post('person/gender', {gender: this.gender}).then(response => {
 
