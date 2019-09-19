@@ -3303,21 +3303,53 @@ __webpack_require__.r(__webpack_exports__);
       submitting: false,
       errors: '',
       success: '',
-      placeholders: {
-        province: '------- 省 --------',
-        city: '--- 市 ---',
-        area: '--- 区 ---'
+      select: {
+        province: '',
+        city: '',
+        area: ''
       }
     };
   },
+  created: function created() {
+    if (!this.district) return false;
+    var arr = this.district.split(' ');
+    this.select.province = arr[0];
+    this.select.city = arr[1];
+    this.select.area = arr[2];
+  },
   methods: {
+    onChangeProvince: function onChangeProvince(data) {
+      if (data.value != '省') this.select.province = data.value;
+      this.select.city = '';
+      this.select.area = '';
+    },
+    onChangeCity: function onChangeCity(data) {
+      if (data.value != '市') this.select.city = data.value;
+      this.select.area = '';
+    },
+    onChangeArea: function onChangeArea(data) {
+      if (data.value != '区') this.select.area = data.value;
+    },
+    onSelected: function onSelected(data) {
+      console.log('selected');
+      /*
+      if(data.province.value == '省' || !data.province.value) return false;
+      if(data.city.value == '市' || !data.city.value) return false;
+      if(data.area.value == '区' || !data.area.value) return false;
+      this.district = data.province.value + ' ' + data.city.value + ' ' + data.area.value;
+      */
+    },
+    getDistrict: function getDistrict() {
+      return this.select.province + ' ' + this.select.city + ' ' + this.select.area;
+    },
     update: function update() {
       var _this = this;
 
       this.startSubmit();
+      if (!this.checkInput()) return this.finishSubmit();
       if (this.value == this.district) return this.finishSubmit();
       axios.post('person/district', {
-        gender: this.district
+        ditrict: this.district
       }).then(function (response) {
         if (response.data.code == 201) {
           _this.showSuccess(response.data.msg);
@@ -3357,6 +3389,13 @@ __webpack_require__.r(__webpack_exports__);
     showErrors: function showErrors(errors) {
       this.errors = errors;
       this.finishSubmit();
+    },
+    checkInput: function checkInput() {
+      //console.log(this.select);
+      if (!this.select.province || this.select.province == '省') return this.showErrors('请选择省份');
+      if (!this.select.city || this.select.city == '市') return this.showErrors('请选择城市');
+      if (!this.select.area || this.select.area == '区') return this.showErrors('请选择区县');
+      return true;
     }
   },
   components: {
@@ -73932,7 +73971,19 @@ var render = function() {
             "div",
             { staticClass: "input-group" },
             [
-              _c("v-distpicker", { attrs: { placeholders: _vm.placeholders } }),
+              _c("v-distpicker", {
+                attrs: {
+                  province: _vm.select.province,
+                  city: _vm.select.city,
+                  area: _vm.select.area
+                },
+                on: {
+                  province: _vm.onChangeProvince,
+                  city: _vm.onChangeCity,
+                  area: _vm.onChangeArea,
+                  selected: _vm.onSelected
+                }
+              }),
               _vm._v(" "),
               _c("div", { staticClass: "input-group-append" }, [
                 _c(
@@ -73964,7 +74015,7 @@ var render = function() {
               attrs: {
                 id: "birthday",
                 type: "text",
-                placeholder: _vm.value,
+                placeholder: _vm.district,
                 readonly: ""
               }
             }),
@@ -94722,10 +94773,10 @@ var reg = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
-module.exports = __webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
+module.exports = __webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
 
 
 /***/ })
