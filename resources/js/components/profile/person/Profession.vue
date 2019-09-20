@@ -113,6 +113,7 @@
 
                 this.errors = errors;
                 this.finishSubmit();
+                return false;
 
             }
 

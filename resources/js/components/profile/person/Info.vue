@@ -107,9 +107,18 @@
                     this.info.profession = data.profession;
                     this.info.field = data.field;
                     this.info.birthday = data.birthday;
-                    this.info.district = data.district;
                     this.info.brief = data.brief;
-                
+
+                    if(data.district){
+                        this.info.district = $.parseJSON(data.district);    
+                    }else{
+                        this.info.district = {
+                            province: '',
+                            city: '',
+                            area: ''
+                        }
+                    }
+
                     this.changeLoadedState();
                 
                 } else {

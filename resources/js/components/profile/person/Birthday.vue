@@ -80,7 +80,6 @@
             changeUpdateState() {
 
                 this.updating = !this.updating;
-
                 return false;
 
             },
@@ -112,6 +111,7 @@
 
                 this.errors = errors;
                 this.finishSubmit();
+                return false;
 
             }
 

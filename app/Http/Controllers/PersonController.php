@@ -241,12 +241,21 @@ class PersonController extends Controller
         $data = $request->input();
 
         $messages = [
-            'birthday.required' => '请选择出生日期',
-            'birthday.date' => '日期格式错误',
+            'province.required' => '请选择省份',
+            'province.min' => '请选择省份',
+            'province.max' => '请选择省份',
+            'city.required' => '请选择城市',
+            'city.min' => '请选择城市',
+            'city.max' => '请选择城市',
+            'area.required' => '请选择区县',
+            'area.min' => '请选择区县',
+            'area.max' => '请选择区县',
         ];
 
         $validator = Validator::make($data, [
-            'birthday' => ['required', 'date'],
+            'province' => ['required', 'string', 'min:2', 'max:50'],
+            'city' => ['required', 'string', 'min:2', 'max:50'],
+            'area' => ['required', 'string', 'min:2', 'max:50'],
         ], $messages);
 
         if($validator->fails()) {
@@ -263,7 +272,7 @@ class PersonController extends Controller
 
         $person = $user->person;
 
-        $person->birthday = $data['birthday'];
+        $person->district = json_encode($data['district'], JSON_UNESCAPED_UNICODE);
 
         $person->save();
 
