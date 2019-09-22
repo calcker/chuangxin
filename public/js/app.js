@@ -2179,12 +2179,56 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['errors', 'success'],
-  computed: {
-    errorsType: function errorsType() {
-      return _typeof(this.errors);
+  data: function data() {
+    return {
+      info: {
+        errors: null,
+        success: null
+      }
+    };
+  },
+  created: function created() {
+    this.fillErrors();
+    this.fillSuccess();
+  },
+  methods: {
+    fillErrors: function fillErrors() {
+      if (this.errors) {
+        if (typeof this.errors == "string") {
+          this.info.errors = [this.errors];
+        } else if (_typeof(this.errors) == "object") {
+          var errors = new Array();
+          $.each(this.errors, function (key, value) {
+            for (var i = 0; i < value.length; i++) {
+              errors.push(value[i]);
+            }
+          });
+          this.info.errors = errors;
+        }
+      }
+    },
+    fillSuccess: function fillSuccess() {
+      if (this.success) {
+        if (typeof this.success == "string") {
+          this.info.success = [this.success];
+        } else if (_typeof(this.success) == "object") {
+          var success = new Array();
+          $.each(this.success, function (key, value) {
+            for (var i = 0; i < value.length; i++) {
+              success.push(value[i]);
+            }
+          });
+          this.info.success = success;
+        }
+      }
+    },
+    clear: function clear() {
+      this.$emit("update:errors", '');
+      this.$emit("update:success", '');
+      this.info.errors = null;
+      this.info.success = null;
     }
   }
 });
@@ -3226,6 +3270,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AlertBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AlertBox */ "./resources/js/components/AlertBox.vue");
 //
 //
 //
@@ -3244,21 +3289,77 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['value'],
   data: function data() {
     return {
       brief: this.value,
-      updating: false
+      updating: false,
+      submitting: false,
+      errors: null,
+      success: null
     };
   },
   methods: {
     update: function update() {
-      console.log('ffa');
+      var _this = this;
+
+      this.startSubmit();
+      if (!this.checkInput()) return false;
+      axios.post('person/brief', {
+        brief: this.brief
+      }).then(function (response) {
+        if (response.data.code == 201) {
+          _this.showSuccess(response.data.msg);
+        } else {
+          _this.showErrors(response.data.msg);
+        }
+      })["catch"](function (error) {
+        var errors = error.response.data.msg;
+
+        if (errors) {
+          _this.showErrors(errors);
+        } else {
+          _this.showErrors("未知错误");
+        }
+      });
+    },
+    checkInput: function checkInput() {
+      return true;
     },
     changeUpdateState: function changeUpdateState() {
       this.updating = !this.updating;
+    },
+    startSubmit: function startSubmit() {
+      this.errors = '';
+      this.success = '';
+      this.submitting = true;
+    },
+    finishSubmit: function finishSubmit() {
+      this.submitting = false;
+      return false;
+    },
+    showSuccess: function showSuccess(msg) {
+      this.success = msg;
+      this.finishSubmit();
+    },
+    showErrors: function showErrors(msg) {
+      this.errors = msg;
+      this.finishSubmit();
     }
+  },
+  components: {
+    AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -3295,6 +3396,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3308,8 +3415,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       updating: false,
       submitting: false,
-      errors: '',
-      success: ''
+      errors: null,
+      success: null
     };
   },
   computed: {
@@ -3323,40 +3430,26 @@ __webpack_require__.r(__webpack_exports__);
       this.district.province = data.value != '省' ? data.value : '';
       this.district.city = '';
       this.district.area = '';
+      this.errors = '';
+      this.success = '';
     },
     onChangeCity: function onChangeCity(data) {
       this.district.city = data.value != '市' ? data.value : '';
       this.district.area = '';
+      this.errors = '';
+      this.success = '';
     },
     onChangeArea: function onChangeArea(data) {
       this.district.area = data.value != '区' ? data.value : '';
-    },
-    checkInput: function checkInput() {
-      console.log(this.district);
-
-      if (!this.district.province || this.district.province == '' || this.district.province == '省') {
-        console.log(this.district.province);
-        return this.showErrors('请选择省份');
-      }
-
-      if (!this.district.city || this.district.city == '' || this.district.city == '市') {
-        console.log(this.district.city);
-        return this.showErrors('请选择城市');
-      }
-
-      if (!this.district.area || this.district.area == '' || this.district.area == '区') {
-        console.log(this.district.area);
-        return this.showErrors('请选择区县');
-      }
-
-      return true;
+      this.errors = '';
+      this.success = '';
     },
     update: function update() {
       var _this = this;
 
       this.startSubmit();
-      if (!this.checkInput()) return this.finishSubmit();
-      if (this.value == this.district) return this.finishSubmit();
+      if (!this.checkInput()) return false;
+      if (this.compare(this.value, this.district)) return this.finishSubmit();
       axios.post('person/district', {
         ditrict: this.district
       }).then(function (response) {
@@ -3371,15 +3464,36 @@ __webpack_require__.r(__webpack_exports__);
         if (errors) {
           _this.showErrors(errors);
         } else {
-          _this.showErrors({
-            unknown: ["未知错误"]
-          });
+          _this.showErrors("未知错误");
         }
       });
     },
+    checkInput: function checkInput() {
+      if (!this.district.province || this.district.province == '' || this.district.province == '省') {
+        this.showErrors('请选择省份');
+        return false;
+      }
+
+      if (!this.district.city || this.district.city == '' || this.district.city == '市') {
+        this.showErrors('请选择城市');
+        return false;
+      }
+
+      if (!this.district.area || this.district.area == '' || this.district.area == '区') {
+        this.showErrors('请选择区县');
+        return false;
+      }
+
+      return true;
+    },
+    compare: function compare(district_1, district_2) {
+      if (district_1.province != district_2.province) return false;
+      if (district_1.city != district_2.city) return false;
+      if (district_1.area != district_2.area) return false;
+      return true;
+    },
     changeUpdateState: function changeUpdateState() {
       this.updating = !this.updating;
-      return false;
     },
     startSubmit: function startSubmit() {
       this.errors = '';
@@ -3387,7 +3501,6 @@ __webpack_require__.r(__webpack_exports__);
       this.submitting = true;
     },
     finishSubmit: function finishSubmit() {
-      this.changeUpdateState();
       this.submitting = false;
       return false;
     },
@@ -3395,11 +3508,9 @@ __webpack_require__.r(__webpack_exports__);
       this.success = msg;
       this.finishSubmit();
     },
-    showErrors: function showErrors(errors) {
-      this.errors = errors;
-      console.log(this.errors);
+    showErrors: function showErrors(msg) {
+      this.errors = msg;
       this.finishSubmit();
-      return false;
     }
   },
   components: {
@@ -3983,7 +4094,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     changeUpdateState: function changeUpdateState() {
       this.updating = !this.updating;
-      return false;
     },
     startSubmit: function startSubmit() {
       this.errors = '';
@@ -72453,7 +72563,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "alertBox" }, [
-    _vm.errors
+    _vm.info.errors
       ? _c(
           "div",
           {
@@ -72461,72 +72571,60 @@ var render = function() {
             attrs: { role: "alert" }
           },
           [
-            _vm.errorsType == "string"
-              ? _c("ul", { staticClass: "errors" }, [
-                  _vm._v("\n            " + _vm._s(_vm.errors) + "\n        ")
-                ])
-              : _c(
-                  "ul",
-                  { staticClass: "errors" },
-                  _vm._l(_vm.errors, function(value, key, index) {
-                    return _c("li", [_vm._v(_vm._s(value[0]))])
-                  }),
-                  0
-                ),
+            _vm._l(_vm.info.errors, function(item) {
+              return _c("p", [_vm._v("\n\t\t\t" + _vm._s(item) + "\n\t\t")])
+            }),
             _vm._v(" "),
-            _vm._m(0)
-          ]
+            _c(
+              "button",
+              {
+                staticClass: "close",
+                attrs: {
+                  type: "button",
+                  "data-dismiss": "alert",
+                  "aria-label": "Close"
+                },
+                on: { click: _vm.clear }
+              },
+              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+            )
+          ],
+          2
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.success
+    _vm.info.success
       ? _c(
           "div",
           {
             staticClass: "alert alert-success alert-dismissible fade show",
             attrs: { role: "alert" }
           },
-          [_vm._v("\n        " + _vm._s(_vm.success) + "\n        "), _vm._m(1)]
+          [
+            _vm._l(_vm.info.success, function(item) {
+              return _c("p", [_vm._v("\n\t\t\t" + _vm._s(item) + "\n\t\t")])
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "close",
+                attrs: {
+                  type: "button",
+                  "data-dismiss": "alert",
+                  "aria-label": "Close"
+                },
+                on: { click: _vm.clear }
+              },
+              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+            )
+          ],
+          2
         )
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "alert",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "alert",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -73947,58 +74045,106 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.updating
-    ? _c("div", { staticClass: "brief" }, [
-        _c("textarea", {
-          staticClass: "form-control mb-2",
-          attrs: { id: "brief", rows: "10" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "text-right" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-primary",
-              attrs: { type: "button" },
-              on: { click: _vm.update }
-            },
-            [_vm._v("保存")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-secondary",
-              attrs: { type: "button" },
-              on: { click: _vm.changeUpdateState }
-            },
-            [_vm._v("取消")]
-          )
-        ])
-      ])
-    : _c("div", { staticClass: "brief" }, [
-        _c("textarea", {
-          staticClass: "form-control mb-2",
-          attrs: { id: "brief", rows: "10", readonly: "" }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "text-right" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "button" },
-              on: { click: _vm.changeUpdateState }
-            },
-            [
-              _c("i", { staticClass: "fas fa-pencil-alt" }),
-              _vm._v(" 编辑\n        ")
-            ]
-          )
-        ])
-      ])
+  return _c(
+    "div",
+    { staticClass: "brief" },
+    [
+      _vm.errors || _vm.success
+        ? _c("alert-box", {
+            attrs: { errors: _vm.errors, success: _vm.success },
+            on: {
+              "update:errors": function($event) {
+                _vm.errors = $event
+              },
+              "update:success": function($event) {
+                _vm.success = $event
+              }
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.updating
+        ? _c("div", [
+            _c("textarea", {
+              staticClass: "form-control mb-2",
+              attrs: { id: "brief", rows: "10" }
+            }),
+            _vm._v(" "),
+            _vm.submitting
+              ? _c("div", { staticClass: "text-right" }, [_vm._m(0)])
+              : _c("div", { staticClass: "text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-primary",
+                      attrs: { type: "button" },
+                      on: { click: _vm.update }
+                    },
+                    [_vm._v("保存")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-secondary",
+                      attrs: { type: "button" },
+                      on: { click: _vm.changeUpdateState }
+                    },
+                    [_vm._v("取消")]
+                  )
+                ])
+          ])
+        : _c("div", [
+            _c("textarea", {
+              staticClass: "form-control mb-2",
+              attrs: {
+                id: "brief",
+                rows: "10",
+                placeholder: _vm.brief,
+                readonly: ""
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-right" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.changeUpdateState }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-pencil-alt" }),
+                  _vm._v(" 编辑\n            ")
+                ]
+              )
+            ])
+          ])
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: { type: "button", disabled: "" }
+      },
+      [
+        _c("span", {
+          staticClass: "spinner-border spinner-border-sm",
+          attrs: { role: "status", "aria-hidden": "true" }
+        }),
+        _vm._v("\n                正在提交...\n            ")
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -74026,7 +74172,15 @@ var render = function() {
     [
       _vm.errors || _vm.success
         ? _c("alert-box", {
-            attrs: { errors: _vm.errors, success: _vm.success }
+            attrs: { errors: _vm.errors, success: _vm.success },
+            on: {
+              "update:errors": function($event) {
+                _vm.errors = $event
+              },
+              "update:success": function($event) {
+                _vm.success = $event
+              }
+            }
           })
         : _vm._e(),
       _vm._v(" "),
@@ -74048,27 +74202,29 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.update }
-                  },
-                  [_vm._v("保存")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-secondary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.changeUpdateState }
-                  },
-                  [_vm._v("取消")]
-                )
-              ])
+              _vm.submitting
+                ? _c("div", { staticClass: "input-group-append" }, [_vm._m(0)])
+                : _c("div", { staticClass: "input-group-append" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-primary",
+                        attrs: { type: "button" },
+                        on: { click: _vm.update }
+                      },
+                      [_vm._v("保存")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-outline-secondary",
+                        attrs: { type: "button" },
+                        on: { click: _vm.changeUpdateState }
+                      },
+                      [_vm._v("取消")]
+                    )
+                  ])
             ],
             1
           )
@@ -74076,7 +74232,7 @@ var render = function() {
             _c("input", {
               staticClass: "form-control",
               attrs: {
-                id: "birthday",
+                id: "district",
                 type: "text",
                 placeholder: _vm.placeholder,
                 readonly: ""
@@ -74099,7 +74255,27 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: { type: "button", disabled: "" }
+      },
+      [
+        _c("span", {
+          staticClass: "spinner-border spinner-border-sm",
+          attrs: { role: "status", "aria-hidden": "true" }
+        }),
+        _vm._v("\n                正在提交...\n            ")
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -94854,10 +95030,10 @@ var reg = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
-module.exports = __webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
+module.exports = __webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
 
 
 /***/ })

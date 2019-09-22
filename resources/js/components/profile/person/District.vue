@@ -1,15 +1,21 @@
 <template>
     <div class="district">
-        <alert-box v-if="errors || success" :errors="errors" :success="success"></alert-box>
+        <alert-box v-if="errors || success" :errors.sync="errors" :success.sync="success"></alert-box>
         <div v-if="updating" class="input-group">
             <v-distpicker :province="district.province" :city="district.city" :area="district.area" @province="onChangeProvince" @city="onChangeCity" @area="onChangeArea"></v-distpicker>
-            <div class="input-group-append">
+             <div v-if="submitting" class="input-group-append">
+                <button class="btn btn-primary" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    正在提交...
+                </button>
+            </div>
+            <div v-else class="input-group-append">
                 <button @click="update" class="btn btn-outline-primary" type="button">保存</button>
                 <button @click="changeUpdateState" class="btn btn-outline-secondary" type="button">取消</button>
             </div>
         </div>
         <div v-else class="input-group">
-            <input id="birthday" class="form-control" type="text" :placeholder="placeholder" readonly>
+            <input id="district" class="form-control" type="text" :placeholder="placeholder" readonly>
             <div class="input-group-append">
                 <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 编辑</button>
             </div>
@@ -32,8 +38,8 @@
                 },
                 updating: false,
                 submitting: false,
-                errors: '',
-                success: ''         
+                errors: null,
+                success: null
             }
         },
         computed: {
@@ -49,35 +55,27 @@
                 this.district.province = ( data.value != '省' ) ? data.value : '';
                 this.district.city = '';
                 this.district.area = '';
+                this.errors = '';
+                this.success = '';
             },
             onChangeCity(data) {
                 this.district.city = ( data.value != '市' ) ? data.value : '';
                 this.district.area = '';
+                this.errors = '';
+                this.success = '';
             },
             onChangeArea(data) {
                 this.district.area = ( data.value != '区' ) ? data.value : '';
-            },
-            checkInput() {
-                console.log(this.district);
-                if(!this.district.province || this.district.province == '' || this.district.province == '省') {
-                    console.log(this.district.province);
-                    return this.showErrors('请选择省份');
-                }
-                if(!this.district.city || this.district.city == '' || this.district.city == '市') {
-                    console.log(this.district.city);
-                    return this.showErrors('请选择城市');
-                }
-                if(!this.district.area || this.district.area == '' || this.district.area == '区') {
-                    console.log(this.district.area);
-                    return this.showErrors('请选择区县');
-                }
-                return true;
+                this.errors = '';
+                this.success = '';
             },
             update() {
-
                 this.startSubmit();
-                if(!this.checkInput()) return this.finishSubmit();
-                if(this.value == this.district) return this.finishSubmit();
+                
+                if(!this.checkInput()) return false;
+
+                if(this.compare(this.value, this.district)) return this.finishSubmit();
+                
                 axios.post('person/district', {ditrict: this.district}).then(response => {
 
                     if(response.data.code == 201) {
@@ -99,18 +97,41 @@
 
                     }else{
 
-                        this.showErrors({unknown: ["未知错误"]});
+                        this.showErrors("未知错误");
 
                     }
                 });
 
+            },
 
+            checkInput() {
+                if(!this.district.province || this.district.province == '' || this.district.province == '省') {
+                    this.showErrors('请选择省份');
+                    return false;
+                }
+                if(!this.district.city || this.district.city == '' || this.district.city == '市') {
+                    this.showErrors('请选择城市');
+                    return false;
+                }
+                if(!this.district.area || this.district.area == '' || this.district.area == '区') {
+                    this.showErrors('请选择区县');
+                    return false;
+                }
+                return true;
+            },
+            
+            compare(district_1, district_2) {
+
+                if(district_1.province != district_2.province) return false;
+                if(district_1.city != district_2.city) return false;
+                if(district_1.area != district_2.area) return false;
+
+                return true;
             },
 
             changeUpdateState() {
 
                 this.updating = !this.updating;
-                return false;
 
             },
 
@@ -124,7 +145,6 @@
 
             finishSubmit() {
 
-                this.changeUpdateState();
                 this.submitting = false;
                 return false;
             
@@ -137,12 +157,10 @@
 
             },
 
-            showErrors(errors) {
-
-                this.errors = errors;
-                console.log(this.errors);
+            showErrors(msg) {
+                
+                this.errors = msg;
                 this.finishSubmit();
-                return false;
 
             }
 

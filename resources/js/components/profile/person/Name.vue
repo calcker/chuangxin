@@ -76,9 +76,6 @@
             changeUpdateState() {
 
                 this.updating = !this.updating;
-
-                return false;
-
             },
 
             startSubmit() {
