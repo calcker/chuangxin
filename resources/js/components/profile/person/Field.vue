@@ -1,21 +1,25 @@
 <template>
     <div class="field">
-        <div v-if="updating" class="input-group">
-            <select class="custom-select" v-model="selected">
-                <option selected>请选择...</option>
-                <option v-for="field in fields">
-                    {{field.name}}
-                </option>
-            </select>
-            <select class="custom-select">
-                <option selected>请选择...</option>
-                <option v-for="item in items">
-                    {{item.name}}
-                </option>
-            </select>
-            <div class="input-group-append">
-                <button @click="update" class="btn btn-outline-primary" type="button">保存</button>
-                <button @click="changeUpdateState" class="btn btn-outline-secondary" type="button">取消</button>
+        <alert-box v-if="errors || success" :errors.sync="errors" :success.sync="success"></alert-box>
+        <div v-if="updating">
+            
+            <div class="input-group">
+                <select class="custom-select" v-model="selected">
+                    <option selected>请选择...</option>
+                    <option v-for="field in fields">
+                        {{field.name}}
+                    </option>
+                </select>
+                <select class="custom-select">
+                    <option selected>请选择...</option>
+                    <option v-for="item in items">
+                        {{item.name}}
+                    </option>
+                </select>
+                <div class="input-group-append">
+                    <button @click="update" class="btn btn-outline-primary" type="button">保存</button>
+                    <button @click="changeUpdateState" class="btn btn-outline-secondary" type="button">取消</button>
+                </div>
             </div>
         </div>
         <div v-else class="input-group">
