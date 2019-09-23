@@ -76,11 +76,12 @@
 
                 if(this.compare(this.value, this.district)) return this.finishSubmit();
                 
-                axios.post('person/district', {ditrict: this.district}).then(response => {
+                axios.post('person/district', this.district).then(response => {
 
                     if(response.data.code == 201) {
 
                         this.showSuccess(response.data.msg);
+                        this.changeUpdateState();
                     
                     } else {
 

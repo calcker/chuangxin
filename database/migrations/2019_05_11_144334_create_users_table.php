@@ -67,8 +67,8 @@ class CreateUsersTable extends Migration
             $table->enum('gender', [1, 2])->nullable();
             $table->string('profession')->nullable()->index();
             $table->unsignedSmallInteger('field')->nullable()->index();
-            $table->datetime('birthday')->nullable();
-            $table->unsignedSmallInteger('district')->nullable()->index();
+            $table->date('birthday')->nullable();
+            $table->string('district')->nullable()->index();
             $table->text('brief')->nullable();
             $table->timestamps();
         });

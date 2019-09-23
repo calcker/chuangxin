@@ -2,7 +2,7 @@
     <div class="brief">
         <alert-box v-if="errors || success" :errors.sync="errors" :success.sync="success"></alert-box>
         <div v-if="updating">
-            <textarea id="brief" class="form-control mb-2" rows="10"></textarea>
+            <textarea id="brief" class="form-control mb-2" rows="10" v-model="brief" :disabled="submitting == true"></textarea>
             <div v-if="submitting" class="text-right">
                 <button class="btn btn-primary" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div v-else>
-            <textarea id="brief" class="form-control mb-2" rows="10" :placeholder="brief" readonly></textarea>
+            <textarea id="brief" class="form-control mb-2" rows="10" :placeholder="placeholder" readonly></textarea>
             <div class="text-right">
                 <button @click="changeUpdateState" class="btn btn-primary" type="button">
                     <i class="fas fa-pencil-alt"></i> 编辑
@@ -39,18 +39,30 @@
                 success: null
             };
         },
+        computed: {
+            placeholder() {
+
+                if(!this.brief) return '未填写';
+
+                return this.brief;
+
+            }
+        },
         methods: {
             update() {
 
                 this.startSubmit();
                 
                 if(!this.checkInput()) return false;
+
+                if(this.value == this.brief) return this.finishSubmit();
                 
                 axios.post('person/brief', {brief: this.brief}).then(response => {
 
                     if(response.data.code == 201) {
 
                         this.showSuccess(response.data.msg);
+                        this.changeUpdateState();
                     
                     } else {
 

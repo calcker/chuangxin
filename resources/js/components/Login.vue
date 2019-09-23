@@ -71,7 +71,7 @@
 
 		       		this.errors = error.response.data.msg;
 
-		       		if(!this.errors) this.errors = {unknown: ["未知错误"]};
+		       		if(!this.errors) this.errors = "未知错误";
 
       				this.$store.dispatch('DEL_AUTH_DATA');
 

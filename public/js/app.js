@@ -2312,9 +2312,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (error) {
         _this.errors = error.response.data.msg;
-        if (!_this.errors) _this.errors = {
-          unknown: ["未知错误"]
-        };
+        if (!_this.errors) _this.errors = "未知错误";
 
         _this.$store.dispatch('DEL_AUTH_DATA');
 
@@ -3196,24 +3194,38 @@ __webpack_require__.r(__webpack_exports__);
       birthday: this.value,
       updating: false,
       submitting: false,
-      errors: '',
-      success: '',
+      errors: null,
+      success: null,
       defaultVal: '1990-01-01',
       notBefore: '1900-01-01',
       notAfter: new Date()
     };
+  },
+  computed: {
+    placeholder: function placeholder() {
+      if (!this.birthday) return '未填写';
+      var date = new Date(this.birthday),
+          year = date.getFullYear(),
+          month = date.getMonth() + 1,
+          day = date.getDate();
+      return year + ' 年 ' + month + ' 月 ' + day + ' 日 ';
+    }
   },
   methods: {
     update: function update() {
       var _this = this;
 
       this.startSubmit();
+      console.log(this.birthday);
+      if (!this.checkInput()) return false;
       if (this.value == this.birthday) return this.finishSubmit();
       axios.post('person/birthday', {
         birthday: this.birthday
       }).then(function (response) {
         if (response.data.code == 201) {
           _this.showSuccess(response.data.msg);
+
+          _this.changeUpdateState();
         } else {
           _this.showErrors(response.data.msg);
         }
@@ -3223,15 +3235,15 @@ __webpack_require__.r(__webpack_exports__);
         if (errors) {
           _this.showErrors(errors);
         } else {
-          _this.showErrors({
-            unknown: ["未知错误"]
-          });
+          _this.showErrors("未知错误");
         }
       });
     },
+    checkInput: function checkInput() {
+      return true;
+    },
     changeUpdateState: function changeUpdateState() {
       this.updating = !this.updating;
-      return false;
     },
     startSubmit: function startSubmit() {
       this.errors = '';
@@ -3239,7 +3251,6 @@ __webpack_require__.r(__webpack_exports__);
       this.submitting = true;
     },
     finishSubmit: function finishSubmit() {
-      this.changeUpdateState();
       this.submitting = false;
       return false;
     },
@@ -3247,10 +3258,9 @@ __webpack_require__.r(__webpack_exports__);
       this.success = msg;
       this.finishSubmit();
     },
-    showErrors: function showErrors(errors) {
-      this.errors = errors;
+    showErrors: function showErrors(msg) {
+      this.errors = msg;
       this.finishSubmit();
-      return false;
     }
   },
   components: {
@@ -3310,17 +3320,26 @@ __webpack_require__.r(__webpack_exports__);
       success: null
     };
   },
+  computed: {
+    placeholder: function placeholder() {
+      if (!this.brief) return '未填写';
+      return this.brief;
+    }
+  },
   methods: {
     update: function update() {
       var _this = this;
 
       this.startSubmit();
       if (!this.checkInput()) return false;
+      if (this.value == this.brief) return this.finishSubmit();
       axios.post('person/brief', {
         brief: this.brief
       }).then(function (response) {
         if (response.data.code == 201) {
           _this.showSuccess(response.data.msg);
+
+          _this.changeUpdateState();
         } else {
           _this.showErrors(response.data.msg);
         }
@@ -3450,11 +3469,11 @@ __webpack_require__.r(__webpack_exports__);
       this.startSubmit();
       if (!this.checkInput()) return false;
       if (this.compare(this.value, this.district)) return this.finishSubmit();
-      axios.post('person/district', {
-        ditrict: this.district
-      }).then(function (response) {
+      axios.post('person/district', this.district).then(function (response) {
         if (response.data.code == 201) {
           _this.showSuccess(response.data.msg);
+
+          _this.changeUpdateState();
         } else {
           _this.showErrors(response.data.msg);
         }
@@ -4362,9 +4381,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (error) {
         _this.errors = error.response.data.msg;
-        if (!_this.errors) _this.errors = {
-          unknown: ["未知错误"]
-        };
+        if (!_this.errors) _this.errors = "未知错误";
 
         _this.$store.dispatch('DEL_REG_DATA');
 
@@ -73925,7 +73942,15 @@ var render = function() {
     [
       _vm.errors || _vm.success
         ? _c("alert-box", {
-            attrs: { errors: _vm.errors, success: _vm.success }
+            attrs: { errors: _vm.errors, success: _vm.success },
+            on: {
+              "update:errors": function($event) {
+                _vm.errors = $event
+              },
+              "update:success": function($event) {
+                _vm.success = $event
+              }
+            }
           })
         : _vm._e(),
       _vm._v(" "),
@@ -73936,6 +73961,7 @@ var render = function() {
             [
               _c("date-picker", {
                 attrs: {
+                  valueType: "format",
                   format: "YYYY-MM-DD",
                   "default-value": _vm.defaultVal,
                   "not-after": _vm.notAfter,
@@ -73982,7 +74008,7 @@ var render = function() {
               attrs: {
                 id: "birthday",
                 type: "text",
-                placeholder: _vm.birthday,
+                placeholder: _vm.placeholder,
                 readonly: ""
               }
             }),
@@ -74066,8 +74092,29 @@ var render = function() {
       _vm.updating
         ? _c("div", [
             _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.brief,
+                  expression: "brief"
+                }
+              ],
               staticClass: "form-control mb-2",
-              attrs: { id: "brief", rows: "10" }
+              attrs: {
+                id: "brief",
+                rows: "10",
+                disabled: _vm.submitting == true
+              },
+              domProps: { value: _vm.brief },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.brief = $event.target.value
+                }
+              }
             }),
             _vm._v(" "),
             _vm.submitting
@@ -74100,7 +74147,7 @@ var render = function() {
               attrs: {
                 id: "brief",
                 rows: "10",
-                placeholder: _vm.brief,
+                placeholder: _vm.placeholder,
                 readonly: ""
               }
             }),
@@ -95030,10 +95077,10 @@ var reg = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
-module.exports = __webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
+module.exports = __webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
 
 
 /***/ })

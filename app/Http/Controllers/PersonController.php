@@ -272,7 +272,48 @@ class PersonController extends Controller
 
         $person = $user->person;
 
-        $person->district = json_encode($data['district'], JSON_UNESCAPED_UNICODE);
+        $person->district = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+        $person->save();
+
+        return response()->json([
+            'code' => 201,
+            'msg' => '修改成功',
+            'data' => $data,
+        ]);
+
+    }
+
+    //修改简介
+    public function brief(Request $request)
+    {
+        $data = $request->input();
+
+        $messages = [
+            'brief.required' => '简介不能为空',
+            'brief.min' => '简介不能为空',
+            'brief.max' => '简介不能超过2000个字符',
+        ];
+
+        $validator = Validator::make($data, [
+            'brief' => ['required', 'string', 'min:1', 'max:2000'],
+        ], $messages);
+
+        if($validator->fails()) {
+            
+            throw new HttpResponseException(response()->json([
+                'code' => 422,
+                'msg'  => $validator->errors(),
+                'data' => null
+            ], 422));
+
+        }
+        
+        $user = auth()->user();
+
+        $person = $user->person;
+
+        $person->brief = $data['brief'];
 
         $person->save();
 

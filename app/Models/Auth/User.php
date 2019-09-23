@@ -118,7 +118,7 @@ class User extends Model implements
             'profession' => $person->profession,
             'field' => $person->field,
             'birthday' => $person->birthday,
-            'distirct' => $person->district,
+            'district' => $person->district,
             'brief' => $person->brief,
         ];
 

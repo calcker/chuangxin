@@ -110,7 +110,9 @@
                     this.info.brief = data.brief;
 
                     if(data.district){
-                        this.info.district = $.parseJSON(data.district);    
+
+                        this.info.district = $.parseJSON(data.district);
+                    
                     }else{
                         this.info.district = {
                             province: '',

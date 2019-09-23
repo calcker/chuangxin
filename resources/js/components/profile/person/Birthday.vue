@@ -1,8 +1,8 @@
 <template>
     <div class="birthday">
-        <alert-box v-if="errors || success" :errors="errors" :success="success"></alert-box>
+        <alert-box v-if="errors || success" :errors.sync="errors" :success.sync="success"></alert-box>
         <div v-if="updating" class="input-group">
-            <date-picker v-model="birthday" format="YYYY-MM-DD" :default-value="defaultVal" :not-after="notAfter" :not-before="notBefore"></date-picker>
+            <date-picker v-model="birthday" valueType="format" format="YYYY-MM-DD" :default-value="defaultVal" :not-after="notAfter" :not-before="notBefore"></date-picker>
             <div v-if="submitting" class="input-group-append">
                 <button class="btn btn-primary" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div v-else class="input-group">
-            <input id="birthday" class="form-control" type="text" :placeholder="birthday" readonly>
+            <input id="birthday" class="form-control" type="text" :placeholder="placeholder" readonly>
             <div class="input-group-append">
                 <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 编辑</button>
             </div>
@@ -34,17 +34,34 @@
                 birthday: this.value,
                 updating: false,
                 submitting: false,
-                errors: '',
-                success: '',
+                errors: null,
+                success: null,
                 defaultVal: '1990-01-01',
                 notBefore: '1900-01-01',
                 notAfter: new Date()
             };
         },
+        computed: {
+            placeholder() {
+
+                if( !this.birthday ) return '未填写';
+
+                var date = new Date(this.birthday),
+                    year = date.getFullYear(),
+                    month = date.getMonth() + 1,
+                    day = date.getDate();
+
+                return year + ' 年 ' + month + ' 月 ' + day + ' 日 ';
+            }
+        },
         methods: {
             update() {
 
                 this.startSubmit();
+
+                console.log(this.birthday);
+
+                if(!this.checkInput()) return false;
 
                 if(this.value == this.birthday) return this.finishSubmit();
 
@@ -53,6 +70,7 @@
                     if(response.data.code == 201) {
 
                         this.showSuccess(response.data.msg);
+                        this.changeUpdateState();
                     
                     } else {
 
@@ -69,7 +87,7 @@
 
                     }else{
 
-                        this.showErrors({unknown: ["未知错误"]});
+                        this.showErrors("未知错误");
 
                     }
                 });
@@ -77,11 +95,14 @@
 
             },
 
+            checkInput() {
+
+                return true;
+            },
+
             changeUpdateState() {
 
                 this.updating = !this.updating;
-                return false;
-
             },
 
             startSubmit() {
@@ -94,7 +115,6 @@
 
             finishSubmit() {
 
-                this.changeUpdateState();
                 this.submitting = false;
                 return false;
             
@@ -107,11 +127,10 @@
 
             },
 
-            showErrors(errors) {
-
-                this.errors = errors;
+            showErrors(msg) {
+                
+                this.errors = msg;
                 this.finishSubmit();
-                return false;
 
             }
 
