@@ -2,15 +2,15 @@
     <div class="field">
         <alert-box v-if="errors || success" :errors.sync="errors" :success.sync="success"></alert-box>
         <div v-if="updating">
-            
+            <tags :tags.sync="selected" :deleteable="deleteable"></tags>
             <div class="input-group">
-                <select class="custom-select" v-model="selected">
+                <select class="custom-select">
                     <option selected>请选择...</option>
                     <option v-for="field in fields">
                         {{field.name}}
                     </option>
                 </select>
-                <select class="custom-select">
+                <select class="custom-select" v-model="seletcted">
                     <option selected>请选择...</option>
                     <option v-for="item in items">
                         {{item.name}}
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div v-else class="input-group">
-            <input id="birthday" class="form-control" type="text" :placeholder="value" readonly>
+            <input id="field" class="form-control" type="text" :placeholder="value" readonly>
             <div class="input-group-append">
                 <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 编辑</button>
             </div>
@@ -32,14 +32,16 @@
 </template>
 
 <script>
+    import AlertBox from '../../AlertBox'
+    import Tags from '../../Tags'
+
     export default {
         props: ['value'],
         data() {
             return {
-                time: null,
-                name: this.value,
+                selected: this.value,
+                deleteable: true,
                 updating: false,
-                selected: null,
                 fields: [
                     {
                         name: '工程技术类',
@@ -80,7 +82,7 @@
                 ]
             };
         },
-        computed:{
+        computed: {
             items: function() {
                 for (var i = 0; i < this.fields.length; i++) {
                     if (this.fields[i].name === this.selected) {
@@ -88,6 +90,14 @@
                         return this.fields[i].items;
                     }
                 }
+            }
+        },
+        watch: {
+            selected(val) {
+
+
+                console.log(val);
+
             }
         },
         methods: {
@@ -101,6 +111,7 @@
 
             }
 
-        }
+        },
+        components: {AlertBox, Tags}
     }
 </script>
