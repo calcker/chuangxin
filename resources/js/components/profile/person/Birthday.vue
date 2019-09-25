@@ -59,8 +59,6 @@
 
                 this.startSubmit();
 
-                console.log(this.birthday);
-
                 if(!this.checkInput()) return false;
 
                 if(this.value == this.birthday) return this.finishSubmit();

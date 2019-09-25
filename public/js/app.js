@@ -2397,17 +2397,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['tags', 'deletable'],
   methods: {
     onDelete: function onDelete(event) {
       var tags = this.tags,
-          name = $(event.target).parent().text();
+          name = $(event.target).parent().val();
       $.each(tags, function (i, tag) {
-        if (tag.name == name) tags.splice(i, 1);
+        if (tag == name) tags.splice(i, 1);
       });
       this.$emit("update:tags", tags);
     }
@@ -3254,7 +3251,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.startSubmit();
-      console.log(this.birthday);
       if (!this.checkInput()) return false;
       if (this.value == this.birthday) return this.finishSubmit();
       axios.post('person/birthday', {
@@ -3674,9 +3670,14 @@ __webpack_require__.r(__webpack_exports__);
   props: ['value'],
   data: function data() {
     return {
-      selected: this.value,
-      deleteable: true,
+      selected: null,
+      deletable: true,
+      sort: null,
+      item: null,
       updating: false,
+      submitting: false,
+      errors: null,
+      success: null,
       fields: [{
         name: '工程技术类',
         items: [{
@@ -3724,18 +3725,34 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
+  created: function created() {
+    if (this.value) {
+      this.selected = this.value.split(' ');
+    } else {
+      this.selected = new Array();
+    }
+  },
   computed: {
+    placeholder: function placeholder() {
+      if (this.selected.length == 0) return '未填写';
+      return this.selected.join(', ');
+    },
     items: function items() {
       for (var i = 0; i < this.fields.length; i++) {
-        if (this.fields[i].name === this.selected) {
+        if (this.fields[i].name === this.sort) {
           return this.fields[i].items;
         }
       }
     }
   },
   watch: {
-    selected: function selected(val) {
-      console.log(val);
+    item: function item(val) {
+      if (this.item) {
+        if (this.selected.indexOf(this.item, this.selected) < 0) this.selected.push(val);
+      }
+
+      this.sort = '';
+      this.item = '';
     }
   },
   methods: {
@@ -72996,9 +73013,9 @@ var render = function() {
     _vm._l(_vm.tags, function(tag) {
       return _c(
         "div",
-        { staticClass: "alert alert-primary", attrs: { role: "alert" } },
+        { staticClass: "alert alert-success", attrs: { role: "alert" } },
         [
-          _vm._v("\n\t\t" + _vm._s(tag.name) + "\n\t\t"),
+          _vm._v("\n\t\t" + _vm._s(tag) + "\n\t\t"),
           _vm.deletable
             ? _c(
                 "button",
@@ -73007,7 +73024,8 @@ var render = function() {
                   attrs: {
                     type: "button",
                     "data-dismiss": "alert",
-                    "aria-label": "Close"
+                    "aria-label": "Close",
+                    value: tag
                   },
                   on: { click: _vm.onDelete }
                 },
@@ -74564,7 +74582,7 @@ var render = function() {
             "div",
             [
               _c("tags", {
-                attrs: { tags: _vm.selected, deleteable: _vm.deleteable },
+                attrs: { tags: _vm.selected, deletable: _vm.deletable },
                 on: {
                   "update:tags": function($event) {
                     _vm.selected = $event
@@ -74575,11 +74593,41 @@ var render = function() {
               _c("div", { staticClass: "input-group" }, [
                 _c(
                   "select",
-                  { staticClass: "custom-select" },
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sort,
+                        expression: "sort"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.sort = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
                   [
-                    _c("option", { attrs: { selected: "" } }, [
-                      _vm._v("请选择...")
-                    ]),
+                    _c(
+                      "option",
+                      {
+                        staticStyle: { display: "none" },
+                        attrs: { disabled: "", selected: "" }
+                      },
+                      [_vm._v("请选择...")]
+                    ),
                     _vm._v(" "),
                     _vm._l(_vm.fields, function(field) {
                       return _c("option", [
@@ -74601,8 +74649,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.seletcted,
-                        expression: "seletcted"
+                        value: _vm.item,
+                        expression: "item"
                       }
                     ],
                     staticClass: "custom-select",
@@ -74616,16 +74664,21 @@ var render = function() {
                             var val = "_value" in o ? o._value : o.value
                             return val
                           })
-                        _vm.seletcted = $event.target.multiple
+                        _vm.item = $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
                       }
                     }
                   },
                   [
-                    _c("option", { attrs: { selected: "" } }, [
-                      _vm._v("请选择...")
-                    ]),
+                    _c(
+                      "option",
+                      {
+                        staticStyle: { display: "none" },
+                        attrs: { disabled: "", selected: "" }
+                      },
+                      [_vm._v("请选择...")]
+                    ),
                     _vm._v(" "),
                     _vm._l(_vm.items, function(item) {
                       return _c("option", [
@@ -74671,7 +74724,7 @@ var render = function() {
               attrs: {
                 id: "field",
                 type: "text",
-                placeholder: _vm.value,
+                placeholder: _vm.placeholder,
                 readonly: ""
               }
             }),

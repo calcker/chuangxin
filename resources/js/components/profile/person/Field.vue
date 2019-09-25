@@ -2,16 +2,16 @@
     <div class="field">
         <alert-box v-if="errors || success" :errors.sync="errors" :success.sync="success"></alert-box>
         <div v-if="updating">
-            <tags :tags.sync="selected" :deleteable="deleteable"></tags>
+            <tags :tags.sync="selected" :deletable="deletable"></tags>
             <div class="input-group">
-                <select class="custom-select">
-                    <option selected>请选择...</option>
+                <select class="custom-select" v-model="sort">
+                    <option disabled selected style='display:none;'>请选择...</option>
                     <option v-for="field in fields">
                         {{field.name}}
                     </option>
                 </select>
-                <select class="custom-select" v-model="seletcted">
-                    <option selected>请选择...</option>
+                <select class="custom-select" v-model="item">
+                    <option disabled selected style='display:none;'>请选择...</option>
                     <option v-for="item in items">
                         {{item.name}}
                     </option>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div v-else class="input-group">
-            <input id="field" class="form-control" type="text" :placeholder="value" readonly>
+            <input id="field" class="form-control" type="text" :placeholder="placeholder" readonly>
             <div class="input-group-append">
                 <button @click="changeUpdateState" class="btn btn-primary" type="button"><i class="fas fa-pencil-alt"></i> 编辑</button>
             </div>
@@ -39,9 +39,14 @@
         props: ['value'],
         data() {
             return {
-                selected: this.value,
-                deleteable: true,
+                selected: null,
+                deletable: true,
+                sort: null,
+                item: null,
                 updating: false,
+                submitting: false,
+                errors: null,
+                success: null,
                 fields: [
                     {
                         name: '工程技术类',
@@ -82,30 +87,58 @@
                 ]
             };
         },
+        created() {
+
+            if(this.value) {
+
+                this.selected = this.value.split(' ');
+
+
+            } else{
+
+                this.selected = new Array();
+
+            }
+
+        },
         computed: {
-            items: function() {
+            placeholder() {
+
+                if( this.selected.length == 0 ) return '未填写';
+
+                return this.selected.join(', ');
+               
+            },
+            items() {
                 for (var i = 0; i < this.fields.length; i++) {
-                    if (this.fields[i].name === this.selected) {
+                    if (this.fields[i].name === this.sort) {
 
                         return this.fields[i].items;
                     }
                 }
             }
         },
+        
         watch: {
-            selected(val) {
+            item(val) {
 
+                if(this.item){
 
-                console.log(val);
+                    if( this.selected.indexOf(this.item, this.selected) < 0 ) this.selected.push(val);
+
+                }
+
+                this.sort = '';
+                this.item = '';
 
             }
         },
         methods: {
-            update: function(){
+            update() {
                 console.log('ffa');
 
             },
-            changeUpdateState: function(){
+            changeUpdateState() {
 
                 this.updating = !this.updating;
 
