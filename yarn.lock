@@ -6313,6 +6313,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-avatar-cropper@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/vue-avatar-cropper/-/vue-avatar-cropper-1.0.5.tgz#c4be274d61bd699bfe2510deb053e2e49032cfb2"
+  integrity sha512-NNIZrc2CKZx8iIeVHom6PTxPgNtPolrmTkE0nlSokcf7shSse7XpiIXvJmBI/P3Jy2k4a31iroSYc31wn93sMg==
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.3.tgz#2756f46cb3258054c5f4723de8ae7e87302a1ccf"
