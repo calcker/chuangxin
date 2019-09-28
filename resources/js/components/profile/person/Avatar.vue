@@ -14,7 +14,7 @@
 
 <style type="text/css">
 .avatar-setting {
-    padding-top: 20px;
+    padding-top: 50px;
 
 }
 
