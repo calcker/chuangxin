@@ -3,8 +3,8 @@
         <div class="card-body">
             <h3 class="card-title mt-3 mb-3"><i class="fas fa-user-circle"></i>头像设置</h3>
             <hr>
-            <div class="text-center">
-                <img v-if="userAvatar" :src="userAvatar">
+            <div class="avatar-setting text-center">
+                <p><img v-if="userAvatar" :src="userAvatar"></p>
                 <button id="pick-avatar" type="button" class="btn btn-primary"><i class="fas fa-crop-alt"></i> 选择图片</button>
                 <avatar-cropper @uploaded="handleUploaded" trigger="#pick-avatar" upload-url="/files/upload" />
             </div>
@@ -13,6 +13,10 @@
 </template>
 
 <style type="text/css">
+.avatar-setting {
+    padding-top: 20px;
+
+}
 
 </style>
 
@@ -23,7 +27,7 @@
         components: { AvatarCropper },
         data() {
             return {
-                userAvatar: undefined,
+                userAvatar: 'http://pyhpt8jwi.bkt.clouddn.com',
             }
         },
         methods: {
