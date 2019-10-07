@@ -5,8 +5,12 @@
 	  			<li class="nav-item">
 	 			   <a class="nav-link active" href="#">动态</a>
 	  			</li>
+	  			<!--
 	  			<li class="nav-item">
 	    			<a class="nav-link" href="#">作品</a>
+	  			</li>
+	  			<li class="nav-item">
+	 			   <a class="nav-link" href="#">项目</a>
 	  			</li>
 	  			<li class="nav-item">
 	 			   <a class="nav-link" href="#">灵感</a>
@@ -14,15 +18,7 @@
 	  			<li class="nav-item">
 	    			<a class="nav-link" href="#">招聘</a>
 	  			</li>
-	  			<li class="nav-item">
-	    			<a class="nav-link" href="#">出售</a>
-	  			</li>
-	  			<li class="nav-item">
-	    			<a class="nav-link" href="#">消息</a>
-	  			</li>
-	  			<li class="nav-item">
-	    			<a class="nav-link" href="#">外包</a>
-	  			</li>
+	  			-->
 			</ul>
 		</div>
 	</div>

@@ -55,6 +55,10 @@ Route::group(['prefix' => 'albums'], function(){
     //Route::post('someone/{id}', 'Content\CountsController@someone');
 });
 
+Route::group(['prefix' => 'upload'], function(){
+    Route::post('avatar', 'UploadController@avatar');
+    //Route::post('someone/{id}', 'Content\CountsController@someone');
+});
 
 
 

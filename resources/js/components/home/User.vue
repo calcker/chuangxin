@@ -1,7 +1,6 @@
 <template>
 	<div class="card">
  		<div class="card-body">
- 			<h6 class="card-title"><b>创客:</b></h6>
  			<a :href="'/user/'+ user.id" class="text-center">
  				<p>
  					<img class="rounded-circle" src="/images/img_avatar.png" style="width:96px;height:96px" :alt="user.name" :title="user.name">
@@ -19,7 +18,7 @@
 				<div class="col-md-4">
 					<a class="nav-link" href="/my/opinions/">
 			  			<h5>{{user.opinions}}</h5>
-			    		<p>见解</p>
+			    		<p>项目</p>
 			    	</a>
 				</div>
     			<div class="col-md-4">
@@ -33,12 +32,12 @@
     	<ul class="list-group list-group-flush">
     		<li class="list-group-item">
     			<a href="/router#/works/new" class="btn btn-outline-secondary btn-block">
-    				<i class="fas fa-plus"></i> 新建作品
+    				<i class="fas fa-palette"></i> 发表作品
     			</a>
     		</li>
     		<li class="list-group-item">
     			<a href="/router#/project/new" class="btn btn-outline-secondary btn-block">
-    				<i class="fas fa-users"></i> 发起项目
+    				<i class="fas fa-hammer"></i> 创建项目
     			</a>
     		</li>
     		<li class="list-group-item">

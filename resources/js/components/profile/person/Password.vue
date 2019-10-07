@@ -5,15 +5,21 @@
             <hr>
             <form>
                 <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">账号类型</label>
+                    <label for="oldPassword" class="col-sm-2 col-form-label">旧密码</label>
                     <div class="col-sm-10">
-                        <input class="form-control" type="text" placeholder="个人" readonly>
+                        <input type="password" class="form-control" id="oldPassword" placeholder="旧密码">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                    <label for="newPassword" class="col-sm-2 col-form-label">新密码</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                        <input type="password" class="form-control" id="newPassword" placeholder="新密码">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="repeatPassword" class="col-sm-2 col-form-label">重复新密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="repeatPassword" placeholder="重复新密码">
                     </div>
                 </div>
             </form>
