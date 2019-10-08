@@ -3221,9 +3221,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Loading */ "./resources/js/components/Loading.vue");
-/* harmony import */ var vue_avatar_cropper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-avatar-cropper */ "./node_modules/vue-avatar-cropper/dist/index.js");
-/* harmony import */ var vue_avatar_cropper__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_avatar_cropper__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _AlertBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../AlertBox */ "./resources/js/components/AlertBox.vue");
+/* harmony import */ var vue_avatar_cropper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-avatar-cropper */ "./node_modules/vue-avatar-cropper/dist/index.js");
+/* harmony import */ var vue_avatar_cropper__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_avatar_cropper__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -3255,21 +3256,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
+    AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_1__["default"],
     Loading: _Loading__WEBPACK_IMPORTED_MODULE_0__["default"],
-    AvatarCropper: vue_avatar_cropper__WEBPACK_IMPORTED_MODULE_1___default.a
+    AvatarCropper: vue_avatar_cropper__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   data: function data() {
     return {
       status: 'loading',
-      //'loading', 'loading-success', 'loading-failure',
+      //'loading', 'load-success', 'load-failure',
       token: null,
       uploadURL: null,
       downloadURL: null,
@@ -3285,10 +3285,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         width: 128,
         height: 128
       },
-      rand: this.random()
+      rand: this.random(),
+      errors: null,
+      success: null
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['userInfo']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['userInfo']), {
     src: function src() {
       return this.downloadURL + '/' + this.userKey + '?' + this.rand;
     },
@@ -3308,14 +3310,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.token = response.data.data.token;
         _this.uploadURL = response.data.data.uploadURL;
         _this.downloadURL = response.data.data.downloadURL;
-        _this.status = 'loading-success';
+        _this.status = 'load-success';
       } else {
-        _this.status = 'loading-failure';
+        _this.status = 'load-failure';
+        _this.errors = '加载失败';
       }
     })["catch"](function (error) {
       var errors = error.response.data.msg;
       console.log(errors);
-      _this.status = 'loading-failure';
+      _this.status = 'load-failure';
+      _this.errors = '加载失败';
+      console.log(_this.errors);
     });
   },
   methods: {
@@ -73490,7 +73495,7 @@ var staticRenderFns = [
                 staticClass: "btn btn-outline-secondary",
                 attrs: { type: "submit" }
               },
-              [_c("i", { staticClass: "fas fa-pencil-alt" }), _vm._v(" 记录")]
+              [_c("i", { staticClass: "fas fa-pencil-alt" }), _vm._v(" 保存")]
             )
           ])
         ])
@@ -74174,7 +74179,21 @@ var render = function() {
         _vm._v(" "),
         _vm.status == "loading" ? _c("loading") : _vm._e(),
         _vm._v(" "),
-        _vm.status == "loading-success"
+        _vm.errors || _vm.success
+          ? _c("alert-box", {
+              attrs: { errors: _vm.errors, success: _vm.success },
+              on: {
+                "update:errors": function($event) {
+                  _vm.errors = $event
+                },
+                "update:success": function($event) {
+                  _vm.success = $event
+                }
+              }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.status == "load-success"
           ? _c(
               "div",
               { staticClass: "avatar-setting text-center" },
@@ -74196,12 +74215,6 @@ var render = function() {
               ],
               1
             )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.status == "loading-failure"
-          ? _c("div", { staticClass: "text-center" }, [
-              _c("p", [_vm._v("加载失败！")])
-            ])
           : _vm._e()
       ],
       1
@@ -95653,10 +95666,10 @@ var reg = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
-module.exports = __webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
+module.exports = __webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
 
 
 /***/ })

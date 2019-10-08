@@ -4,15 +4,12 @@
             <h3 class="card-title mt-3 mb-3"><i class="fas fa-user-circle"></i>头像设置</h3>
             <hr>
             <loading v-if="status == 'loading'"></loading>
-            <div v-if="status == 'loading-success'" class="avatar-setting text-center">
+            <alert-box v-if="errors || success" :errors.sync="errors" :success.sync="success"></alert-box>
+            <div v-if="status == 'load-success'" class="avatar-setting text-center">
                 <p><img :src="src"></p>
                 <button id="pick-avatar" type="button" class="btn btn-primary"><i class="fas fa-crop-alt"></i> 选择图片</button>
                 <avatar-cropper @uploaded="handleUploaded" trigger="#pick-avatar" :upload-url="uploadURL" :upload-form-data="uploadData" :cropper-options="cropperOptions" :output-options="outputOptions"/>
             </div>
-            <div v-if="status == 'loading-failure'" class="text-center">
-                <p>加载失败！</p>
-            </div>
-
         </div>
     </div>
 </template>
@@ -30,15 +27,16 @@
 
 <script>
     import Loading from '../../Loading'
+    import AlertBox from '../../AlertBox'
     import AvatarCropper from 'vue-avatar-cropper'
     import { mapGetters } from 'vuex'
 
     export default {
-        components: { Loading, AvatarCropper },
+        components: { AlertBox, Loading, AvatarCropper },
 
         data() {
             return {
-                status: 'loading', //'loading', 'loading-success', 'loading-failure',
+                status: 'loading', //'loading', 'load-success', 'load-failure',
                 token: null,
                 uploadURL: null,
                 downloadURL: null,
@@ -51,10 +49,12 @@
                     zoomable: true
                 },
                 outputOptions: {
-                    width: 128, 
+                    width: 128,
                     height: 128
                 },
-                rand: this.random()
+                rand: this.random(),
+                errors: null,
+                success: null
             }
         },
 
@@ -86,23 +86,19 @@
                     this.token = response.data.data.token;
                     this.uploadURL = response.data.data.uploadURL;
                     this.downloadURL = response.data.data.downloadURL;
-                    this.status = 'loading-success';
+                    this.status = 'load-success';
 
-                
                 } else {
 
-                    this.status = 'loading-failure';
+                    this.loadFailure();
+
                 }
                 
 
             }).catch(error => {
                 
-                const errors = error.response.data.msg;
-
-                console.log(errors);
-
-                this.status = 'loading-failure';
-               
+                this.loadFailure();
+                
             });
 
         },
@@ -116,6 +112,13 @@
             random() {
 
                 return Math.floor(Math.random()*10000);
+
+            },
+
+            loadFailure() {
+
+                this.status = 'load-failure';
+                this.errors = '加载失败';
 
             }
         }
