@@ -3312,15 +3312,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.downloadURL = response.data.data.downloadURL;
         _this.status = 'load-success';
       } else {
-        _this.status = 'load-failure';
-        _this.errors = '加载失败';
+        _this.loadFailure();
       }
     })["catch"](function (error) {
-      var errors = error.response.data.msg;
-      console.log(errors);
-      _this.status = 'load-failure';
-      _this.errors = '加载失败';
-      console.log(_this.errors);
+      _this.loadFailure();
     });
   },
   methods: {
@@ -3329,6 +3324,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     random: function random() {
       return Math.floor(Math.random() * 10000);
+    },
+    loadFailure: function loadFailure() {
+      this.status = 'load-failure';
+      this.errors = '加载失败';
     }
   }
 });
@@ -95666,10 +95665,10 @@ var reg = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
-module.exports = __webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
+module.exports = __webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
 
 
 /***/ })

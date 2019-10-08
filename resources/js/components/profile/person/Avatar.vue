@@ -86,8 +86,7 @@
                     this.token = response.data.data.token;
                     this.uploadURL = response.data.data.uploadURL;
                     this.downloadURL = response.data.data.downloadURL;
-                    this.status = 'load-success';
-
+                    this.loadSuccess();
                 } else {
 
                     this.loadFailure();
@@ -110,11 +109,13 @@
             },
 
             random() {
-
                 return Math.floor(Math.random()*10000);
-
             },
 
+            loadSuccess() {
+                this.status = 'load-success';
+            },
+            
             loadFailure() {
 
                 this.status = 'load-failure';
