@@ -18,6 +18,8 @@ class UploadController extends Controller
         $config = config('qiniu.avatar');
 
         $qiniu = new Qiniu($config);
+
+        $qiniu->fileKey = auth()->user()->key;
     	
         return response()->json([
             'code' => 201,

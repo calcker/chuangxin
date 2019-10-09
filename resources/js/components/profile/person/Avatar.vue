@@ -33,7 +33,7 @@
 
     export default {
         components: { AlertBox, Loading, AvatarCropper },
-
+        props: ['value'],
         data() {
             return {
                 status: 'loading', //'loading', 'load-success', 'load-failure',

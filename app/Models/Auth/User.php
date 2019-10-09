@@ -84,8 +84,6 @@ class User extends Model implements
         return $this->hasMany(Album::class);
     }
 
-
-
     public function counts()
     {
         $person = $this->person;

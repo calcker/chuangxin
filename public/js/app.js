@@ -3266,6 +3266,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Loading: _Loading__WEBPACK_IMPORTED_MODULE_0__["default"],
     AvatarCropper: vue_avatar_cropper__WEBPACK_IMPORTED_MODULE_2___default.a
   },
+  props: ['value'],
   data: function data() {
     return {
       status: 'loading',
@@ -3310,7 +3311,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.token = response.data.data.token;
         _this.uploadURL = response.data.data.uploadURL;
         _this.downloadURL = response.data.data.downloadURL;
-        _this.status = 'load-success';
+
+        _this.loadSuccess();
       } else {
         _this.loadFailure();
       }
@@ -3324,6 +3326,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     random: function random() {
       return Math.floor(Math.random() * 10000);
+    },
+    loadSuccess: function loadSuccess() {
+      this.status = 'load-success';
     },
     loadFailure: function loadFailure() {
       this.status = 'load-failure';
@@ -4142,6 +4147,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Name: _Name__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Gender: _Gender__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Profession: _Profession__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Field: _Field__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Birthday: _Birthday__WEBPACK_IMPORTED_MODULE_5__["default"],
+    District: _District__WEBPACK_IMPORTED_MODULE_6__["default"],
+    Brief: _Brief__WEBPACK_IMPORTED_MODULE_7__["default"]
+  },
   data: function data() {
     return {
       info: {
@@ -4199,16 +4214,6 @@ __webpack_require__.r(__webpack_exports__);
     changeLoadedState: function changeLoadedState() {
       this.loaded = true;
     }
-  },
-  components: {
-    AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Name: _Name__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Gender: _Gender__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Profession: _Profession__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Field: _Field__WEBPACK_IMPORTED_MODULE_4__["default"],
-    Birthday: _Birthday__WEBPACK_IMPORTED_MODULE_5__["default"],
-    District: _District__WEBPACK_IMPORTED_MODULE_6__["default"],
-    Brief: _Brief__WEBPACK_IMPORTED_MODULE_7__["default"]
   }
 });
 
@@ -73717,7 +73722,7 @@ var render = function() {
             [
               _c("h5", [_vm._v(_vm._s(_vm.user.praises))]),
               _vm._v(" "),
-              _c("p", [_vm._v("赞")])
+              _c("p", [_vm._v("关注者")])
             ]
           )
         ])
@@ -95665,10 +95670,10 @@ var reg = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
-module.exports = __webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
+module.exports = __webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
 
 
 /***/ })

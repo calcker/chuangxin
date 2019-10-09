@@ -74,6 +74,8 @@
     import Brief from './Brief'
 
     export default {
+        components: {AlertBox, Name, Gender, Profession, Field, Birthday, District, Brief},
+        
         data() {
             return {
                 info: {
@@ -145,8 +147,7 @@
                 this.loaded = true;
             }
 
-        },
-        components: {AlertBox, Name, Gender, Profession, Field, Birthday, District, Brief}
+        }
 
     }
 </script>

@@ -29,7 +29,8 @@ class Qiniu extends DataObject
     public function getUploadToken()
     {
         
-        return $this->auth->uploadToken($this->bucket);
+        return $this->auth->uploadToken($this->bucket, $this->fileKey);
+        //return $this->auth->uploadToken($this->bucket, $this->fileKey, $this->expries, $this->policy, true);
         //return $this->auth->uploadToken($this->bucket, null, $this->expries, $this->policy, true);
         
     }

@@ -24,7 +24,7 @@
     			<div class="col-md-4">
 			    	<a class="nav-link" href="/my/praises/">
 			    		<h5>{{user.praises}}</h5>
-			    		<p>赞</p>
+			    		<p>关注者</p>
 			    	</a>
 				</div>
 			</div>
