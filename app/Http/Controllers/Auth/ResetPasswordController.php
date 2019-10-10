@@ -27,6 +27,14 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = '/home';
 
+    
+    public function reset(Request $request)
+    {
+        $request->validate($this->rules(), $this->validationErrorMessages());
+        
+    }
+
+
     /**
      * Create a new controller instance.
      *

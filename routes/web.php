@@ -24,6 +24,11 @@ Route::get('/register/email/verify/{token}', 'Auth\EmailVerificationController@v
 Route::post('/login', 'Auth\EmailLoginController@login');
 Route::get('/logout', 'Auth\LoginController@logout');
 
+Route::group(['prefix' => 'auth'], function(){
+    Route::post('password', 'Auth\ResetPasswordController@reset');
+});
+
+
 Route::group(['prefix' => 'feeds'], function(){
     Route::post('update', 'Feed\FeedsController@update');
     Route::post('backward', 'Feed\FeedsController@backward');

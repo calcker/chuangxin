@@ -3189,6 +3189,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    TopBar: _home_TopBar__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Info: _person_Info__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Avatar: _person_Avatar__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Password: _person_Password__WEBPACK_IMPORTED_MODULE_3__["default"],
+    Email: _person_Email__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Mobile: _person_Mobile__WEBPACK_IMPORTED_MODULE_5__["default"]
+  },
   data: function data() {
     return {
       showingComponent: 'Info'
@@ -3198,14 +3206,6 @@ __webpack_require__.r(__webpack_exports__);
     showComponent: function showComponent(component) {
       this.showingComponent = component;
     }
-  },
-  components: {
-    TopBar: _home_TopBar__WEBPACK_IMPORTED_MODULE_0__["default"],
-    Info: _person_Info__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Avatar: _person_Avatar__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Password: _person_Password__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Email: _person_Email__WEBPACK_IMPORTED_MODULE_4__["default"],
-    Mobile: _person_Mobile__WEBPACK_IMPORTED_MODULE_5__["default"]
   }
 });
 
@@ -4377,6 +4377,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AlertBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AlertBox */ "./resources/js/components/AlertBox.vue");
 //
 //
 //
@@ -4410,11 +4411,118 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
-      data: ''
+      password: {
+        old: null,
+        "new": null,
+        repeat: null
+      },
+      submitting: false,
+      errors: null,
+      success: null
     };
+  },
+  methods: {
+    submit: function submit() {
+      var _this = this;
+
+      this.clear();
+      this.startSubmit();
+      if (!this.checkInput()) return false;
+      /*
+      if(!this.checkInput()) {
+           this.finishSubmit();
+          return false;
+       }
+      */
+
+      return false;
+      axios.post('auth/password', {
+        password: this.password
+      }).then(function (response) {
+        if (response.data.code == 201) {
+          _this.showSuccess(response.data.msg);
+
+          _this.changeUpdateState();
+        } else {
+          _this.showErrors(response.data.msg);
+        }
+      })["catch"](function (error) {
+        var errors = error.response.data.msg;
+
+        if (errors) {
+          _this.showErrors(errors);
+        } else {
+          _this.showErrors("未知错误");
+        }
+      });
+    },
+    checkInput: function checkInput() {
+      this.clear();
+
+      if (!this.password.old) {
+        this.showErrors('请输入原密码');
+        return false;
+      }
+
+      if (!this.password["new"]) {
+        this.showErrors('请输入新密码');
+        return false;
+      }
+
+      if (!this.password.repeat) {
+        this.showErrors('请重复输入新密码');
+        return false;
+      }
+
+      if (this.password["new"] != this.password.repeat) {
+        this.showErrors('两次输入的新密码不同');
+        return false;
+      }
+
+      return true;
+    },
+    clear: function clear() {
+      this.errors = '';
+    },
+    startSubmit: function startSubmit() {
+      //this.errors = '';
+      //this.success = '';
+      //this.submitting = true;
+      this.clear();
+    },
+    finishSubmit: function finishSubmit() {
+      this.submitting = false;
+    },
+    showSuccess: function showSuccess(msg) {
+      this.success = msg;
+      this.finishSubmit();
+    },
+    showErrors: function showErrors(msg) {
+      this.errors = msg;
+      this.finishSubmit();
+    },
+    changeUpdateState: function changeUpdateState() {
+      this.password.old = null;
+      this.password["new"] = null;
+      this.password.repeat = null;
+    }
   }
 });
 
@@ -75564,40 +75672,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-body" }, [
-        _c("h3", { staticClass: "card-title mt-3 mb-3" }, [
-          _c("i", { staticClass: "fas fa-key" }),
-          _vm._v("密码设置")
-        ]),
+  return _c("div", { staticClass: "card" }, [
+    _c(
+      "div",
+      { staticClass: "card-body" },
+      [
+        _vm._m(0),
         _vm._v(" "),
         _c("hr"),
+        _vm._v(" "),
+        _vm.errors || _vm.success
+          ? _c("alert-box", {
+              attrs: { errors: _vm.errors, success: _vm.success },
+              on: {
+                "update:errors": function($event) {
+                  _vm.errors = $event
+                },
+                "update:success": function($event) {
+                  _vm.success = $event
+                }
+              }
+            })
+          : _vm._e(),
         _vm._v(" "),
         _c("form", [
           _c("div", { staticClass: "form-group row" }, [
             _c(
               "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "oldPassword" }
-              },
-              [_vm._v("旧密码")]
+              { staticClass: "col-sm-2 col-form-label", attrs: { for: "old" } },
+              [_vm._v("原密码")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-10" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.password.old,
+                    expression: "password.old"
+                  }
+                ],
                 staticClass: "form-control",
                 attrs: {
                   type: "password",
-                  id: "oldPassword",
-                  placeholder: "旧密码"
+                  id: "old",
+                  placeholder: "原密码",
+                  disabled: _vm.submitting == true
+                },
+                domProps: { value: _vm.password.old },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.password, "old", $event.target.value)
+                  }
                 }
               })
             ])
@@ -75606,20 +75736,35 @@ var staticRenderFns = [
           _c("div", { staticClass: "form-group row" }, [
             _c(
               "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "newPassword" }
-              },
+              { staticClass: "col-sm-2 col-form-label", attrs: { for: "new" } },
               [_vm._v("新密码")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-10" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.password.new,
+                    expression: "password.new"
+                  }
+                ],
                 staticClass: "form-control",
                 attrs: {
                   type: "password",
-                  id: "newPassword",
-                  placeholder: "新密码"
+                  id: "new",
+                  placeholder: "新密码",
+                  disabled: _vm.submitting == true
+                },
+                domProps: { value: _vm.password.new },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.password, "new", $event.target.value)
+                  }
                 }
               })
             ])
@@ -75630,24 +75775,85 @@ var staticRenderFns = [
               "label",
               {
                 staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "repeatPassword" }
+                attrs: { for: "repeat" }
               },
               [_vm._v("重复新密码")]
             ),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-10" }, [
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.password.repeat,
+                    expression: "password.repeat"
+                  }
+                ],
                 staticClass: "form-control",
                 attrs: {
                   type: "password",
-                  id: "repeatPassword",
-                  placeholder: "重复新密码"
+                  id: "repeat",
+                  placeholder: "重复新密码",
+                  disabled: _vm.submitting == true
+                },
+                domProps: { value: _vm.password.repeat },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.password, "repeat", $event.target.value)
+                  }
                 }
               })
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c("div", { staticClass: "col-sm-10 offset-sm-2" }, [
+              _vm.submitting == false
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" },
+                      on: { click: _vm.submit }
+                    },
+                    [_vm._v("修改")]
+                  )
+                : _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit", disabled: "" }
+                    },
+                    [
+                      _c("span", {
+                        staticClass: "spinner-border spinner-border-sm",
+                        attrs: { role: "status", "aria-hidden": "true" }
+                      }),
+                      _vm._v(
+                        "\n                        正在提交...\n                    "
+                      )
+                    ]
+                  )
+            ])
           ])
         ])
-      ])
+      ],
+      1
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", { staticClass: "card-title mt-3 mb-3" }, [
+      _c("i", { staticClass: "fas fa-key" }),
+      _vm._v("密码重设")
     ])
   }
 ]

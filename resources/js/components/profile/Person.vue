@@ -53,16 +53,19 @@
     import Mobile from './person/Mobile';
 
     export default {
+
+        components: {TopBar, Info, Avatar, Password, Email, Mobile},
+
         data() {
             return {
                 showingComponent: 'Info'
             }
         },
+        
         methods: {
             showComponent: function(component){
                 this.showingComponent = component;
             }
-        },
-        components: {TopBar, Info, Avatar, Password, Email, Mobile}
+        }
     }
 </script>
