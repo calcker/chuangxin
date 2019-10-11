@@ -2235,6 +2235,57 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Captcha.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Captcha.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      src: null,
+      errors: null
+    };
+  },
+  created: function created() {
+    this.getData(); //console.log(this.src);
+  },
+  methods: {
+    getData: function getData() {
+      var _this = this;
+
+      axios.get('captcha').then(function (response) {
+        console.log(response);
+
+        if (response.data.code == 201) {
+          var data = response.data.data;
+          _this.src = data.src;
+        } else {
+          _this.errors = response.data.msg;
+        }
+      })["catch"](function (error) {
+        _this.errors = error.response.data.msg;
+        if (!_this.errors) _this.errors = {
+          unknown: ["未知错误"]
+        };
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Loading.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Loading.vue?vue&type=script&lang=js& ***!
@@ -4378,6 +4429,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AlertBox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../AlertBox */ "./resources/js/components/AlertBox.vue");
+/* harmony import */ var _Captcha__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Captcha */ "./resources/js/components/Captcha.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4422,9 +4480,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_0__["default"]
+    AlertBox: _AlertBox__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Captcha: _Captcha__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -4433,6 +4493,7 @@ __webpack_require__.r(__webpack_exports__);
         "new": null,
         repeat: null
       },
+      captcha: null,
       submitting: false,
       errors: null,
       success: null
@@ -4442,17 +4503,8 @@ __webpack_require__.r(__webpack_exports__);
     submit: function submit() {
       var _this = this;
 
-      this.clear();
       this.startSubmit();
       if (!this.checkInput()) return false;
-      /*
-      if(!this.checkInput()) {
-           this.finishSubmit();
-          return false;
-       }
-      */
-
-      return false;
       axios.post('auth/password', {
         password: this.password
       }).then(function (response) {
@@ -4474,8 +4526,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     checkInput: function checkInput() {
-      this.clear();
-
       if (!this.password.old) {
         this.showErrors('请输入原密码');
         return false;
@@ -4496,16 +4546,21 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
 
+      if (this.password["new"] == this.password.old) {
+        this.showErrors('新密码与旧密码相同');
+        return false;
+      }
+
       return true;
     },
-    clear: function clear() {
+    clearAlert: function clearAlert() {
       this.errors = '';
+      this.success = '';
     },
     startSubmit: function startSubmit() {
       //this.errors = '';
       //this.success = '';
-      //this.submitting = true;
-      this.clear();
+      this.submitting = true;
     },
     finishSubmit: function finishSubmit() {
       this.submitting = false;
@@ -73049,6 +73104,64 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Captcha.vue?vue&type=template&id=17badedf&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Captcha.vue?vue&type=template&id=17badedf& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.src
+    ? _c("div", { staticClass: "captcha" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.captcha,
+              expression: "captcha"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "captcha",
+            placeholder: "验证码",
+            disabled: _vm.submitting == true
+          },
+          domProps: { value: _vm.captcha },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.captcha = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("img", {
+          staticStyle: { cursor: "pointer" },
+          attrs: { src: _vm.src }
+        })
+      ])
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Loading.vue?vue&type=template&id=6ca9e6be&":
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Loading.vue?vue&type=template&id=6ca9e6be& ***!
@@ -74310,7 +74423,12 @@ var render = function() {
               "div",
               { staticClass: "avatar-setting text-center" },
               [
-                _c("p", [_c("img", { attrs: { src: _vm.src } })]),
+                _c("p", [
+                  _c("img", {
+                    staticClass: "img-thumbnail",
+                    attrs: { src: _vm.src }
+                  })
+                ]),
                 _vm._v(" "),
                 _vm._m(1),
                 _vm._v(" "),
@@ -75722,6 +75840,7 @@ var render = function() {
                 },
                 domProps: { value: _vm.password.old },
                 on: {
+                  focus: _vm.clearAlert,
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -75759,6 +75878,7 @@ var render = function() {
                 },
                 domProps: { value: _vm.password.new },
                 on: {
+                  focus: _vm.clearAlert,
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -75799,6 +75919,7 @@ var render = function() {
                 },
                 domProps: { value: _vm.password.repeat },
                 on: {
+                  focus: _vm.clearAlert,
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -75808,6 +75929,19 @@ var render = function() {
                 }
               })
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c(
+              "label",
+              {
+                staticClass: "col-sm-2 col-form-label",
+                attrs: { for: "captcha" }
+              },
+              [_vm._v("验证码")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-10" }, [_c("captcha")], 1)
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
@@ -75834,7 +75968,7 @@ var render = function() {
                         attrs: { role: "status", "aria-hidden": "true" }
                       }),
                       _vm._v(
-                        "\n                        正在提交...\n                    "
+                        "\n                        正在提交\n                    "
                       )
                     ]
                   )
@@ -93295,6 +93429,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertBox_vue_vue_type_template_id_9404768c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertBox_vue_vue_type_template_id_9404768c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Captcha.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Captcha.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Captcha_vue_vue_type_template_id_17badedf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Captcha.vue?vue&type=template&id=17badedf& */ "./resources/js/components/Captcha.vue?vue&type=template&id=17badedf&");
+/* harmony import */ var _Captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Captcha.vue?vue&type=script&lang=js& */ "./resources/js/components/Captcha.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Captcha_vue_vue_type_template_id_17badedf___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Captcha_vue_vue_type_template_id_17badedf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Captcha.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Captcha.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Captcha.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Captcha.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Captcha.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Captcha_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Captcha.vue?vue&type=template&id=17badedf&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Captcha.vue?vue&type=template&id=17badedf& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Captcha_vue_vue_type_template_id_17badedf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Captcha.vue?vue&type=template&id=17badedf& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Captcha.vue?vue&type=template&id=17badedf&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Captcha_vue_vue_type_template_id_17badedf___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Captcha_vue_vue_type_template_id_17badedf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

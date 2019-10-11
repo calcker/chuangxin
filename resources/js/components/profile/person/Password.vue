@@ -8,19 +8,25 @@
                 <div class="form-group row">
                     <label for="old" class="col-sm-2 col-form-label">原密码</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="old" v-model="password.old" placeholder="原密码" :disabled="submitting == true">
+                        <input type="password" class="form-control" id="old" v-model="password.old" placeholder="原密码" :disabled="submitting == true"  @focus="clearAlert">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="new" class="col-sm-2 col-form-label">新密码</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="new" v-model="password.new" placeholder="新密码" :disabled="submitting == true">
+                        <input type="password" class="form-control" id="new" v-model="password.new" placeholder="新密码" :disabled="submitting == true" @focus="clearAlert">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="repeat" class="col-sm-2 col-form-label">重复新密码</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="repeat" v-model="password.repeat" placeholder="重复新密码" :disabled="submitting == true">
+                        <input type="password" class="form-control" id="repeat" v-model="password.repeat" placeholder="重复新密码" :disabled="submitting == true" @focus="clearAlert">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="captcha" class="col-sm-2 col-form-label">验证码</label>
+                    <div class="col-sm-10">
+                        <captcha></captcha>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -28,7 +34,7 @@
                         <button v-if = "submitting == false" @click="submit" type="submit" class="btn btn-primary">修改</button>
                         <button v-else type="submit" class="btn btn-primary" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            正在提交...
+                            正在提交
                         </button>
                     </div>
                 </div>
@@ -43,10 +49,11 @@
 
 <script>
     import AlertBox from '../../AlertBox'
+    import Captcha from '../../Captcha'
 
     export default {
         
-        components: {AlertBox},
+        components: {AlertBox, Captcha},
 
         data() {
             return {
@@ -55,6 +62,7 @@
                     new: null,
                     repeat: null,
                 },
+                captcha: null,
                 submitting: false,
                 errors: null,
                 success: null
@@ -63,19 +71,11 @@
 
         methods: {
             submit() {
-                this.clear();
+                
                 this.startSubmit();
 
                 if(!this.checkInput()) return false;
-                /*
-                if(!this.checkInput()) {
 
-                    this.finishSubmit();
-                    return false;
-
-                }
-                */
-                return false;
                 axios.post('auth/password', {password: this.password}).then(response => {
 
                     if(response.data.code == 201) {
@@ -108,9 +108,6 @@
 
             checkInput() {
 
-
-                this.clear();
-
                 if( !this.password.old ) {
 
                     this.showErrors('请输入原密码');
@@ -139,21 +136,28 @@
 
                 }
 
+                if( this.password.new == this.password.old ) {
+
+                    this.showErrors('新密码与旧密码相同');
+                    return false;
+
+                }
+
                 return true;
 
 
             },
 
-            clear() {
+            clearAlert() {
                 this.errors = '';
+                this.success = '';
             },
 
             startSubmit() {
 
                 //this.errors = '';
                 //this.success = '';
-                //this.submitting = true;
-                this.clear();
+                this.submitting = true;
 
             },
 

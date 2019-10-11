@@ -28,6 +28,11 @@ Route::group(['prefix' => 'auth'], function(){
     Route::post('password', 'Auth\ResetPasswordController@reset');
 });
 
+/*
+Route::group(['prefix' => 'captcha'], function(){
+    Route::get('create', 'Auth\CaptchaController@create');
+});
+*/
 
 Route::group(['prefix' => 'feeds'], function(){
     Route::post('update', 'Feed\FeedsController@update');

@@ -6,7 +6,7 @@
             <loading v-if="status == 'loading'"></loading>
             <alert-box v-if="errors || success" :errors.sync="errors" :success.sync="success"></alert-box>
             <div v-if="status == 'load-success'" class="avatar-setting text-center">
-                <p><img :src="src"></p>
+                <p><img :src="src" class="img-thumbnail"></p>
                 <button id="pick-avatar" type="button" class="btn btn-primary"><i class="fas fa-crop-alt"></i> 选择图片</button>
                 <avatar-cropper @uploaded="handleUploaded" trigger="#pick-avatar" :upload-url="uploadURL" :upload-form-data="uploadData" :cropper-options="cropperOptions" :output-options="outputOptions"/>
             </div>
