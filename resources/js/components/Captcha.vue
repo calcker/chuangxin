@@ -1,7 +1,26 @@
 <template>
 	<div v-if="src" class="captcha">
-		<input type="text" class="form-control" id="captcha" v-model="captcha" placeholder="验证码" :disabled="submitting == true">
-		<img :src="src" style="cursor: pointer">
+		<div class="input-group">
+			<input type="text" class="form-control" id="captcha" v-model="inputCaptcha" placeholder="验证码">
+  			<div class="input-group-append">
+    			<img :src="src" style="cursor: pointer" title="点击图片重新获取验证码">
+    			<button class="btn btn-link" type="button">看不清? 换一张</button>
+  			</div>
+		</div>
+
+		<!--
+		<div class="row">
+			<div class="col-md-3">
+				<input type="text" class="form-control" id="captcha" v-model="inputCaptcha" placeholder="验证码">
+			</div>
+			<div class="col-md-3">
+				<img :src="src" style="cursor: pointer">
+			</div>
+			<div class="col-md-6">
+				<p>看不清？换一张</p>
+			</div>
+		</div>
+		-->
 	</div>		
 </template>
 
@@ -10,6 +29,7 @@
         data () {
         	return {
         		src: '/captcha?' + Math.random(),
+        		inputCaptcha: null,
         		errors: null
         	}
         },

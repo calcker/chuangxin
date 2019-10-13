@@ -2251,10 +2251,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      src: null,
+      src: '/captcha?' + Math.random(),
+      inputCaptcha: null,
       errors: null
     };
   },
@@ -73121,37 +73141,42 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.src
     ? _c("div", { staticClass: "captcha" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.captcha,
-              expression: "captcha"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "captcha",
-            placeholder: "验证码",
-            disabled: _vm.submitting == true
-          },
-          domProps: { value: _vm.captcha },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+        _c("div", { staticClass: "input-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.inputCaptcha,
+                expression: "inputCaptcha"
               }
-              _vm.captcha = $event.target.value
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", id: "captcha", placeholder: "验证码" },
+            domProps: { value: _vm.inputCaptcha },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.inputCaptcha = $event.target.value
+              }
             }
-          }
-        }),
-        _vm._v(" "),
-        _c("img", {
-          staticStyle: { cursor: "pointer" },
-          attrs: { src: _vm.src }
-        })
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c("img", {
+              staticStyle: { cursor: "pointer" },
+              attrs: { src: _vm.src }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              { staticClass: "btn btn-link", attrs: { type: "button" } },
+              [_vm._v("看不清? 换一张")]
+            )
+          ])
+        ])
       ])
     : _vm._e()
 }
