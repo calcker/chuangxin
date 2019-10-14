@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24c9e597b8ee53acfe4e14d8afcc73ab",
+    "content-hash": "261d56aa5227ef5066943ec652ea61a1",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1008,30 +1008,31 @@
         },
         {
             "name": "mews/captcha",
-            "version": "2.3.0",
+            "version": "3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mewebstudio/captcha.git",
-                "reference": "2c9efa19d7d7ae56bed5f23e1c4c42ea5d01fc1a"
+                "reference": "bef0db3663f1fe442ae803fb207dbe2bbfa10890"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mewebstudio/captcha/zipball/2c9efa19d7d7ae56bed5f23e1c4c42ea5d01fc1a",
-                "reference": "2c9efa19d7d7ae56bed5f23e1c4c42ea5d01fc1a",
+                "url": "https://api.github.com/repos/mewebstudio/captcha/zipball/bef0db3663f1fe442ae803fb207dbe2bbfa10890",
+                "reference": "bef0db3663f1fe442ae803fb207dbe2bbfa10890",
                 "shasum": ""
             },
             "require": {
                 "ext-gd": "*",
-                "illuminate/config": "~5.0",
-                "illuminate/filesystem": "~5.0",
-                "illuminate/hashing": "~5.0",
-                "illuminate/support": "~5.0",
-                "intervention/image": "~2.2",
-                "php": ">=5.4"
+                "illuminate/config": "~5.0|^6.0",
+                "illuminate/filesystem": "~5.0|^6.0",
+                "illuminate/hashing": "~5.0|^6.0",
+                "illuminate/session": "~5.0|^6.0",
+                "illuminate/support": "~5.0|^6.0",
+                "intervention/image": "~2.5",
+                "php": "^7.2"
             },
             "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "~4.1"
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^8.0"
             },
             "type": "package",
             "extra": {
@@ -1064,14 +1065,15 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Laravel 5 Captcha Package",
+            "description": "Laravel 5 & 6 Captcha Package",
             "homepage": "https://github.com/mewebstudio/captcha",
             "keywords": [
                 "captcha",
-                "laravel5 Captcha",
-                "laravel5 Security"
+                "laravel5 Security",
+                "laravel6 Captcha",
+                "laravel6 Security"
             ],
-            "time": "2019-08-16T21:57:24+00:00"
+            "time": "2019-09-05T22:33:04+00:00"
         },
         {
             "name": "monolog/monolog",

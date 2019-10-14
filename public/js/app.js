@@ -2256,50 +2256,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['disabled'],
   data: function data() {
     return {
-      src: '/captcha?' + Math.random(),
-      inputCaptcha: null,
-      errors: null
+      src: null,
+      input: null
     };
   },
   created: function created() {
-    this.getData(); //console.log(this.src);
+    this.generate();
   },
   methods: {
-    getData: function getData() {
-      var _this = this;
-
-      axios.get('captcha').then(function (response) {
-        console.log(response);
-
-        if (response.data.code == 201) {
-          var data = response.data.data;
-          _this.src = data.src;
-        } else {
-          _this.errors = response.data.msg;
-        }
-      })["catch"](function (error) {
-        _this.errors = error.response.data.msg;
-        if (!_this.errors) _this.errors = {
-          unknown: ["未知错误"]
-        };
-      });
+    generate: function generate() {
+      this.src = '/captcha?' + Math.random();
     }
   }
 });
@@ -4513,7 +4483,6 @@ __webpack_require__.r(__webpack_exports__);
         "new": null,
         repeat: null
       },
-      captcha: null,
       submitting: false,
       errors: null,
       success: null
@@ -4524,9 +4493,11 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.startSubmit();
+      this.clearAlert();
       if (!this.checkInput()) return false;
       axios.post('auth/password', {
-        password: this.password
+        password: this.password,
+        captcha: this.getCaptcha()
       }).then(function (response) {
         if (response.data.code == 201) {
           _this.showSuccess(response.data.msg);
@@ -4534,6 +4505,8 @@ __webpack_require__.r(__webpack_exports__);
           _this.changeUpdateState();
         } else {
           _this.showErrors(response.data.msg);
+
+          _this.changeCaptcha();
         }
       })["catch"](function (error) {
         var errors = error.response.data.msg;
@@ -4543,6 +4516,8 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           _this.showErrors("未知错误");
         }
+
+        _this.changeCaptcha();
       });
     },
     checkInput: function checkInput() {
@@ -4562,7 +4537,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       if (this.password["new"] != this.password.repeat) {
-        this.showErrors('两次输入的新密码不同');
+        this.showErrors('两次输入的新密码不相同');
         return false;
       }
 
@@ -4597,6 +4572,12 @@ __webpack_require__.r(__webpack_exports__);
       this.password.old = null;
       this.password["new"] = null;
       this.password.repeat = null;
+    },
+    getCaptcha: function getCaptcha() {
+      return this.$refs.captcha.input;
+    },
+    changeCaptcha: function changeCaptcha() {
+      this.$refs.captcha.generate();
     }
   }
 });
@@ -73139,46 +73120,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.src
-    ? _c("div", { staticClass: "captcha" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.inputCaptcha,
-                expression: "inputCaptcha"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", id: "captcha", placeholder: "验证码" },
-            domProps: { value: _vm.inputCaptcha },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.inputCaptcha = $event.target.value
-              }
+  return _c("div", { staticClass: "captcha" }, [
+    _c("div", { staticClass: "input-group" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.input,
+            expression: "input"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          id: "captcha",
+          disabled: _vm.disabled,
+          placeholder: "验证码"
+        },
+        domProps: { value: _vm.input },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
             }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-append" }, [
-            _c("img", {
-              staticStyle: { cursor: "pointer" },
-              attrs: { src: _vm.src }
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: "btn btn-link", attrs: { type: "button" } },
-              [_vm._v("看不清? 换一张")]
-            )
-          ])
-        ])
+            _vm.input = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group-append" }, [
+        _c("img", {
+          staticStyle: { cursor: "pointer" },
+          attrs: { src: _vm.src, title: "点击更换" },
+          on: { click: _vm.generate }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-link",
+            attrs: { type: "button" },
+            on: { click: _vm.generate }
+          },
+          [_vm._v("看不清? 换一张")]
+        )
       ])
-    : _vm._e()
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -75840,11 +75829,7 @@ var render = function() {
         _vm._v(" "),
         _c("form", [
           _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              { staticClass: "col-sm-2 col-form-label", attrs: { for: "old" } },
-              [_vm._v("原密码")]
-            ),
+            _vm._m(1),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-10" }, [
               _c("input", {
@@ -75878,11 +75863,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              { staticClass: "col-sm-2 col-form-label", attrs: { for: "new" } },
-              [_vm._v("新密码")]
-            ),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-10" }, [
               _c("input", {
@@ -75916,14 +75897,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "repeat" }
-              },
-              [_vm._v("重复新密码")]
-            ),
+            _vm._m(3),
             _vm._v(" "),
             _c("div", { staticClass: "col-sm-10" }, [
               _c("input", {
@@ -75957,16 +75931,19 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
-            _c(
-              "label",
-              {
-                staticClass: "col-sm-2 col-form-label",
-                attrs: { for: "captcha" }
-              },
-              [_vm._v("验证码")]
-            ),
+            _vm._m(4),
             _vm._v(" "),
-            _c("div", { staticClass: "col-sm-10" }, [_c("captcha")], 1)
+            _c(
+              "div",
+              { staticClass: "col-sm-10" },
+              [
+                _c("captcha", {
+                  ref: "captcha",
+                  attrs: { disabled: _vm.submitting == true }
+                })
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
@@ -76014,6 +75991,46 @@ var staticRenderFns = [
       _c("i", { staticClass: "fas fa-key" }),
       _vm._v("密码重设")
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-2 col-form-label", attrs: { for: "old" } },
+      [_c("b", [_vm._v("原密码")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-2 col-form-label", attrs: { for: "new" } },
+      [_c("b", [_vm._v("新密码")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-2 col-form-label", attrs: { for: "repeat" } },
+      [_c("b", [_vm._v("重复新密码")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "col-sm-2 col-form-label", attrs: { for: "captcha" } },
+      [_c("b", [_vm._v("验证码")])]
+    )
   }
 ]
 render._withStripped = true
@@ -96104,10 +96121,10 @@ var reg = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
-module.exports = __webpack_require__(/*! /home/vagrant/code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/vue-router.scss */"./resources/sass/vue-router.scss");
+module.exports = __webpack_require__(/*! /home/vagrant/Code/chuangxin/resources/sass/auth.scss */"./resources/sass/auth.scss");
 
 
 /***/ })
