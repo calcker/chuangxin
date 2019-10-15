@@ -28,6 +28,7 @@
 
         	generate() {
 
+                this.input = null;
         		this.src = '/captcha?' + Math.random();
 
         	}

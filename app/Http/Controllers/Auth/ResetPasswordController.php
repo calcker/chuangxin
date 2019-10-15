@@ -36,8 +36,6 @@ class ResetPasswordController extends Controller
     {
         $data = $request->input();
 
-        //die(var_dump($data));
-
         $validator = $this->validator($data);
 
         if($validator->fails()) {
@@ -52,18 +50,15 @@ class ResetPasswordController extends Controller
 
         $user = auth()->user();
 
-        if($user->password != Hash::make($data['password'])) {
+        if( ! Hash::check($data['password']['old'], $user->password)) {
 
             throw new HttpResponseException(response()->json([
                 'code' => 422,
-                'msg'  => 'Failure',
-                'data' => [
-                    'password.old' =>['原密码错误'],
-                ],
+                'msg'  => '原密码错误',
+                'data' => null,
             ], 422));
 
         }
-
 
 
 
